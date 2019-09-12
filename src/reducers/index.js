@@ -1,6 +1,6 @@
-import { combinedReducers } from 'redux';
+import { combineReducers } from 'redux';
 
-const allReducers = combinedReducers({
+const allReducers = combineReducers({
   // reducers go here
 });
 

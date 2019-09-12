@@ -6,15 +6,15 @@ import App from './App';
 import allReducers from './reducers';
 import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux';
-import { compositeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 const store = createStore(
-  allReducers, compositeWithDevTools(
-    applyMiddleware(thunk),
-  ));
+  allReducers, composeWithDevTools(
+  applyMiddleware(thunk),
+));
 
 ReactDOM.render(
   <Provider store = { store } >
