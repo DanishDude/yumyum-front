@@ -1,34 +1,45 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, /* NavbarBrand,  */NavItem } from 'reactstrap';
+import { 
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  Nav,
+  NavItem,
+  /* NavbarBrand,  */
+} from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import './NavigationBar.css';
 
-class Navebar extends Component {
+
+class NavigationBar extends Component {
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = { 
       isOpen: false,
     }
-    this.toggle = this.toggle.bind(this);
   }
 
   toggle = () => { this.setState({ isOpen: !this.state.isOpen }) }
 
   render() { 
     return ( 
-      <div className="Navebar">
-        <Navbar fixed="top" expand="md" >
+      <div className="NavigationBar">
+        <Navbar color="dark" fixed="top" expand="md" >
           <NavLink exact to="/">Yumyum</NavLink>
-          <NavbarToggler onClick={ this.toggle } />
+          <NavbarToggler onClick={ this.toggle } className="mr-2" />
           <Collapse isOpen={ this.state.isOpen } navbar>
-            <NavItem>
+            <Nav className="ml-auto" navbar>
+            <NavItem className="menu-item">
               <NavLink to="/recepies">Recepies</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem className="menu-item">
               <NavLink to="/about-us">About Us</NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem className="menu-item">
               <NavLink to="/contact">Contact</NavLink>
             </NavItem>
+            </Nav>
           </Collapse>
         </Navbar>
       </div>
@@ -36,4 +47,4 @@ class Navebar extends Component {
   }
 }
  
-export default Navebar;
+export default NavigationBar;

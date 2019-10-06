@@ -8,7 +8,17 @@ class AboutUs extends Component {
   render() { 
     return ( 
       <div>
-        <h3>This is the About page</h3>
+        <h1>This is the About page</h1>
+        <ul>
+          <li>yumy.um</li>
+          <li>Recepie cards</li>
+          <li>Blog</li>
+          <li>Forum</li>
+          <li>Kitchen tips</li>
+          <li>Holiday Specials</li>
+          <li>User profile</li>
+          <li>Eating seasonal</li>
+        </ul>
       </div>
     );
   }

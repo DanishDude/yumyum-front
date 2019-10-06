@@ -1,0 +1,8 @@
+.NavigationBar {
+  margin: auto;
+  height: 40px;
+}
+
+.NavigationBar .menu-item {
+  margin-left: 10px;
+}
