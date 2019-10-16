@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import recepies from './recepies';
 
 const allReducers = combineReducers({
-  // reducers go here
+  recepies,
 });
 
 export default allReducers;
