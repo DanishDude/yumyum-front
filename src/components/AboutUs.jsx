@@ -12,8 +12,8 @@ class AboutUs extends Component {
         <ul>
           <li>yumy.um</li>
           <li>Recepie cards</li>
-          <p> title, image, description, ingredients list, prep/cook time, ratings</p>
-          <p>serves 4-6, written by, nutritionm freezable</p>
+          <p> title, image, description, ingredients list, prep/cook time, ratings, tags</p>
+          <p>serves 4-6, auther, nutrition, freezable</p>
           <li>Blog</li>
           <li>Forum - @mention recepie / comment thread</li>
           <li>Kitchen tips</li>
