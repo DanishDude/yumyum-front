@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { asyncFetchRecepies } from '../../actions/fetchRecepies';
 
+import RecepieCardOLD from './RecepieCardOLD';
 import RecepieCard from './RecepieCard';
 
 class Recepies extends Component {
@@ -15,6 +16,7 @@ class Recepies extends Component {
     const { recepies, loading, error } = this.props;
     return ( 
       <div className="Recepies">
+        <h2> Here are the top rated recepies !</h2>
         {error !== '' ? <div>{error}</div> : ''}
         {!recepies && loading ? <div>Loading...</div> : (
           <ul className="list">
@@ -24,12 +26,13 @@ class Recepies extends Component {
                 key={recepie.id}
                 className="recepie-wrapper"
               >
-                <RecepieCard {...recepie} />
+                <RecepieCard />
               </li>
             ))
             : <div>{'Sorry, there are no recepies today :-('}</div>}
           </ul>
         )}
+        <RecepieCardOLD />
       </div>
     );
   }

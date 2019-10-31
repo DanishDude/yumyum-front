@@ -4,7 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import Home from './components/Home';
 import AboutUs from "./components/AboutUs";
 import Contact from "./components/Contact";
-import Recepies from "./components/Recepies/Recepies";
+import Recepies from './containers/Recepies/Recepies';
 import "./App.css";
 
 class App extends Component {
