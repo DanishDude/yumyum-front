@@ -1,21 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
 // recepies is an array of objects {recepie}
 
-function RecepieCard({ recepies }) {
-console.log(recepies.title);
+const RecepieCard = ({ recepie }) => {
+console.log(recepie);
 
   return (
-    <li
-      key>
-      <div>
-        <h3>{ recepies.title }</h3>  
-      </div>
-    </li>
+    <div className="RecepieCard">
+      <h3>{ recepie.title }</h3>
+      <img src="yumyum/yumyum-front/public/logo512.png" alt="" />
+      <p>{ recepie.description }</p> 
+    </div>
   )
 }
 
-const mstp = state => ({ recepies: state.recepies.recepies });
+//const mstp = state => ({ recepies: state.recepies.recepies });
 
-export default connect(mstp, null)(RecepieCard);
+export default RecepieCard //connect(mstp, null)(RecepieCard);

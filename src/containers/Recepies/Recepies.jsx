@@ -26,7 +26,7 @@ class Recepies extends Component {
                 key={recepie.id}
                 className="recepie-wrapper"
               >
-                <RecepieCard />
+                <RecepieCard recepie={recepie} />
               </li>
             ))
             : <div>{'Sorry, there are no recepies today :-('}</div>}
