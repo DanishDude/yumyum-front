@@ -11,7 +11,7 @@ class AboutUs extends Component {
         <h1>This is the About page</h1>
         <ul>
           <li>yumy.um</li>
-          <li>Recepie cards</li>
+          <li>Recipe cards</li>
           <p> title, image, description, ingredients list, prep/cook time, ratings, tags</p>
           <p>serves 4-6, auther, nutrition, freezable</p>
           <li>Blog</li>
