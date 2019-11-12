@@ -1,26 +1,26 @@
 const initialState = {
   loading: false,
-  recepies: [],
+  recipes: [],
   error: '',
 };
 
-const recepies = (state = initialState, action) => {
+const recipes = (state = initialState, action) => {
   switch (action.type) {
-    case 'START_FETCH_RECEPIES': {
+    case 'START_FETCH_RECIPES': {
       return {
         ...state,
         loading: true,
       };
     }
-    case 'FETCH_SUCCESS_RECEPIES': {
+    case 'FETCH_SUCCESS_RECIPES': {
       return {
         ...state,
         loading: false,
-        recepies: [...action.recepies],
+        recipes: [...action.recipes],
         error: '',
       };
     }
-    case 'FETCH_ERROR_RECEPIES': {
+    case 'FETCH_ERROR_RECIPES': {
       return {
         ...state,
         loading: false,
@@ -32,4 +32,4 @@ const recepies = (state = initialState, action) => {
   }
 };
 
-export default recepies;
+export default recipes;
