@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { asyncFetchRecipes } from "../../actions/fetchRecipes";
@@ -10,7 +10,6 @@ function Recipes() {
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const {recipes, loading, error} = content.recipes
-  let match = useRouteMatch();
 
   useEffect(() => {
     dispatch(asyncFetchRecipes());

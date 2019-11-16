@@ -2,8 +2,6 @@ import React from 'react';
 import './RecipeCard.scss'
 
 const RecipeCard = ({ recipe }) => {
-console.log(recipe.id, recipe);
-
   return (
     <div className="RecipeCard">
         <img
