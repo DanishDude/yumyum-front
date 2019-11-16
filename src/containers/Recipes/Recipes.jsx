@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { asyncFetchRecipes } from "../../actions/fetchRecipes";
 import RecipeCard from "./RecipeCard";
-import Recipe from "./Recipe";
 import "./Recipes.scss";
 
 function Recipes() {
@@ -28,7 +27,7 @@ function Recipes() {
           {recipes && recipes.length > 0 ? (
             recipes.map(recipe => (
               <li key={recipe.id}>
-                <Link to={`recipe/${recipe.id}`}>
+                <Link to={{pathname: `recipe/${recipe.id}`, state: {recipe: recipe}}}>
                   <RecipeCard recipe={recipe} />
                 </Link>
               </li>
@@ -38,12 +37,7 @@ function Recipes() {
           )}
         </ul>
       )}
-      <Switch>
-        {recipes.map( recipe => {
-          return <Route path={`recipe/${recipe.id}`} component={Recipe} />
-        })}
-        {/* <Route path={`${match.path}/:recipeId`} component={Recipe} /> */}
-      </Switch>
+      
     </div>
   );
 };

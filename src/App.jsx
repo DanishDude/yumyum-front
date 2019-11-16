@@ -5,6 +5,7 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import Recipes from './containers/Recipes/Recipes';
+import Recipe from './containers/Recipes/Recipe';
 import './App.scss';
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/recipes" component={Recipes} />
+            <Route path="/recipe" component={Recipe} />
             <Route path="/about-us" component={AboutUs} />
             <Route path="/contact" component={Contact} />
           </Switch>
