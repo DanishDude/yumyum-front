@@ -3,30 +3,42 @@ import './Recipe.scss';
 
 const Recipe = (recipeObj) => {
   const recipe = recipeObj.history.location.state.recipe;
+  recipe.preparation_time = recipe.preparation_time / 60;
+  recipe.cook_time = recipe.cook_time / 60;
   console.log(recipe);
-  console.log(recipe.tag_list.split(', '));
-    
   
   return (
     <div className="Recipe">
-      <h5>Recipe ID {recipe.id}</h5>
       <div className="header">
-        <h2>{recipe.title}</h2>
-        <h6>{recipe.tag_list}</h6>
-        <p>Prep: {recipe.preparation_time} Cook: {recipe.cook_time}</p>
+        <h2 className="title">{recipe.title}</h2>
+        <h6 className="tag-list">{recipe.tag_list}</h6>
+        <p className="prep-cook-times">
+          Prep: {recipe.preparation_time} Cook: {recipe.cook_time}
+        </p>
       </div>
       <div className="story">
         <img src={`http://localhost:5000/api/recipeImage/${recipe.id}`} alt="" />
         <p>{recipe.description}</p>
       </div>
-      <div>
-        <ul>
-          {recipe.ingredient_list.split(', ').map(ingredient =>
-            <li>
-              {ingredient}
-            </li>
-          )}
-        </ul>
+      <div className="text">
+        <div className="ingredients">
+          <ul>
+            {recipe.ingredient_list.split(', ').map((ingredient, index) =>
+              <li key={index}>
+                {ingredient}
+              </li>
+            )}
+          </ul>
+        </div>
+        <div className="instructions">
+          <ul>
+            {recipe.instructions.split('-,-').map((step, index) => 
+              <li key={index}>
+                {step}
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );
