@@ -1,4 +1,5 @@
 import React from 'react';
+import './Recipe.scss';
 
 const Recipe = (recipeObj) => {
   const recipe = recipeObj.history.location.state.recipe;
