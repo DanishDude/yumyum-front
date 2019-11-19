@@ -8,7 +8,7 @@ import {
   /* NavbarBrand,  */
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import './NavigationBar.css';
+import './NavigationBar.scss';
 
 
 class NavigationBar extends Component {
@@ -25,23 +25,25 @@ class NavigationBar extends Component {
   render() { 
     return ( 
       <div className="NavigationBar">
-        <Navbar color="dark" fixed="top" expand="md" >
-          <NavLink exact to="/">Yumyum</NavLink>
-          <NavbarToggler onClick={ this.toggle } className="mr-2" />
-          <Collapse isOpen={ this.state.isOpen } navbar>
-            <Nav className="ml-auto" navbar>
-            <NavItem className="menu-item">
-              <NavLink to="/recipes">Recipes</NavLink>
-            </NavItem>
-            <NavItem className="menu-item">
-              <NavLink to="/about-us">About Us</NavLink>
-            </NavItem>
-            <NavItem className="menu-item">
-              <NavLink to="/contact">Contact</NavLink>
-            </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+          <Navbar color="dark" fixed="top" expand="md" >
+          <div className="content">
+            <NavLink exact to="/">Yumyum</NavLink>
+            <NavbarToggler onClick={ this.toggle } className="mr-2" />
+            <Collapse isOpen={ this.state.isOpen } navbar>
+              <Nav className="ml-auto" navbar>
+              <NavItem className="menu-item">
+                <NavLink to="/recipes">Recipes</NavLink>
+              </NavItem>
+              <NavItem className="menu-item">
+                <NavLink to="/about-us">About Us</NavLink>
+              </NavItem>
+              <NavItem className="menu-item">
+                <NavLink to="/contact">Contact</NavLink>
+              </NavItem>
+              </Nav>
+            </Collapse>
+          </div>
+          </Navbar>
       </div>
     );
   }

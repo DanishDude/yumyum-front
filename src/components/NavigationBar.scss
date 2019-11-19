@@ -1,0 +1,16 @@
+.NavigationBar {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+  height: 80px;
+
+  .content {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  }
+}
+
+.NavigationBar .menu-item {
+  margin-left: 10px;
+}

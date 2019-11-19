@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Assistant:200|Catamaran:900|Roboto|Teko:300&display=swap');
+
 body {
   margin: 0;
+  background-color: whitesmoke;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -10,4 +13,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1, h3, h5, p, div, span, a {
+  font-family: 'Teko',"Roboto", "Arial", sans-serif;
+}
+
+h2, h4, h6 {
+  font-family: 'Catamaran',"Roboto", "Arial", sans-serif;
 }
