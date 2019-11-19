@@ -5,7 +5,7 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import Recipes from './containers/Recipes/Recipes';
-import Recipe from './containers/Recipes/Recipe';
+import Recipe from './containers/Recipe/Recipe';
 import './App.scss';
 
 class App extends Component {
