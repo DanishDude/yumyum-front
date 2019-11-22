@@ -40,6 +40,9 @@ class NavigationBar extends Component {
               <NavItem className="menu-item">
                 <NavLink to="/contact">Contact</NavLink>
               </NavItem>
+              <NavItem className="menu-item">
+                <NavLink to="connected">Connected</NavLink>
+              </NavItem>
               </Nav>
             </Collapse>
           </div>

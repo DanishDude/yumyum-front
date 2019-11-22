@@ -6,7 +6,7 @@ import { asyncFetchRecipes } from "../../actions/fetchRecipes";
 import RecipeCard from "./RecipeCard";
 import "./Recipes.scss";
 
-function Recipes() {
+const Recipes = () => {
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const {recipes, loading, error} = content.recipes
@@ -44,52 +44,3 @@ function Recipes() {
 const mdtp = dispatch => bindActionCreators({ asyncFetchRecipes }, dispatch);
 
 export default connect(null, mdtp)(Recipes);
-
-/* = = = = = = = = = = = = = = = = = = = = = = = = = = = = */
-
-/* class Recipes extends Component {
-  componentDidMount() {
-    const { asyncFetchRecipes } = this.props;
-    asyncFetchRecipes();
-  }
-
-  render() { 
-    const { recipes, loading, error } = this.props;
-    let match = useRouteMatch();
-    return ( 
-      <div className="Recipes">
-        <h1> Here are the top rated recipes !</h1>
-        {error !== '' ? <div>{error}</div> : ''}
-        {!recipes && loading ? <div>Loading...</div> : (
-          <ul>
-            {(recipes && recipes.length > 0)
-            ? recipes.map(recipe => (
-              <li key={recipe.id}>
-                <Link to={`${match.url}/recipe`}>
-                  <RecipeCard recipe={recipe} />
-                </Link>
-              </li>
-            ))
-            : <div>{'Sorry, there are no recipes today :-('}</div>}
-          </ul>
-        )}
-        <Switch>
-          <Route path={`${match.path}/recipeId`}>
-            <Recipe />
-          </Route>
-        </Switch>
-      </div>
-    );
-  };
-};
-
-const mstp = state => ({
-  loading: state.recipes.loading,
-  recipes: state.recipes.recipes,
-  error: state.recipes.error,
-});
-
-const mdtp = dispatch => bindActionCreators({ asyncFetchRecipes }, dispatch);
- 
-export default connect(mstp, mdtp)(Recipes);
- */
