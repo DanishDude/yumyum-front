@@ -6,7 +6,7 @@ import { userRegister } from '../../actions/user';
 
 class SignInPage extends React.Component {
   submit = values => {
-  const { userRegister, history, location: {state} } = this.props
+  const { userRegister } = this.props
     fetch('http://localhost:5000/api/signin', {
       method: 'POST',
       headers: {
@@ -24,6 +24,7 @@ class SignInPage extends React.Component {
     })
     .then(user => {
       userRegister(user);
+      window.localStorage.setItem('token', user['token']);
       //history.pushState(this.state.form.pathname);
     })
     .catch(err => {
