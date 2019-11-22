@@ -7,7 +7,7 @@ import Contact from './components/Contact';
 import Recipes from './containers/Recipes/Recipes';
 import Recipe from './containers/Recipe/Recipe';
 import Connected from './components/Conected';
-import SignIn from './containers/ConnectUser/SignIn';
+import SignInPage from './containers/ConnectUser/SignInPage';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import './App.scss';
 
@@ -27,7 +27,7 @@ class App extends Component {
               <Route path="/recipe" component={Recipe} />
               <Route path="/about-us" component={AboutUs} />
               <Route path="/contact" component={Contact} />
-              <Route path="/signin" component={SignIn} />
+              <Route path="/signin" component={SignInPage} />
               <PrivateRoute exact path="/connected" component={Connected} />
             </Switch>
           </div>
