@@ -4,12 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { userSignIn } from '../../actions/user'; */
 
-let SignIn = props => {
+let Login = props => {
   const { handleSubmit } = props
   return (
-    <div className="SignIn">
-      <h3>This is the sign-in page</h3>
-      <p>to be continued...</p>
+    <div className="Login">
+      <h3>This is the login page</h3>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
@@ -19,15 +18,15 @@ let SignIn = props => {
           <label htmlFor="password">Password</label>
           <Field name="password" component="input" type="password" />
         </div>
-        <button type="submit">Connect</button>
+        <button type="submit">Login</button>
       </form>
     </div>
 
   )
 }
 
-SignIn = reduxForm({
-  form: 'signIn'
-})(SignIn);
+Login = reduxForm({
+  form: 'login'
+})(Login);
 
-export default SignIn;
+export default Login;
