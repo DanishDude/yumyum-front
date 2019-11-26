@@ -1,8 +1,5 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-/* import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { userSignIn } from '../../actions/user'; */
 
 let Login = props => {
   const { handleSubmit } = props

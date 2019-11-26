@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login, signup } from '../../actions/user';
@@ -24,9 +25,12 @@ class LoginPage extends React.Component {
       }
     })
     .then(user => {
-      login(user);
-      window.localStorage.setItem('token', user['token']);
-      //history.pushState(this.state.form.pathname);
+      if (user && user['token'] !== '') {
+        login(user);
+        window.localStorage.setItem('token', user['token']);
+        this.props.history.push('/recipes');
+      }
+      
     })
     .catch(err => {
       alert(err);
@@ -46,8 +50,9 @@ class LoginPage extends React.Component {
       })
       .then(res => {
         if (res.status === 500) {
-          console.log(`Error ${res.body}`);
           alert('Error during signup')
+          console.log(res);
+          
         } else if (res.status === 201) {
           return res.json()
         }
@@ -55,7 +60,12 @@ class LoginPage extends React.Component {
       .then(user => {
         signup(user);
         window.localStorage.setItem('token', user['token']);
+        this.props.history.push('/recipes');
       })
+      .catch(err => {
+      alert(err);
+      console.log(err);
+    });
   }
 
   toggleLogin = () => {
@@ -65,7 +75,7 @@ class LoginPage extends React.Component {
 
   render() { 
     return (
-    <div>
+    <div className="LoginPage">
       <Login onSubmit={this.login} />
       <Signup onSubmit={this.signup} />
       <button type="button" onClick={this.toggleLogin}>Log token</button>
