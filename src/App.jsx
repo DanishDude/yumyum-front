@@ -8,6 +8,7 @@ import Recipes from './containers/Recipes/Recipes';
 import Recipe from './containers/Recipe/Recipe';
 import Connected from './components/Conected';
 import LoginPage from './containers/ConnectUser/LoginPage';
+import SignupPage from './containers/ConnectUser/SignupPage';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import './App.scss';
 
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path="/about-us" component={AboutUs} />
               <Route path="/contact" component={Contact} />
               <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
               <PrivateRoute exact path="/connected" component={Connected} />
             </Switch>
           </div>
