@@ -15,8 +15,25 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    padding-bottom: 20px;
     margin-right: -50%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%);
+    justify-items: center;
+
+    h3 {
+      text-align: center;
+    }
+
+    .item {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+    }
+
+    .sbmt {
+      width: 120px;
+    }
   }
-  
 }
