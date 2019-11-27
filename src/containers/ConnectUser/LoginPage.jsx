@@ -44,8 +44,7 @@ class LoginPage extends React.Component {
   render() { 
     return (
     <div className="LoginPage">
-      <Login onSubmit={this.login} />
-      <button type="button" onClick={this.createAccount}>Create account</button>
+      <Login onSubmit={this.login} createAccount={this.createAccount} />
     </div>
   )}
 }

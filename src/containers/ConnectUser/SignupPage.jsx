@@ -43,8 +43,7 @@ class SignupPage extends React.Component {
   render() { 
     return (
     <div className="SignupPage">
-      <Signup onSubmit={this.signup} />
-      <button type="button" onClick={this.goTologin}>Login instead</button>
+      <Signup onSubmit={this.signup} goTologin={this.goTologin} />
     </div>
   )}
 }

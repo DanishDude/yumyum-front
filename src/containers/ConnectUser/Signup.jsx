@@ -3,7 +3,7 @@ import { Field, reduxForm} from 'redux-form';
 import './Signup.scss';
 
 let Signup = props => {
-  const { handleSubmit } = props
+  const { handleSubmit, goTologin } = props
   return (
     <div className="Signup">
       <h3>This is a Signup Page</h3>
@@ -25,6 +25,7 @@ let Signup = props => {
           <Field name="password" component="input" type="password" />
         </div>
         <button type="submit">Create Profile</button>
+        <button type="button" onClick={goTologin}>Login instead</button>
       </form>
     </div>
   )

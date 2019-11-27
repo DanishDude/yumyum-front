@@ -1,23 +1,32 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Button } from 'reactstrap';
 import './Login.scss';
 
 let Login = props => {
-  const { handleSubmit } = props
+  const { handleSubmit, createAccount } = props
+
+  
+
   return (
     <div className="Login">
-      <h3>This is the login page</h3>
+      <div className="content">
+      <h3>Sign In</h3>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email:</label>
-          <Field name="email" component="input" type="email" />
+          <Field name="email" component="input" type="email"  placeholder="Email" />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <Field name="password" component="input" type="password" />
+          <Field name="password" component="input" type="password" placeholder="password" />
         </div>
-        <button type="submit">Login</button>
+        <div>
+          <Button color="primary" type="submit">Login</Button>
+        </div>
+        <div>
+          <Button color="link" type="button" onClick={createAccount}>Create account</Button>
+        </div>
       </form>
+      </div>
     </div>
 
   )
