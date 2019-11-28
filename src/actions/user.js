@@ -1,4 +1,9 @@
-export const userRegister = (user) => ({
-  type: 'USER_REGISTER',
+export const login = (user) => ({
+  type: 'LOGIN',
   user,
 });
+
+export const signup = (user) => ({
+  type: 'SIGNUP',
+  user,
+})
