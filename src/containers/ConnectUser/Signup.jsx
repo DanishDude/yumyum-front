@@ -4,7 +4,7 @@ import { Field, reduxForm} from 'redux-form';
 import './Signup.scss';
 
 let Signup = props => {
-  const { handleSubmit, goTologin } = props
+  const { handleSubmit, goTologin } = props;
   return (
     <div className="Signup">
       <div className="content">
