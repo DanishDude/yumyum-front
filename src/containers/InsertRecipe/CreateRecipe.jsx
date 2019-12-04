@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 // title, description, image, ingredient, prep time, cook time, tag list, instructions
 
 let CreateRecipe = props => {
-  const { handleSubmit, goToRecipe } = props;
+  const { handleSubmit } = props;
   let history = useHistory();
   const goToRecipes = () => history.push('/recipes');
 
@@ -14,7 +14,7 @@ let CreateRecipe = props => {
     <div className="CreateRecipe">
       <Button type="button" onClick={goToRecipes}>Cancel</Button>
       <h3>Share your recipe</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <Field name="title" component="input" type="text" placeholder="Recipe title" />
         </div>
@@ -40,6 +40,9 @@ let CreateRecipe = props => {
         <div>
           <Field name="instructions" component="input" type="textarea"
                  placeholder="Chop vegies in large chunks" />
+        </div>
+        <div>
+          <Button color="primary" type="submit">Share</Button>
         </div>
       </form>
     </div>

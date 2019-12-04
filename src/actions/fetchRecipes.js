@@ -26,7 +26,6 @@ export const asyncFetchRecipes = () => (dispatch) => {
     });
 };
 
-// Revise recipeImage, for GET simply add url in src, find uploader package.
 export const startFetchRecipeImage = () => ({
   type: 'START_FETCH_RECIPE_IMAGE',
 });
