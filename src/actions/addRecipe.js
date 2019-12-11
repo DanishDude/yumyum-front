@@ -1,4 +1,4 @@
-const url = 'http:localhost:5000/api';
+//const url = 'http:localhost:5000/api';
 
 export const addRecipe = (newRecipe) => ({
   type: 'ADD_RECIPE',

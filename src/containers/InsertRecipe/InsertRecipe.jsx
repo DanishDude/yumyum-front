@@ -1,18 +1,30 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom'
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 
-// title, description, image, ingredient, prep time, cook time, tag list, instructions
-
-let CreateRecipe = props => {
+let InsertRecipe = props => {
   const { handleSubmit } = props;
-  let history = useHistory();
-  const goToRecipes = () => history.push('/recipes');
+
+  const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
+
+  const FileInput = ({ 
+    input: { value: omitValue, onChange, onBlur, ...inputProps }, 
+    meta: omitMeta, 
+    ...props 
+  }) => {
+    return (
+      <input
+        onChange={adaptFileEventToValue(onChange)}
+        onBlur={adaptFileEventToValue(onBlur)}
+        type="file"
+        {...props.input}
+        {...props}
+      />
+    );
+  };
 
   return (
     <div className="CreateRecipe">
-      <Button type="button" onClick={goToRecipes}>Cancel</Button>
       <h3>Share your recipe</h3>
       <form onSubmit={handleSubmit}>
         <div>
@@ -42,15 +54,20 @@ let CreateRecipe = props => {
                  placeholder="Chop vegies in large chunks" />
         </div>
         <div>
+          <label htmlFor="image">Add a cover photo</label>
+          <Field name="image" component={FileInput} type="file" accept="image/png, image/jpeg"
+          />
+        </div>
+        <div>
           <Button color="primary" type="submit">Share</Button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-CreateRecipe = reduxForm({
-  form: 'createRecipe'
-})(CreateRecipe);
+InsertRecipe = reduxForm({
+  form: 'insertRecipe'
+})(InsertRecipe);
 
-export default CreateRecipe;
+export default InsertRecipe;

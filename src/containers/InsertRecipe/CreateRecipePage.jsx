@@ -1,58 +1,59 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { addRecipe } from '../../actions/addRecipe';
-import CreateRecipe from './CreateRecipe';
+import { Button } from 'reactstrap';
+import CancelAddRecipe from './CancelAddRecipe';
+import InsertRecipe from './InsertRecipe';
 
 class CreateRecipePage extends React.Component {
-  /* const content = useSelector(state => state);
-  const dispatch = useDispatch();
-  const {recipes, loading, error, newRecipe} = content.recipes;
-  let history = useHistory();
+  addRecipe = (values, token) => {
+    let fd = new FormData();
+    for (const [key, value] of Object.entries(values)) {
+      if (key === 'image') {
+        fd.append('recipeImage', value, value.name);
+      } else {
+        fd.append(key, value);
+      };
+    };
 
-  const addRecipe = (newRecipe) => {
-    useEffect(() => {
-      dispatch(asyncFetchAddRecipe(newRecipe))
-    }, []);
-  }; */
-
-  addRecipe = values => {
-    const { addRecipe } = this.props
-      fetch('http://localhost:5000/api/recipe', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values)
-      })
-      .then(res => {
-        if (res.status === 500) {
-          alert('Error adding recipe')
-          console.log(res);
-        } else if (res.status === 201) {
-          return res.json();
-        }
-      })
-      .then(recipe => (
-        this.props.history.push(`/recipes`)
-      ))
-      .catch(err => {
-        alert(err);
-        console.log(err);
-      })
+    fetch('http://localhost:5000/api/recipe', {
+      method: 'POST',
+      body: fd
+    })
+    .then(res => {
+      if (res.status === 500) {
+        alert('Error adding recipe')
+        console.log(res);
+      } else if (res.status === 201) {
+        return res.json();
+      }
+    })
+    .then(recipe => (this.props.history.push(`/recipes`)))
+    .catch(err => {
+      alert(err);
+      console.log(err);
+    });
   }
 
   render() {
+    const token = window.localStorage.getItem('token');
+    
     return (
-      <CreateRecipe onSubmit={this.addRecipe} />
+      <div>
+        <div>
+          <Button onClick={this.doSomething}>Console Log</Button>
+        </div>
+        <br/>
+        <CancelAddRecipe />
+        <InsertRecipe onSubmit={this.addRecipe} />
+      </div>
   )};
 };
 
 const mstp = state => {
   return {
-    recipes: state.recipes
+    recipes: state.recipes.recipes
   };
 };
 
