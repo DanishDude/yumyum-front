@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { addRecipe } from '../../actions/addRecipe';
-import { Button } from 'reactstrap';
-import CancelAddRecipe from './CancelAddRecipe';
 import InsertRecipe from './InsertRecipe';
+import './CreateRecipePage.scss';
 
 class CreateRecipePage extends React.Component {
-  addRecipe = (values, token) => {
+  addRecipe = (values) => {
     let fd = new FormData();
     for (const [key, value] of Object.entries(values)) {
       if (key === 'image') {
@@ -37,18 +36,12 @@ class CreateRecipePage extends React.Component {
   }
 
   render() {
-    const token = window.localStorage.getItem('token');
     
     return (
-      <div>
-        <div>
-          <Button onClick={this.doSomething}>Console Log</Button>
-        </div>
-        <br/>
-        <CancelAddRecipe />
+      <div className="CreateRecipePage">
         <InsertRecipe onSubmit={this.addRecipe} />
       </div>
-  )};
+    )};
 };
 
 const mstp = state => {

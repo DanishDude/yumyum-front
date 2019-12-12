@@ -6,7 +6,7 @@ const CancelAddRecipe = () => {
   const history = useHistory();
   const goToRecipes = () => history.push('/recipes');
   return (
-      <Button type="button" onClick={goToRecipes}>Cancel</Button>
+      <Button color="link" type="button" onClick={goToRecipes}>Cancel</Button>
   );
 };
 

@@ -1,0 +1,48 @@
+.InsertRecipe {
+  height: 800px;
+  width: 500px;
+  // border: 2px solid gray;
+  // border-radius: 1em;
+  padding: 1em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+  .content {
+    margin: 0;
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    padding-bottom: 20px;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    justify-items: center;
+
+    h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+    }
+
+    .timer {
+      width: 80px;
+    }
+
+    .submit-btn {
+      width: 40%;
+    }
+  }
+}
