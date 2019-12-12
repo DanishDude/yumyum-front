@@ -27,6 +27,27 @@ const recipes = (state = initialState, action) => {
         error: action.err,
       };
     }
+    case 'START_ADD_RECIPE': {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case 'SUCCESS_ADD_RECIPE': {
+      return {
+        ...state,
+        loading: false,
+        recipes: [...recipes, ...action.recipe],
+        error: '',
+      };
+    }
+    case 'ERROR_ADD_RECIPE': {
+      return {
+        ...state,
+        loading: false,
+        error: action.err,
+      };
+    }
     default:
       return state;
   }

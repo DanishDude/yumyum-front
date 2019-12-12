@@ -44,7 +44,7 @@ const Recipe = (recipeObj) => {
         <div>
           <h4 className="step-header">What to do</h4>
           <ul className="step">
-            {recipe.instructions.split('-,-').map((step, index) => 
+            {recipe.instructions.split('|').map((step, index) => 
               <li key={index}>
                 <h6>Step {index +1}</h6>
                 {step}

@@ -22,7 +22,7 @@ class SignupPage extends React.Component {
           console.log(res);
           
         } else if (res.status === 201) {
-          return res.json()
+          return res.json();
         }
       })
       .then(user => {
