@@ -22,7 +22,10 @@ class NavigationBar extends Component {
 
   toggle = () => { this.setState({ isOpen: !this.state.isOpen }) }
 
-  render() { 
+  render() {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    
     return ( 
       <div className="NavigationBar">
           <Navbar color="dark" fixed="top" expand="md" >

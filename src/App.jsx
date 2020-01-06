@@ -20,13 +20,14 @@ const App = () => {
             <NavigationBar className="navigation-bar" />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/recipes" component={Recipes} />
-              <Route path="/recipe" component={Recipe} />
-              <Route path="/about-us" component={AboutUs} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/create-recipe" component={CreateRecipePage} />
+              <Route path = "/recipes" component={Recipes} />
+              <Route path = "/recipe" component={Recipe} />
+              <Route path = "/about-us" component={AboutUs} />
+              <Route path = "/contact" component={Contact} />
+              <Route path = "/login" component={LoginPage} />
+              <Route path = "/signup" component={SignupPage} />
+              {/* <Route path = "/create-recipe" component={CreateRecipePage} /> */}
+              <PrivateRoute path = "/create-recipe" component={CreateRecipePage} />
               <PrivateRoute exact path="/connected" component={Connected} />
             </Switch>
           </div>
