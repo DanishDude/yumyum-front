@@ -22,7 +22,10 @@ class NavigationBar extends Component {
 
   toggle = () => { this.setState({ isOpen: !this.state.isOpen }) }
 
-  render() { 
+  render() {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    
     return ( 
       <div className="NavigationBar">
           <Navbar color="dark" fixed="top" expand="md" >
@@ -39,6 +42,9 @@ class NavigationBar extends Component {
               </NavItem>
               <NavItem className="menu-item">
                 <NavLink to="/contact">Contact</NavLink>
+              </NavItem>
+              <NavItem className="menu-item">
+                <NavLink to="connected">Connected</NavLink>
               </NavItem>
               </Nav>
             </Collapse>
