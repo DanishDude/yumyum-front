@@ -5,7 +5,6 @@ const Recipe = (recipeObj) => {
   const recipe = recipeObj.history.location.state.recipe;
   recipe.preparation_time = recipe.preparation_time / 60;
   recipe.cook_time = recipe.cook_time / 60;
-  console.log(recipe);
   
   return (
     <div className="Recipe">
@@ -44,7 +43,7 @@ const Recipe = (recipeObj) => {
         <div>
           <h4 className="step-header">What to do</h4>
           <ul className="step">
-            {recipe.instructions.split('-,-').map((step, index) => 
+            {recipe.instructions.split('|').map((step, index) => 
               <li key={index}>
                 <h6>Step {index +1}</h6>
                 {step}
