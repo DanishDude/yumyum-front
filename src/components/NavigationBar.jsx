@@ -4,8 +4,7 @@ import {
   Navbar,
   NavbarToggler,
   Nav,
-  NavItem,
-  /* NavbarBrand,  */
+  NavItem
 } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import './NavigationBar.scss';
@@ -23,9 +22,6 @@ class NavigationBar extends Component {
   toggle = () => { this.setState({ isOpen: !this.state.isOpen }) }
 
   render() {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    
     return ( 
       <div className="NavigationBar">
           <Navbar color="dark" fixed="top" expand="md" >

@@ -5,7 +5,6 @@ const Recipe = (recipeObj) => {
   const recipe = recipeObj.history.location.state.recipe;
   recipe.preparation_time = recipe.preparation_time / 60;
   recipe.cook_time = recipe.cook_time / 60;
-  console.log(recipe);
   
   return (
     <div className="Recipe">
