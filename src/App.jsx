@@ -14,24 +14,24 @@ import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import './App.scss';
 
 const App = () => {
-    return (
-      <div className="App">
-        <div className="wrapper">
-            <NavigationBar className="navigation-bar" />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/recipes" component={Recipes} />
-              <Route path="/recipe" component={Recipe} />
-              <Route path="/about-us" component={AboutUs} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/signup" component={SignupPage} />
-              <Route path="/create-recipe" component={CreateRecipePage} />
-              <PrivateRoute exact path="/connected" component={Connected} />
-            </Switch>
-          </div>
-      </div>
-    );
+  return (
+    <div className="App">
+      <div className="wrapper">
+          <NavigationBar className="navigation-bar" />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path = "/recipes" component={Recipes} />
+            <Route path = "/recipe" component={Recipe} />
+            <Route path = "/about-us" component={AboutUs} />
+            <Route path = "/contact" component={Contact} />
+            <Route path = "/login" component={LoginPage} />
+            <Route path = "/signup" component={SignupPage} />
+            <PrivateRoute path = "/create-recipe" component={CreateRecipePage} />
+            <PrivateRoute exact path="/connected" component={Connected} />
+          </Switch>
+        </div>
+    </div>
+  );
 }
 
 export default App;
