@@ -12,9 +12,7 @@ const Recipes = () => {
   const dispatch = useDispatch();
   const {recipes, loading, error} = content.recipes;
 
-  useEffect(() => {
-    dispatch(asyncFetchRecipes());
-  }, []);
+  useEffect(() => { dispatch(asyncFetchRecipes()) }, []);
   
   return (
     <div className="Recipes">
