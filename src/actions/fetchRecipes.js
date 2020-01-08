@@ -16,7 +16,7 @@ export const fetchErrorRecipes = (err) => ({
 
 export const asyncFetchRecipes = () => (dispatch) => {
   dispatch(startFetchRecipes());
-  fetch(`${url}/recipe`)
+  fetch(`${url}/recipes`)
     .then(res => res.json())
     .then(recipes => {
       dispatch(fetchSuccessRecipes(recipes));

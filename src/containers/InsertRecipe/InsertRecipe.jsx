@@ -50,8 +50,8 @@ let InsertRecipe = props => {
           </div>
           <div className="field">
             <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft"
-                  placeholder="NB separate steps with this sign - | e.g. Chop vegies in large 
-                  chunks and fry at medium head | When vegiesare golden add beef"
+                  placeholder="NB separate steps with | sign, e.g. Slice tomatoes | Throw in olives |
+                  Sprinkle salt, pepper | Add a dash of olive oil | Top with freshly chopped basil"
             />
           </div>
           <div className="row">
