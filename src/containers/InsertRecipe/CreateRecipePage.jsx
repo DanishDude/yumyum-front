@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { addRecipe } from '../../actions/addRecipe';
+import { addRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
 import './CreateRecipePage.scss';
 

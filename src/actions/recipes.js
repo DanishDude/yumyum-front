@@ -1,7 +1,12 @@
 const url = 'http://localhost:5000/api';
 
+export const addRecipe = (newRecipe) => ({
+  type: 'ADD_RECIPE',
+  newRecipe,
+});
+
 export const startFetchRecipes = () => ({
-  type: 'START_FETCH_RECIPES',
+  type: 'START_FETCH_RECIPES'
 });
 
 export const fetchSuccessRecipes = (recipes) => ({
