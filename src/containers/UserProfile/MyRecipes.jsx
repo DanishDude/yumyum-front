@@ -5,12 +5,9 @@ import { bindActionCreators } from 'redux';
 import { Button } from 'reactstrap';
 import { asyncFetchRecipesByUser } from '../../actions/userRecipes';
 import AddRecipeButton from '../InsertRecipe/AddRecipeButton';
+import RecipeCard from '../Recipes/RecipeCard';
 
 const MyRecipes = (user) => {
-  console.log('yoyo');
-  
-  console.log(user.user);
-  
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const { userRecipes, loading, error } = content.userRecipes;
@@ -33,8 +30,12 @@ const MyRecipes = (user) => {
             userRecipes.map(userRecipe => (
               <li key={userRecipe.id}>
                 <Link to={{pathname: `recipe/${userRecipe.id}`, state: {userRecipe}}}>
-                  {userRecipe.title}
+                  <RecipeCard recipe={userRecipe} />
                 </Link>
+                  <img
+                    src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/trash-bin/trash-bin.json"
+                    alt="delete"
+                  />
               </li>
             ))
           ) : ''}

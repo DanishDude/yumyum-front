@@ -5,7 +5,7 @@ import { Button } from 'reactstrap';
 
 const MyProfile = (user) => {
   const history = useHistory();
-  const goToMyRecipes = () => history.push('/my-recipes');
+  const goToMyRecipes = () => history.push('/user-profile');
   
   return (
     <div className="BasicProfile">
