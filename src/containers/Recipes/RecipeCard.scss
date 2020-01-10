@@ -1,5 +1,5 @@
 .RecipeCard {
-  margin: 0 15px 15px 0;
+  margin: 20px 15px 0px 0;
   width: 200px;
   height: 300px;
   position: relative;
@@ -35,5 +35,9 @@
     text-align: center;
     overflow-wrap: break-word;
     color: white;
+
+    h4 {
+      font-weight: 1000;
+    }
   }
 }

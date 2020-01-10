@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { Button } from 'reactstrap';
 import { asyncFetchRecipesByUser } from '../../actions/userRecipes';
 import AddRecipeButton from '../InsertRecipe/AddRecipeButton';
+import PageHeader from '../../components/PageHeader';
 import RecipeCard from '../Recipes/RecipeCard';
+import './MyRecipes.scss';
 
 const MyRecipes = (user) => {
   const content = useSelector(state => state);
@@ -16,10 +17,17 @@ const MyRecipes = (user) => {
   
   const history = useHistory();
   const goToMyProfile = () => history.push('my-profile');
+
+  // const editRecipe = ()
+
+  const header = {
+    title: 'My Recipes',
+    subtext: "Keep it fresh - update recipes anytime!"
+  };
   
   return (
     <div className="MyRecipes">
-      <h2>My Recipes</h2>
+      <PageHeader {...header} />
       <Button onClick={goToMyProfile}>My Profile</Button>
       {error !== '' ? <div>{error}</div> : ''}
       {!userRecipes && loading ? (
@@ -32,10 +40,10 @@ const MyRecipes = (user) => {
                 <Link to={{pathname: `recipe/${userRecipe.id}`, state: {userRecipe}}}>
                   <RecipeCard recipe={userRecipe} />
                 </Link>
-                  <img
-                    src="https://maxst.icons8.com/vue-static/landings/animated-icons/icons/trash-bin/trash-bin.json"
-                    alt="delete"
-                  />
+                  <div className="icons">
+                  <i className="fas fa-edit icon" ></i>
+                  <i className="fas fa-trash-alt icon"></i>
+                  </div>
               </li>
             ))
           ) : ''}
@@ -52,6 +60,4 @@ const mstp = (state) => {
   };
 };
 
-const mdtp = dispatch => bindActionCreators({ asyncFetchRecipesByUser }, dispatch);
-
-export default connect(mstp, mdtp)(MyRecipes);
+export default connect(mstp)(MyRecipes);

@@ -1,0 +1,19 @@
+.MyRecipes {
+  ul {
+    padding-top: 20px;
+    display: flex;
+    flex-flow: wrap;
+    list-style-type: none;
+    align-items: flex-start;
+  }
+
+  .icons {
+    padding: 2% 0 0 45%;
+  }
+
+  .icon {
+    padding-left: 15%;
+    font-size: 1.65em;
+    color: rgb(36, 36, 36);
+  }
+}
