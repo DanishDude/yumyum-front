@@ -5,6 +5,48 @@ export const addRecipe = (newRecipe) => ({
   newRecipe,
 });
 
+export const startFetchAddRecipe = () => ({
+  type: 'START_FETCH_ADD_RECIPE'
+});
+
+export const fetchSuccessAddRecipe = recipe => ({
+  type: 'FETCH_SUCCESS_ADD_RECIPE',
+  recipe
+});
+
+export const fetchErrorAddRecipe = err => ({
+  type: 'FETCH_ERROR_ADD_RECIPE',
+  err
+});
+
+export const asyncFetchAddRecipe = (token, newRecipe) => dispatch => {
+  dispatch(startFetchAddRecipe());
+  let fd = new FormData();
+
+  for (const [key, value] of Object.entries(newRecipe)) {
+    if (key === 'image') {
+      fd.append('recipeImage', value, value.name);
+    } else {
+      fd.append(key, value);
+    };
+  };
+
+  const options = {
+    method: 'POST',
+    body: fd,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  };
+
+  fetch(`${url}/recipe`, options)
+    .then(res => res.json)
+    .then(recipe => { dispatch(fetchSuccessAddRecipe(recipe)) })
+    .catch(() => { dispatch(fetchErrorAddRecipe('Error adding recipe')) });
+};
+
 export const startFetchRecipes = () => ({
   type: 'START_FETCH_RECIPES'
 });
@@ -23,12 +65,8 @@ export const asyncFetchRecipes = () => (dispatch) => {
   dispatch(startFetchRecipes());
   fetch(`${url}/recipes`)
     .then(res => res.json())
-    .then(recipes => {
-      dispatch(fetchSuccessRecipes(recipes));
-    })
-    .catch(() => {
-      dispatch(fetchErrorRecipes('Error loading recipes'));
-    });
+    .then(recipes => { dispatch(fetchSuccessRecipes(recipes)) })
+    .catch(() => { dispatch(fetchErrorRecipes('Error loading recipes')) });
 };
 
 export const startFetchRecipeImage = () => ({
