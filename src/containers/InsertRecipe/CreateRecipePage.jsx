@@ -10,7 +10,7 @@ const CreateRecipePage = (token) => {
 
   const addRecipe = (token, values) => {
     console.log(values);
-    
+    // API error client side, check formData
     dispatch(asyncFetchAddRecipe(token, values));
   };
 
