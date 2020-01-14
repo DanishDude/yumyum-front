@@ -1,5 +1,3 @@
-import { asyncFetchRecipesByUser } from "./userRecipes";
-
 const url = 'http://localhost:5000/api';
 
 export const startFetchAddRecipe = () => ({
@@ -88,6 +86,28 @@ export const asyncFetchRecipeImage = recipeId => dispatch => {
     });
 };
 
+export const startFetchRecipesByUser = () => ({
+  type: 'START_FETCH_RECIPES_BY_USER'
+});
+
+export const fetchSuccessRecipesByUser = userRecipes => ({
+  type: 'FETCH_SUCCESS_RECIPES_BY_USER',
+  userRecipes
+});
+
+export const fetchErrorRecipesByUser = err => ({
+  type: 'FETCH_ERROR_RECIPES_BY_USER',
+  err
+});
+
+export const asyncFetchRecipesByUser = token => dispatch => {
+  dispatch(startFetchRecipesByUser());
+  fetch(`${url}/user-recipes`, { headers: { 'Authorization': 'Bearer ' + token } })
+    .then(res => res.json())
+    .then(userRecipes => { dispatch(fetchSuccessRecipesByUser(userRecipes)) })
+    .catch(() => { dispatch(fetchErrorRecipesByUser()) });
+};
+
 export const startFetchDeleteRecipe = () => ({
   type: 'START_FETCH_DELETE_RECIPE'
 });
@@ -101,7 +121,7 @@ export const errorFetchDeleteRecipe = err => ({
   err
 });
 
-export const asyncFetchDeleteRecipe = (token, recipeId, userId) => dispatch => {
+export const asyncFetchDeleteRecipe = (token, recipeId) => dispatch => {
   dispatch(startFetchDeleteRecipe());
   const options = {
     method: 'DELETE',
@@ -112,7 +132,7 @@ export const asyncFetchDeleteRecipe = (token, recipeId, userId) => dispatch => {
     .then(() => dispatch(successFetchDeleteRecipe()))
     .then(() => {
       dispatch(asyncFetchRecipes());
-      dispatch(asyncFetchRecipesByUser(userId))
+      dispatch(asyncFetchRecipesByUser(token))
     })
     .catch(() => dispatch(errorFetchDeleteRecipe('Error deleting recipe')))
-}
+};

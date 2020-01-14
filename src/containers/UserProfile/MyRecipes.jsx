@@ -3,25 +3,25 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { asyncFetchDeleteRecipe } from '../../actions/recipes';
-import { asyncFetchRecipesByUser } from '../../actions/userRecipes';
+import { asyncFetchRecipesByUser } from '../../actions/recipes';
 import AddRecipeButton from '../InsertRecipe/AddRecipeButton';
 import PageHeader from '../../components/PageHeader';
 import RecipeCard from '../Recipes/RecipeCard';
 import './MyRecipes.scss';
 
 const MyRecipes = (state) => {
-  const { user, token } = state;
+  const { token } = state;
   const content = useSelector(state => state);
   const dispatch = useDispatch();
-  const { userRecipes, loading, error } = content.userRecipes;
+  const { userRecipes, loading, error } = content.recipes;
   
-  useEffect(() => { dispatch(asyncFetchRecipesByUser(user.id)) }, []);
+  useEffect(() => { dispatch(asyncFetchRecipesByUser(token)) }, []);
   
   const history = useHistory();
   const goToMyProfile = () => history.push('my-profile');
 
   const deleteRecipe = (recipeId) => {
-    dispatch(asyncFetchDeleteRecipe(token, recipeId, user.id))
+    dispatch(asyncFetchDeleteRecipe(token, recipeId))
   };
 
   const header = {
@@ -63,7 +63,6 @@ const MyRecipes = (state) => {
 
 const mstp = (state) => {
   return {
-    user: state.user.user,
     token: state.user.token
   };
 };

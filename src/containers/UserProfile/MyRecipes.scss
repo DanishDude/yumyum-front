@@ -5,6 +5,10 @@
     flex-flow: wrap;
     list-style-type: none;
     align-items: flex-start;
+
+    i {
+      cursor: pointer;
+    }
   }
 
   .icons {
@@ -12,7 +16,7 @@
   }
 
   .icon {
-    padding-left: 15%;
+    margin-left: 15%;
     font-size: 1.65em;
     color: rgb(36, 36, 36);
   }
