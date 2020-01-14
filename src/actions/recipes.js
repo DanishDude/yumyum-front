@@ -1,3 +1,5 @@
+import { asyncFetchRecipesByUser } from "./userRecipes";
+
 const url = 'http://localhost:5000/api';
 
 export const startFetchAddRecipe = () => ({
@@ -42,17 +44,17 @@ export const startFetchRecipes = () => ({
   type: 'START_FETCH_RECIPES'
 });
 
-export const fetchSuccessRecipes = (recipes) => ({
+export const fetchSuccessRecipes = recipes => ({
   type: 'FETCH_SUCCESS_RECIPES',
   recipes,
 });
 
-export const fetchErrorRecipes = (err) => ({
+export const fetchErrorRecipes = err => ({
   type: 'FETCH_ERROR_RECIPES',
   err,
 });
 
-export const asyncFetchRecipes = () => (dispatch) => {
+export const asyncFetchRecipes = () => dispatch => {
   dispatch(startFetchRecipes());
   fetch(`${url}/recipes`)
     .then(res => res.json())
@@ -64,17 +66,17 @@ export const startFetchRecipeImage = () => ({
   type: 'START_FETCH_RECIPE_IMAGE',
 });
 
-export const fetchRecepieImage = (recipeImage) => ({
+export const fetchRecepieImage = recipeImage => ({
   type: 'FETCH_SUCCESS_RECIPE_IMAGE',
   recipeImage,
 });
 
-export const fetchErrorRecipeImage = (err) => ({
+export const fetchErrorRecipeImage = err => ({
   type: 'FETCH_ERROR_RECIPE_IMAGE',
   err,
 });
 
-export const asyncFetchRecipeImage = (recipeId) => (dispatch) => {
+export const asyncFetchRecipeImage = recipeId => dispatch => {
   dispatch(startFetchRecipeImage());
   fetch(`${url}/recipeImage/${recipeId}`)
     .then(res => res.json())
@@ -85,3 +87,32 @@ export const asyncFetchRecipeImage = (recipeId) => (dispatch) => {
       dispatch(fetchErrorRecipeImage('Error loading recipe image'))
     });
 };
+
+export const startFetchDeleteRecipe = () => ({
+  type: 'START_FETCH_DELETE_RECIPE'
+});
+
+export const successFetchDeleteRecipe = () => ({
+  type: 'SUCCESS_FETCH_DELETE_RECIPE'
+});
+
+export const errorFetchDeleteRecipe = err => ({
+  type: 'ERROR_FETCH_DELETE_RECIPE',
+  err
+});
+
+export const asyncFetchDeleteRecipe = (token, recipeId, userId) => dispatch => {
+  dispatch(startFetchDeleteRecipe());
+  const options = {
+    method: 'DELETE',
+    headers: { 'Authorization': 'Bearer ' + token }
+  };
+  fetch(`${url}/recipe/${recipeId}`, options)
+    .then(res => res.json)
+    .then(() => dispatch(successFetchDeleteRecipe()))
+    .then(() => {
+      dispatch(asyncFetchRecipes());
+      dispatch(asyncFetchRecipesByUser(userId))
+    })
+    .catch(() => dispatch(errorFetchDeleteRecipe('Error deleting recipe')))
+}

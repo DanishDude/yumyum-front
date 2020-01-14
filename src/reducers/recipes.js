@@ -18,6 +18,12 @@ const recipes = (state = initialState, action) => {
       return { ...state, loading: false, recipes: [...action.recipes], error: '' };
     case 'FETCH_ERROR_RECIPES':
       return { ...state, loading: false, error: action.err };
+    case 'START_FETCH_DELETE_RECIPE':
+      return { ...state, loading: true };
+    case 'SUCCESS_FETCH_DELETE_RECIPES':
+      return { ...state, loading: false, error: '' };
+    case 'ERROR_FETCH_DELETE_RECIPES':
+      return { ...state, loading: false, error: action.err };
     default:
       return state;
   };
