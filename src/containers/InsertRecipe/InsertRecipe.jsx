@@ -14,7 +14,6 @@ let InsertRecipe = props => {
     meta: omitMeta, 
     ...props 
   }) => {
-    
     return (
       <input
         onChange={adaptFileEventToValue(onChange)}

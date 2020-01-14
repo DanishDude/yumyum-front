@@ -19,17 +19,17 @@ export const fetchErrorAddRecipe = err => ({
   err
 });
 
-export const asyncFetchAddRecipe = (token, newRecipe) => dispatch => {
+export const asyncFetchAddRecipe = (token, values) => dispatch => {
   dispatch(startFetchAddRecipe());
   let fd = new FormData();
-
-  for (const [key, value] of Object.entries(newRecipe)) {
-    if (key === 'image') {
-      fd.append('recipeImage', value, value.name);
-    } else {
-      fd.append(key, value);
+    for (const [key, value] of Object.entries(values)) {
+      if (key === 'image') {
+        fd.append('recipeImage', value, value.name);
+      } else {
+        fd.append(key, value);
+      };
     };
-  };
+console.log(fd);
 
   const options = {
     method: 'POST',

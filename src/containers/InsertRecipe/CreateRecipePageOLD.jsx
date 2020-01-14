@@ -15,6 +15,8 @@ class CreateRecipePageOLD extends React.Component {
         fd.append(key, value);
       };
     };
+    console.log(fd);
+    
 
     fetch('http://localhost:5000/api/recipe', {
       method: 'POST',
