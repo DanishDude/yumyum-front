@@ -21,8 +21,6 @@ const MyRecipes = (state) => {
   const goToMyProfile = () => history.push('my-profile');
 
   const deleteRecipe = (recipeId) => {
-    console.log('TOKEN', token);
-    console.log(`I wanna delete recipe ${recipeId}`);
     dispatch(asyncFetchDeleteRecipe(token, recipeId, user.id))
   };
 
