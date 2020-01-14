@@ -1,10 +1,5 @@
 const url = 'http://localhost:5000/api';
 
-export const addRecipe = (newRecipe) => ({
-  type: 'ADD_RECIPE',
-  newRecipe,
-});
-
 export const startFetchAddRecipe = () => ({
   type: 'START_FETCH_ADD_RECIPE'
 });
@@ -21,29 +16,25 @@ export const fetchErrorAddRecipe = err => ({
 
 export const asyncFetchAddRecipe = (token, values) => dispatch => {
   dispatch(startFetchAddRecipe());
-  let fd = new FormData();
+  let formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
       if (key === 'image') {
-        fd.append('recipeImage', value, value.name);
+        formData.append('recipeImage', value, value.name);
       } else {
-        fd.append(key, value);
+        formData.append(key, value);
       };
     };
-console.log(fd);
 
   const options = {
     method: 'POST',
-    body: fd,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    }
+    body: formData,
+    headers: { 'Authorization': 'Bearer ' + token }
   };
 
   fetch(`${url}/recipe`, options)
     .then(res => res.json)
     .then(recipe => { dispatch(fetchSuccessAddRecipe(recipe)) })
+    .then(() => dispatch(asyncFetchRecipes()))
     .catch(() => { dispatch(fetchErrorAddRecipe('Error adding recipe')) });
 };
 

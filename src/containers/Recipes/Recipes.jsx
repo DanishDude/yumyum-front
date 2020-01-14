@@ -16,7 +16,7 @@ const Recipes = () => {
   
   return (
     <div className="Recipes">
-      <h1> Here are the top rated recipes !</h1>
+      <h1>The Best rated recipes !</h1>
       <AddRecipeButton />
       {error !== "" ? <div>{error}</div> : ""}
       {!recipes && loading ? (

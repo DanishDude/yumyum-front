@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-//import { addRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
 import './CreateRecipePage.scss';
 
 class CreateRecipePageOLD extends React.Component {
+  
   addRecipe = (values) => {
+    const token = window.localStorage.getItem('token');
     let fd = new FormData();
+
     for (const [key, value] of Object.entries(values)) {
       if (key === 'image') {
         fd.append('recipeImage', value, value.name);
@@ -15,13 +15,14 @@ class CreateRecipePageOLD extends React.Component {
         fd.append(key, value);
       };
     };
-    console.log(fd);
-    
 
-    fetch('http://localhost:5000/api/recipe', {
+    const options = {
       method: 'POST',
-      body: fd
-    })
+      body: fd,
+      headers: { 'Authorization': 'Bearer ' + token }
+    };
+
+    fetch('http://localhost:5000/api/recipe', options)
     .then(res => {
       if (res.status === 500) {
         alert('Error adding recipe')
@@ -30,7 +31,7 @@ class CreateRecipePageOLD extends React.Component {
         return res.json();
       }
     })
-    .then(recipe => (this.props.history.push(`/recipes`)))
+    .then(() => (this.props.history.push(`/recipes`)))
     .catch(err => {
       alert(err);
       console.log(err);
@@ -46,13 +47,4 @@ class CreateRecipePageOLD extends React.Component {
     )};
 };
 
-const mstp = state => {
-  return {
-    recipes: state.recipes.recipes
-  };
-};
-
-/* const mdtp = dispatch => bindActionCreators(
-  { addRecipe }, dispatch) */;
-
-export default connect(mstp, null)(CreateRecipePageOLD);
+export default CreateRecipePageOLD;

@@ -7,21 +7,16 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch(action.type) {
-    case 'LOGIN': {
+    case 'LOGIN':
       return { ...state, ...action.user };
-    };
-    case 'SIGNUP': {
+    case 'SIGNUP':
       return { ...state, ...action.user };
-    };
-    case 'START_FETCH_USER': {
+    case 'START_FETCH_USER':
       return { ...state, loading: true };
-    };
-    case 'SUCCESS_FETCH_USER': {
+    case 'SUCCESS_FETCH_USER':
       return { ...state, loading: false, user: action.user, token: action.token };
-    };
-    case 'ERROR_FETCH_USER': {
+    case 'ERROR_FETCH_USER':
       return { ...state, loading:false, error: action.err };
-    };
     default:
       return state;
   };

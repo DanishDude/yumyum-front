@@ -6,25 +6,18 @@ const initialState = {
 
 const recipes = (state = initialState, action) => {
   switch (action.type) {
-    case 'START_FETCH_ADD_RECIPE': {
+    case 'START_FETCH_ADD_RECIPE':
       return { ...state, loading: true };
-    };
-    case 'FETCH_SUCCESS_ADD_RECIPE': {
-      return {
-        ...state, loading: false, recipes: [...recipes, ...action.recipe], error: '' };
-    };
-    case 'FETCH_ERROR_ADD_RECIPE': {
+    case 'FETCH_SUCCESS_ADD_RECIPE':
+      return { ...state, loading: false, error: '' };
+    case 'FETCH_ERROR_ADD_RECIPE':
       return { ...state, loading: false, error: action.err };
-    };
-    case 'START_FETCH_RECIPES': {
+    case 'START_FETCH_RECIPES':
       return { ...state, loading: true };
-    };
-    case 'FETCH_SUCCESS_RECIPES': {
+    case 'FETCH_SUCCESS_RECIPES':
       return { ...state, loading: false, recipes: [...action.recipes], error: '' };
-    };
-    case 'FETCH_ERROR_RECIPES': {
+    case 'FETCH_ERROR_RECIPES':
       return { ...state, loading: false, error: action.err };
-    };
     default:
       return state;
   };

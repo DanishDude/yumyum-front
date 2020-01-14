@@ -1,23 +1,21 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { asyncFetchAddRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
 
 const CreateRecipePage = (token) => {
   const dispatch = useDispatch();
-  console.log(token.token);
-
-  const addRecipe = (token, values) => {
-    console.log(values);
-    // API error client side, check formData
-    dispatch(asyncFetchAddRecipe(token, values));
+  const history = useHistory();
+  const addRecipe = (token, values) => { 
+    dispatch(asyncFetchAddRecipe(token, values))
+    history.push('/recipes')
   };
 
   return (
     <div className="CreateRecipePage">
-      hello
-      <InsertRecipe onSubmit={(values) => addRecipe(token.token, values)} />
+      <InsertRecipe onSubmit={values => addRecipe(token.token, values)} />
     </div>
   );
 };
