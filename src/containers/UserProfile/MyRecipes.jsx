@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { asyncFetchDeleteRecipe } from '../../actions/recipes';
-import { asyncFetchRecipesByUser } from '../../actions/recipes';
+import {
+  asyncFetchDeleteRecipe, asyncFetchRecipesByUser, initializeModifyRecipe
+} from '../../actions/recipes';
 import AddRecipeButton from '../InsertRecipe/AddRecipeButton';
 import PageHeader from '../../components/PageHeader';
 import RecipeCard from '../Recipes/RecipeCard';
@@ -20,8 +21,15 @@ const MyRecipes = (state) => {
   const history = useHistory();
   const goToMyProfile = () => history.push('my-profile');
 
-  const deleteRecipe = (recipeId) => {
-    dispatch(asyncFetchDeleteRecipe(token, recipeId))
+  const deleteRecipe = (recipeId) => dispatch(asyncFetchDeleteRecipe(token, recipeId));
+
+  const modifyRecipe = recipe => {
+    console.log(token);
+    
+    console.log(recipe);
+    
+    history.push('create-recipe');
+    dispatch(initializeModifyRecipe(recipe));
   };
 
   const header = {
@@ -46,10 +54,11 @@ const MyRecipes = (state) => {
                   <RecipeCard recipe={userRecipe} />
                 </Link>
                   <div className="icons">
-                  <i className="fas fa-edit icon" ></i>
+                  <i className="fas fa-edit icon" 
+                    onClick={() => modifyRecipe(userRecipe)} >
+                  </i>
                   <i className="fas fa-trash-alt icon"
-                    onClick={() => deleteRecipe(userRecipe.id)}
-                  >
+                    onClick={() => deleteRecipe(userRecipe.id)} >
                   </i>
                   </div>
               </li>

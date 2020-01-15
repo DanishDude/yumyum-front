@@ -14,7 +14,7 @@ export const fetchErrorAddRecipe = err => ({
   err
 });
 
-export const asyncFetchAddRecipe = (token, values) => dispatch => {
+export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
   dispatch(startFetchAddRecipe());
   let formData = new FormData();
     for (const [key, value] of Object.entries(values)) {
@@ -24,19 +24,25 @@ export const asyncFetchAddRecipe = (token, values) => dispatch => {
         formData.append(key, value);
       };
     };
+console.log(token, values);
 
   const options = {
-    method: 'POST',
+    method: values.id ? 'PUT' : 'POST',
     body: formData,
     headers: { 'Authorization': 'Bearer ' + token }
   };
 
-  fetch(`${url}/recipe`, options)
+  fetch(`${url}/recipe${values.id ? `/${values.id}` : ''}`, options)
     .then(res => res.json)
     .then(recipe => { dispatch(fetchSuccessAddRecipe(recipe)) })
     .then(() => dispatch(asyncFetchRecipes()))
-    .catch(() => { dispatch(fetchErrorAddRecipe('Error adding recipe')) });
+    .catch(() => { dispatch(fetchErrorAddRecipe('Error adding/modyfying recipe')) });
 };
+
+export const initializeModifyRecipe = recipe => ({
+  type: 'INITIALIZE_MODIFY_RECIPE',
+  recipe
+});
 
 export const startFetchRecipes = () => ({
   type: 'START_FETCH_RECIPES'

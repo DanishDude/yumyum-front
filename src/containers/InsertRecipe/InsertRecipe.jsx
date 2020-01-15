@@ -30,6 +30,7 @@ let InsertRecipe = props => {
       <div className="content">
         <h3>Add your recipe</h3>
         <form onSubmit={handleSubmit}>
+          <Field name="id" component="input" type="hidden" />
           <div className="field">
             <Field name="title" component="input" type="text" placeholder="Recipe title" />
           </div>

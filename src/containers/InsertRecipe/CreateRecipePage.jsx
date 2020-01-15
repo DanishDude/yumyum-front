@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { asyncFetchAddRecipe } from '../../actions/recipes';
+import { asyncFetchAddModifyRecipe, initializeModifyRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
 
-const CreateRecipePage = (token) => {
+const CreateRecipePage = (token, recipe) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const addRecipe = (token, values) => { 
-    dispatch(asyncFetchAddRecipe(token, values))
+  const addRecipe = (token, values) => {
+    dispatch(asyncFetchAddModifyRecipe(token, values))
     history.push('/recipes')
   };
+
+  if (recipe) dispatch(initializeModifyRecipe(recipe));
 
   return (
     <div className="CreateRecipePage">
@@ -22,6 +23,4 @@ const CreateRecipePage = (token) => {
 
 const mstp = state => { return { token: state.user.token } }
 
-const mdtp = dispatch => bindActionCreators({ asyncFetchAddRecipe }, dispatch);
-
-export default connect(mstp, mdtp)(CreateRecipePage);
+export default connect(mstp, null)(CreateRecipePage);
