@@ -5,8 +5,10 @@ import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, recipe } = props;
   console.log(propTypes);
+  console.log(recipe);
+  
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 

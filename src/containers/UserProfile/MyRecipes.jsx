@@ -2,25 +2,26 @@ import React, { useEffect } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import {
-  asyncFetchDeleteRecipe, asyncFetchRecipesByUser, initializeModifyRecipe
-} from '../../actions/recipes';
+import { asyncFetchDeleteRecipe, asyncFetchRecipesByUser } from '../../actions/recipes';
 import AddRecipeButton from '../InsertRecipe/AddRecipeButton';
 import PageHeader from '../../components/PageHeader';
 import RecipeCard from '../Recipes/RecipeCard';
 import './MyRecipes.scss';
 
 let MyRecipes = (state) => {
-  const { token } = state;
   const content = useSelector(state => state);
   const dispatch = useDispatch();
-  const { userRecipes, loading, error } = content.recipes;
+  const history = useHistory();
+  const { user, token } = state;
+  const { recipes, loading, error } = content.recipes;
+  const userRecipes = recipes.filter(recipe => recipe.user_id === user.id);
+  
   let redirect = false;
   let editRecipe = {};
-  
+
   useEffect(() => { dispatch(asyncFetchRecipesByUser(token)) }, []);
   
-  const history = useHistory();
+  
   const goToMyProfile = () => history.push('my-profile');
 
   const modifyRecipe = recipe => {
@@ -81,6 +82,7 @@ let MyRecipes = (state) => {
 
 const mstp = (state) => {
   return {
+    user: state.user.user,
     token: state.user.token
   };
 };
