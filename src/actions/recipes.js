@@ -24,7 +24,6 @@ export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
         formData.append(key, value);
       };
     };
-console.log(token, values);
 
   const options = {
     method: values.id ? 'PUT' : 'POST',

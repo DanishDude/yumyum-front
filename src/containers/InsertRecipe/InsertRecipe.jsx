@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import { Field, propTypes, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = (props) => {
-  const { handleSubmit, recipe } = props;
-  console.log(propTypes);
-  console.log(recipe);
-  
+  const { handleSubmit } = props;
+  console.log(props);
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
