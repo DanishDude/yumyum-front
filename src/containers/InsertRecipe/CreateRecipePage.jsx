@@ -11,12 +11,13 @@ const CreateRecipePage = (token, recipe) => {
     dispatch(asyncFetchAddModifyRecipe(token, values))
     history.push('/recipes')
   };
+  console.log(recipe);
 
-  if (recipe) dispatch(initializeModifyRecipe(recipe));
+  // if (recipe) dispatch(initializeModifyRecipe(recipe));
 
   return (
     <div className="CreateRecipePage">
-      <InsertRecipe onSubmit={values => addRecipe(token.token, values)} />
+      <InsertRecipe onSubmit={values => addRecipe(token.token, values)} recipe={recipe} />
     </div>
   );
 };

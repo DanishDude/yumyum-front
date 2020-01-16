@@ -39,11 +39,11 @@ console.log(token, values);
     .catch(() => { dispatch(fetchErrorAddRecipe('Error adding/modyfying recipe')) });
 };
 
-export const initializeModifyRecipe = recipe => ({
+/* export const initializeModifyRecipe = recipe => ({
   type: 'INITIALIZE_MODIFY_RECIPE',
   recipe
 });
-
+ */
 export const startFetchRecipes = () => ({
   type: 'START_FETCH_RECIPES'
 });

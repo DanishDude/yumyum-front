@@ -2,7 +2,7 @@ const initialState = {
   loading: false,
   recipes: [],
   userRecipes: [],
-  form: { insertRecipe: { values: {} } },
+  form: { insertRecipe: { initialValues: {} } },
   error: '',
 };
 
@@ -14,11 +14,11 @@ const recipes = (state = initialState, action) => {
       return { ...state, loading: false, error: '' };
     case 'FETCH_ERROR_ADD_RECIPE':
       return { ...state, loading: false, error: action.err };
-    case 'INITIALIZE_MODIFY_RECIPE':
+    /* case 'INITIALIZE_MODIFY_RECIPE':
       console.log('hello');
       console.log(action.recipe);
       
-      return { ...state, form: { insertRecipe: { values: action.recipe } } };
+      return { ...state, form: { insertRecipe: { initialValues: action.recipe } } }; */
     case 'START_FETCH_RECIPES':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_RECIPES':
