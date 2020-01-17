@@ -6,7 +6,6 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = (props) => {
   const { handleSubmit } = props;
-  console.log(props);
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 

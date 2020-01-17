@@ -4,9 +4,8 @@ export const startFetchAddRecipe = () => ({
   type: 'START_FETCH_ADD_RECIPE'
 });
 
-export const fetchSuccessAddRecipe = recipe => ({
-  type: 'FETCH_SUCCESS_ADD_RECIPE',
-  recipe
+export const fetchSuccessAddRecipe = () => ({
+  type: 'FETCH_SUCCESS_ADD_RECIPE'
 });
 
 export const fetchErrorAddRecipe = err => ({
@@ -16,26 +15,40 @@ export const fetchErrorAddRecipe = err => ({
 
 export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
   dispatch(startFetchAddRecipe());
-  let formData = new FormData();
+  let fd = new FormData();
+  console.log(Object.keys(values));
+  
     for (const [key, value] of Object.entries(values)) {
+      console.log(`${key}: ${value}`);
+      if (value)
       if (key === 'image') {
-        formData.append('recipeImage', value, value.name);
+        value ? fd.append('image', value, value.name) : fd.append('image', null);
+        /* if (!value) {
+          fd.append('recipeImage', null);
+        } else {
+        fd.append('recipeImage', value, value.name);
+        }; */
       } else {
-        formData.append(key, value);
+        fd.append(key, value);
       };
     };
 
   const options = {
     method: values.id ? 'PUT' : 'POST',
-    body: formData,
+    body: fd,
     headers: { 'Authorization': 'Bearer ' + token }
   };
 
   fetch(`${url}/recipe${values.id ? `/${values.id}` : ''}`, options)
-    .then(res => res.json)
-    .then(recipe => { dispatch(fetchSuccessAddRecipe(recipe)) })
-    .then(() => dispatch(asyncFetchRecipes()))
-    .catch(() => { dispatch(fetchErrorAddRecipe('Error adding/modyfying recipe')) });
+    .then(res => res.json())
+    .then(recipe => {
+      dispatch(fetchSuccessAddRecipe(recipe));
+    })
+    .catch((err) => {
+      console.log(err);
+      
+      dispatch(fetchErrorAddRecipe('Error adding/modyfying recipe'))
+    });
 };
 
 export const startFetchRecipes = () => ({
