@@ -9,10 +9,8 @@ const CreateRecipePage = (props) => {
   const recipe = props.location.state;
   const dispatch = useDispatch();
   const history = useHistory();
+
   const addRecipe = (token, values) => {
-    console.log('recipe: ', recipe);
-    console.log(token);
-    console.log(values);
     dispatch(asyncFetchAddModifyRecipe(token, values))
     history.push('/recipes')
   };

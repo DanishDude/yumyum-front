@@ -4,8 +4,9 @@ export const startFetchAddRecipe = () => ({
   type: 'START_FETCH_ADD_RECIPE'
 });
 
-export const fetchSuccessAddRecipe = () => ({
-  type: 'FETCH_SUCCESS_ADD_RECIPE'
+export const fetchSuccessAddRecipe = recipe => ({
+  type: 'FETCH_SUCCESS_ADD_RECIPE',
+  recipe
 });
 
 export const fetchErrorAddRecipe = err => ({
@@ -23,11 +24,6 @@ export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
       if (value)
       if (key === 'image') {
         value ? fd.append('image', value, value.name) : fd.append('image', null);
-        /* if (!value) {
-          fd.append('recipeImage', null);
-        } else {
-        fd.append('recipeImage', value, value.name);
-        }; */
       } else {
         fd.append(key, value);
       };
@@ -41,9 +37,7 @@ export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
 
   fetch(`${url}/recipe${values.id ? `/${values.id}` : ''}`, options)
     .then(res => res.json())
-    .then(recipe => {
-      dispatch(fetchSuccessAddRecipe(recipe));
-    })
+    .then(recipe => dispatch(fetchSuccessAddRecipe(recipe)))
     .catch((err) => {
       console.log(err);
       
@@ -136,13 +130,19 @@ export const errorFetchDeleteRecipe = err => ({
 
 export const asyncFetchDeleteRecipe = (token, recipeId) => dispatch => {
   dispatch(startFetchDeleteRecipe());
+
   const options = {
     method: 'DELETE',
     headers: { 'Authorization': 'Bearer ' + token }
   };
+
   fetch(`${url}/recipe/${recipeId}`, options)
-    .then(res => res.json)
-    .then(() => dispatch(successFetchDeleteRecipe()))
+    .then(res => res.json())
+    .then((toto) => {
+      console.log(toto);
+      
+      dispatch(successFetchDeleteRecipe())
+    })
     .then(() => {
       dispatch(asyncFetchRecipes());
       dispatch(asyncFetchRecipesByUser(token))

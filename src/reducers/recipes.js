@@ -9,7 +9,7 @@ const recipes = (state = initialState, action) => {
     case 'START_FETCH_ADD_RECIPE':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_ADD_RECIPE':
-      return { ...state, loading: false, error: '' };
+      return { ...state, loading: false, error: '', recipes: [...state.recipes, action.recipe] };
     case 'FETCH_ERROR_ADD_RECIPE':
       return { ...state, loading: false, error: action.err };
     case 'START_FETCH_RECIPES':
