@@ -10,6 +10,10 @@ const recipes = (state = initialState, action) => {
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_ADD_RECIPE':
       return { ...state, loading: false, error: '', recipes: [...state.recipes, action.recipe] };
+    case 'FETCH_SUCCESS_MODIFY_RECIPE': {
+      const newRecipes = [...state.recipes.filter(r => r.id !== action.recipe.id), action.recipe];
+      return { ...state, loading: false, error: '', recipes: newRecipes };
+    };
     case 'FETCH_ERROR_ADD_RECIPE':
       return { ...state, loading: false, error: action.err };
     case 'START_FETCH_RECIPES':
@@ -20,13 +24,14 @@ const recipes = (state = initialState, action) => {
       return { ...state, loading: false, error: action.err };
     case 'START_FETCH_RECIPES_BY_USER':
       return { ...state, loading: true };
-    case 'FETCH_SUCCESS_RECIPES_BY_USER':
+    case 'FETCH_SUCCESS_RECIPES_BY_USER': {
       const newRecipes = [
         ...state.recipes
         .filter(r => !(action.userRecipes.map(ur => ur.id).includes(r.id)))
         .concat(action.userRecipes)
       ];
       return { ...state, loading: false, recipes: newRecipes };
+    };
     case 'FETCH_ERROR_RECIPES_BY_USER':
       return { ...state, error: action.err };
     case 'START_FETCH_DELETE_RECIPE':

@@ -9,35 +9,45 @@ export const fetchSuccessAddRecipe = recipe => ({
   recipe
 });
 
+export const fetchSuccessModifyRecipe = recipe => ({
+  type: 'FETCH_SUCCESS_MODIFY_RECIPE',
+  recipe
+});
+
 export const fetchErrorAddRecipe = err => ({
   type: 'FETCH_ERROR_ADD_RECIPE',
   err
 });
 
-export const asyncFetchAddModifyRecipe = (token, values) => dispatch => {
+export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
   dispatch(startFetchAddRecipe());
   let fd = new FormData();
-  console.log(Object.keys(values));
   
-    for (const [key, value] of Object.entries(values)) {
-      console.log(`${key}: ${value}`);
-      if (value)
-      if (key === 'image') {
-        value ? fd.append('image', value, value.name) : fd.append('image', null);
-      } else {
-        fd.append(key, value);
-      };
+    for (const [key, value] of Object.entries(recipe)) {
+      if (value) {
+        if (key === 'image') {
+          value ? fd.append('image', value, value.name) : fd.append('image', {}, value);
+        } else {
+          fd.append(key, value);
+        };
+    };
     };
 
   const options = {
-    method: values.id ? 'PUT' : 'POST',
+    method: recipe.id ? 'PUT' : 'POST',
     body: fd,
     headers: { 'Authorization': 'Bearer ' + token }
   };
 
-  fetch(`${url}/recipe${values.id ? `/${values.id}` : ''}`, options)
+  fetch(`${url}/recipe${recipe.id ? `/${recipe.id}` : ''}`, options)
     .then(res => res.json())
-    .then(recipe => dispatch(fetchSuccessAddRecipe(recipe)))
+    .then(recipe => {
+      if (options.method === 'PUT') {
+        dispatch(fetchSuccessModifyRecipe(recipe));
+      } else {
+        dispatch(fetchSuccessAddRecipe(recipe));
+      };
+    })
     .catch((err) => {
       console.log(err);
       
@@ -133,19 +143,21 @@ export const asyncFetchDeleteRecipe = (token, recipeId) => dispatch => {
 
   const options = {
     method: 'DELETE',
-    headers: { 'Authorization': 'Bearer ' + token }
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
   };
 
   fetch(`${url}/recipe/${recipeId}`, options)
     .then(res => res.json())
-    .then((toto) => {
-      console.log(toto);
-      
-      dispatch(successFetchDeleteRecipe())
-    })
     .then(() => {
+      dispatch(successFetchDeleteRecipe());
       dispatch(asyncFetchRecipes());
-      dispatch(asyncFetchRecipesByUser(token))
+      dispatch(asyncFetchRecipesByUser(token));
     })
-    .catch(() => dispatch(errorFetchDeleteRecipe('Error deleting recipe')))
+    .catch((err) => {
+      dispatch(errorFetchDeleteRecipe('Error deleting recipe'))
+      console.log(err);
+      
+    })
 };
