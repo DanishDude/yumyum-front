@@ -1,7 +1,7 @@
 const url = 'http://localhost:5000/api';
 
-export const startFetchAddRecipe = () => ({
-  type: 'START_FETCH_ADD_RECIPE'
+export const startFetchAddModifyRecipe = () => ({
+  type: 'START_FETCH_ADD_MODIFY_RECIPE'
 });
 
 export const fetchSuccessAddRecipe = recipe => ({
@@ -14,13 +14,13 @@ export const fetchSuccessModifyRecipe = recipe => ({
   recipe
 });
 
-export const fetchErrorAddRecipe = err => ({
-  type: 'FETCH_ERROR_ADD_RECIPE',
+export const fetchErrorAddModifyRecipe = err => ({
+  type: 'FETCH_ERROR_ADD_MODIFY_RECIPE',
   err
 });
 
 export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
-  dispatch(startFetchAddRecipe());
+  dispatch(startFetchAddModifyRecipe());
   let fd = new FormData();
   
     for (const [key, value] of Object.entries(recipe)) {
@@ -48,11 +48,7 @@ export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
         dispatch(fetchSuccessAddRecipe(recipe));
       };
     })
-    .catch((err) => {
-      console.log(err);
-      
-      dispatch(fetchErrorAddRecipe('Error adding/modyfying recipe'))
-    });
+    .catch((err) => dispatch(fetchErrorAddModifyRecipe(err)));
 };
 
 export const startFetchRecipes = () => ({
@@ -143,21 +139,15 @@ export const asyncFetchDeleteRecipe = (token, recipeId) => dispatch => {
 
   const options = {
     method: 'DELETE',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
+    headers: { 'Authorization': 'Bearer ' + token }
   };
 
   fetch(`${url}/recipe/${recipeId}`, options)
-    .then(res => res.json())
+    .then(res => res.text())
     .then(() => {
       dispatch(successFetchDeleteRecipe());
       dispatch(asyncFetchRecipes());
       dispatch(asyncFetchRecipesByUser(token));
     })
-    .catch((err) => {
-      dispatch(errorFetchDeleteRecipe('Error deleting recipe'))
-      console.log(err);
-      
-    })
+    .catch((err) => dispatch(errorFetchDeleteRecipe(err)));
 };
