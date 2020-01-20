@@ -19,7 +19,6 @@ let MyRecipes = (state) => {
   useEffect(() => { dispatch(asyncFetchRecipesByUser(token)) }, []);
   
   const goToMyProfile = () => history.push('my-profile');
-  // TODO if if successful, send new action to replace modified recipe in stor
   const modifyRecipe = recipe => history.push({pathname: 'create-recipe', state: recipe});
   const deleteRecipe = (recipeId) => dispatch(asyncFetchDeleteRecipe(token, recipeId));
   
@@ -30,9 +29,14 @@ let MyRecipes = (state) => {
 
   return (
     <div className="MyRecipes">
+      <div className="header-wrapper">
       <PageHeader {...header} />
-      <AddRecipeButton />
-      <Button onClick={goToMyProfile}>My Profile</Button>
+        <div className="action-btns">
+          <AddRecipeButton />
+          <Button onClick={goToMyProfile}>My Profile</Button>
+        </div> 
+      </div>
+      
       {error !== '' ? <div>{error}</div> : ''}
       {!userRecipes && loading ? (
         <div>Loading...</div>

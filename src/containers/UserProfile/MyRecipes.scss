@@ -1,4 +1,12 @@
 .MyRecipes {
+  .header-wrapper {
+    position: relative;
+    
+    .action-btns {
+      position: absolute;
+    }
+  }
+
   ul {
     padding-top: 20px;
     display: flex;

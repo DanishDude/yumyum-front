@@ -1,5 +1,6 @@
 const url = 'http://localhost:5000/api';
 
+// -------- Add-Modify recipe -------- //
 export const startFetchAddModifyRecipe = () => ({
   type: 'START_FETCH_ADD_MODIFY_RECIPE'
 });
@@ -51,6 +52,7 @@ export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
     .catch((err) => dispatch(fetchErrorAddModifyRecipe(err)));
 };
 
+// -------- Get recipes -------- //
 export const startFetchRecipes = () => ({
   type: 'START_FETCH_RECIPES'
 });
@@ -73,6 +75,7 @@ export const asyncFetchRecipes = () => dispatch => {
     .catch(() => { dispatch(fetchErrorRecipes('Error loading recipes')) });
 };
 
+// -------- Get recipe image -------- //
 export const startFetchRecipeImage = () => ({
   type: 'START_FETCH_RECIPE_IMAGE',
 });
@@ -99,6 +102,7 @@ export const asyncFetchRecipeImage = recipeId => dispatch => {
     });
 };
 
+// -------- Get recipes by user -------- //
 export const startFetchRecipesByUser = () => ({
   type: 'START_FETCH_RECIPES_BY_USER'
 });
@@ -115,12 +119,13 @@ export const fetchErrorRecipesByUser = err => ({
 
 export const asyncFetchRecipesByUser = token => dispatch => {
   dispatch(startFetchRecipesByUser());
-  fetch(`${url}/user-recipes`, { headers: { 'Authorization': 'Bearer ' + token } })
+  fetch(`${url}/user/recipes`, { headers: { 'Authorization': 'Bearer ' + token } })
     .then(res => res.json())
     .then(userRecipes => { dispatch(fetchSuccessRecipesByUser(userRecipes)) })
     .catch(() => { dispatch(fetchErrorRecipesByUser()) });
 };
 
+// -------- Delete recipe -------- //
 export const startFetchDeleteRecipe = () => ({
   type: 'START_FETCH_DELETE_RECIPE'
 });
