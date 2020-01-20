@@ -1,23 +1,30 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import PageHeader from '../../components/PageHeader';
+import EditProfile from './EditProfile';
+import { asyncUpdateUser } from '../../actions/user';
 import './MyProfile.scss';
 
-const MyProfile = (user) => {
+let MyProfile = (state) => {
+  const { user, token } = state;
+  const dispatch = useDispatch();
   const history = useHistory();
+
   const goToMyRecipes = () => history.push('/my-recipes');
+
+  const updateUser = (token, values) => {
+    dispatch(asyncUpdateUser(token, values));
+  };
 
   const header = {
     title: 'My Account',
     subtext: 'Your Information. Stay current and keep it up to date'
   };
 
-  const handleSubmit = values => console.log(values);
-
-  const initialValues = user;
+  console.log(state);
   
   return (
     <div className="MyProfile">
@@ -26,34 +33,21 @@ const MyProfile = (user) => {
       <div className="action-btns">
         <Button onClick={goToMyRecipes}>My Recipes</Button>
       </div>
+        <EditProfile
+          onSubmit={values => updateUser(token, values)}
+          initialValues={user}
+          user={user}
+        />
       </div>
-      <div className="basic-info">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <h6>Email:</h6>
-            <Field name="email" component="input" type="email" placeholder=""/>
-          </div>
-          <div>
-            <h6>Display Name:</h6>
-            <Field name="displayname" component="input" type="text" placeholder=""/>
-          </div>
-          <div>
-            <h6>First Name:</h6>
-            <Field name="firstname" component="input" type="text" placeholder=""/>
-          </div>
-          <div>
-            <h6>Last Name:</h6>
-            <Field name="lastname" component="input" type="text" placeholder=""/>
-          </div>
-        </form>
-      </div>
+      
     </div>
   );
 };
 
 const mstp = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
+    token: state.user.token
   };
 };
 

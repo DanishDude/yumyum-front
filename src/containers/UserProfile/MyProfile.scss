@@ -14,12 +14,19 @@
     }
   }
 
-  .basic-info {
+/*   .basic-info {
     margin: 50px 5vw;
+    margin-right: -50%;
+    left: 50%;
 
     div {
-      /* display: flex;
-      flex-wrap: wrap; */
+      display: flex;
+      flex-wrap: wrap;
+
+      input {
+        margin-bottom: 10px;
+        width: 220px;
+      }
 
       h6 {
         flex: 0 0 15%;
@@ -31,21 +38,12 @@
         width: 200px;
         max-width: 85%;
       }
+
+      button {
+        margin: 15px 0 0 110px;
+        width: 108px;
     }
-  }
+    
+    }
+  } */
 }
-
-/*
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-
-  .col-2 {
-    flex: 0 0 16.666667%;
-    max-width: 16.666667%;
-  .col-10 {
-    flex: 0 0 83.333333%;
-    max-width: 83.333333%;
-} */

@@ -18,7 +18,7 @@ let MyRecipes = (state) => {
 
   useEffect(() => { dispatch(asyncFetchRecipesByUser(token)) }, []);
   
-  const goToMyProfile = () => history.push('my-profile');
+  const goToMyProfile = () => history.push({pathname: 'my-profile', state: {initialValues: user}});
   const modifyRecipe = recipe => history.push({pathname: 'create-recipe', state: recipe});
   const deleteRecipe = (recipeId) => dispatch(asyncFetchDeleteRecipe(token, recipeId));
   

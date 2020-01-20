@@ -27,6 +27,7 @@ export const fetchErrorUser = err => ({
 
 export const asyncFetchUser = token => dispatch => {
   dispatch(startFetchUser());
+
   const options = {
     method: 'GET',
     headers: {
@@ -35,6 +36,7 @@ export const asyncFetchUser = token => dispatch => {
       'Authorization': 'Bearer ' + token
     }
   };
+
   fetch(`${url}/user`, options)
     .then(res => res.json())
     .then(user => {
@@ -43,4 +45,38 @@ export const asyncFetchUser = token => dispatch => {
     .catch(() => {
       dispatch(fetchErrorUser());
     });
+};
+
+export const startUpdateUser = () => ({
+  type: 'START_UPDATE_USER'
+});
+
+export const successUpdateUser = user => ({
+  type: 'SUCCES_UPDATE_USER',
+  user
+});
+
+export const errorUpdateUser = err => ({
+  type: 'ERROR_UPDATE_USER',
+  err
+});
+
+export const asyncUpdateUser = (token, user) => dispatch => {
+  console.log(user);
+  
+  dispatch(startUpdateUser());
+
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token},
+    body: user
+  };
+
+  fetch(`${url}/user`, options)
+    .then(res => res.json)
+    .then(user => dispatch(successUpdateUser(user)))
+    .catch(err => dispatch(errorUpdateUser(err)));
 };
