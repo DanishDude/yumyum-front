@@ -32,7 +32,7 @@ const App = () => {
           <Route path = '/contact' component={Contact} />
           <Route path = '/login' component={LoginPage} />
           <Route path = '/signup' component={SignupPage} />
-          <PrivateRoute exact path='/user-profile' component={ProfileContainer} />
+          <PrivateRoute exact path='/my-recipes' component={ProfileContainer} />
           <PrivateRoute path = '/create-recipe' component={CreateRecipePage} />
           <PrivateRoute path = '/old-create-recipe' component={CreateRecipePageOLD} />
           <PrivateRoute path = '/my-profile' component={MyProfile} />

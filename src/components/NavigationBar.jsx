@@ -40,7 +40,7 @@ class NavigationBar extends Component {
                 <NavLink to="/contact">Contact</NavLink>
               </NavItem>
               <NavItem className="menu-item">
-                <NavLink to="user-profile">My Account</NavLink>
+                <NavLink to="my-recipes">My Account</NavLink>
               </NavItem>
               </Nav>
             </Collapse>

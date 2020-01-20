@@ -1,0 +1,51 @@
+.MyProfile {
+  .header-wrapper {
+    position: relative;
+  }
+
+  .action-btns {
+    position: absolute;
+    top: 80%;
+    right: 8.5%;
+    bottom: 10%;
+
+    button {
+      margin-left: 10px;
+    }
+  }
+
+  .basic-info {
+    margin: 50px 5vw;
+
+    div {
+      /* display: flex;
+      flex-wrap: wrap; */
+
+      h6 {
+        flex: 0 0 15%;
+        max-width: 15%;
+      }
+
+      p {
+        flex: 0 0 85%;
+        width: 200px;
+        max-width: 85%;
+      }
+    }
+  }
+}
+
+/*
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+
+  .col-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  .col-10 {
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+} */
