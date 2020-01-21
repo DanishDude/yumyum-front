@@ -26,7 +26,6 @@ let EditProfile = (props) => {
             <Field name="lastname" component="input" type="text" placeholder=""/>
           </div>
           <div>
-            <h6></h6>
             <Button className="save" color="primary" type="submit">Save</Button>
           </div>
         </form>
@@ -35,7 +34,7 @@ let EditProfile = (props) => {
 };
 
 EditProfile = reduxForm({
-  form: 'userProfile'
+  form: 'editProfile'
 })(EditProfile);
 
 export default EditProfile;

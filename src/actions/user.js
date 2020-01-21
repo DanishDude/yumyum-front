@@ -72,12 +72,13 @@ export const asyncUpdateUser = (token, user) => dispatch => {
     if (!(value && allowed.includes(key))) delete user[key];
   };
 
+  console.log(JSON.parse(JSON.stringify(user)));
   console.log('AFTER ' + user);
-  console.log(JSON.stringify(user));
   
   const options = {
     method: 'PUT',
-    body: JSON.stringify(user),
+    body: JSON.parse(JSON.stringify(user)),
+    
     headers: { 'Authorization': 'Bearer ' + token }
   };
 

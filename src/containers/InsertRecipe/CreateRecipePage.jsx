@@ -10,7 +10,9 @@ const CreateRecipePage = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const addRecipe = (token, values) => {
+  const addModifyRecipe = (token, values) => {
+    console.log(values);
+    
     dispatch(asyncFetchAddModifyRecipe(token, values))
     history.push('/recipes')
   };
@@ -19,7 +21,7 @@ const CreateRecipePage = (props) => {
 
   return (
     <div className="CreateRecipePage">
-      <InsertRecipe onSubmit={values => addRecipe(token, values)} initialValues={recipe} />
+      <InsertRecipe onSubmit={values => addModifyRecipe(token, values)} initialValues={recipe} />
     </div>
   );
 };

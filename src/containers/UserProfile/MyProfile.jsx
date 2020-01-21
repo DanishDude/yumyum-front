@@ -1,11 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { reduxForm } from 'redux-form';
-import PageHeader from '../../components/PageHeader';
-import EditProfile from './EditProfile';
 import { asyncUpdateUser } from '../../actions/user';
+import EditProfile from './EditProfile';
+import PageHeader from '../../components/PageHeader';
 import './MyProfile.scss';
 
 let MyProfile = (props) => {
@@ -18,8 +17,11 @@ let MyProfile = (props) => {
   const goToMyRecipes = () => history.push('/my-recipes');
 
   const updateUser = (token, values) => {
-    console.log('PROFILE ' + values);
-    console.log(JSON.stringify(values));
+    console.log(JSON.parse(JSON.stringify(values)));
+    
+    let data = {};
+    Object.entries(values).forEach(value => data[value[0]] = value[1]);
+    console.log(data);
     
     dispatch(asyncUpdateUser(token, values));
   };
