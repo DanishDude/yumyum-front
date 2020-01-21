@@ -62,17 +62,23 @@ export const errorUpdateUser = err => ({
 });
 
 export const asyncUpdateUser = (token, user) => dispatch => {
-  console.log(user);
-  
   dispatch(startUpdateUser());
 
+  const allowed = ['displayname', 'firstname', 'lastname']
+  
+  console.log('BEFORE ' + user);
+  
+  for (const [key, value] of Object.entries(user)) {
+    if (!(value && allowed.includes(key))) delete user[key];
+  };
+
+  console.log('AFTER ' + user);
+  console.log(JSON.stringify(user));
+  
   const options = {
     method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token},
-    body: user
+    body: JSON.stringify(user),
+    headers: { 'Authorization': 'Bearer ' + token }
   };
 
   fetch(`${url}/user`, options)

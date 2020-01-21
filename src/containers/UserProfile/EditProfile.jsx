@@ -4,19 +4,15 @@ import { Field, reduxForm } from 'redux-form';
 import './EditProfile.scss';
 
 let EditProfile = (props) => {
-  console.log(props);
-  
   const { handleSubmit, user } = props
-  console.log(user);
-  
 
   return (
     <div className="EditProfile">
-        <form onSubmit={handleSubmit}>
           <div className="field">
             <h6>Email:</h6>
             <p>{user.email}</p>
           </div>
+        <form onSubmit={handleSubmit}>
           <div className="field">
             <h6>Display Name:</h6>
             <Field name="displayname" component="input" type="text" placeholder=""/>

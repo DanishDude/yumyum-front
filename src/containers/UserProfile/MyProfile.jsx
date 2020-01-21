@@ -8,14 +8,19 @@ import EditProfile from './EditProfile';
 import { asyncUpdateUser } from '../../actions/user';
 import './MyProfile.scss';
 
-let MyProfile = (state) => {
-  const { user, token } = state;
+let MyProfile = (props) => {
+  console.log(props);
+  
+  const { user, token } = props;
   const dispatch = useDispatch();
   const history = useHistory();
 
   const goToMyRecipes = () => history.push('/my-recipes');
 
   const updateUser = (token, values) => {
+    console.log('PROFILE ' + values);
+    console.log(JSON.stringify(values));
+    
     dispatch(asyncUpdateUser(token, values));
   };
 
@@ -23,8 +28,6 @@ let MyProfile = (state) => {
     title: 'My Account',
     subtext: 'Your Information. Stay current and keep it up to date'
   };
-
-  console.log(state);
   
   return (
     <div className="MyProfile">
@@ -50,9 +53,5 @@ const mstp = state => {
     token: state.user.token
   };
 };
-
-MyProfile = reduxForm({
-  form: 'userProfile'
-})(MyProfile);
 
 export default connect(mstp, null)(MyProfile);
