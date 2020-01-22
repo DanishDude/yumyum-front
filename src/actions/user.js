@@ -77,12 +77,18 @@ export const asyncUpdateUser = (token, user) => dispatch => {
   
   const options = {
     method: 'PUT',
-    body: JSON.parse(JSON.stringify(user)),
-    
+    body: { displayname: "RoboCop", firstname: "Reberto", lastname: "Bazzimo" }, // JSON.parse(JSON.stringify(user)),
     headers: { 'Authorization': 'Bearer ' + token }
   };
 
-  fetch(`${url}/user`, options)
+  console.log((options.body));
+  
+
+  fetch(`${url}/user`, {
+    method: 'PUT',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: { displayname: "RoboCop", firstname: "Reberto", lastname: "Bazzimo" }, // JSON.parse(JSON.stringify(user)),
+  })
     .then(res => res.json)
     .then(user => dispatch(successUpdateUser(user)))
     .catch(err => dispatch(errorUpdateUser(err)));

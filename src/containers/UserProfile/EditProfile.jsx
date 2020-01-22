@@ -6,11 +6,14 @@ import './EditProfile.scss';
 let EditProfile = (props) => {
   const { handleSubmit, user } = props
 
+  // console.log(props);
+  
+
   return (
     <div className="EditProfile">
           <div className="field">
             <h6>Email:</h6>
-            <p>{user.email}</p>
+            {/* <p>{user.email}</p> */}
           </div>
         <form onSubmit={handleSubmit}>
           <div className="field">

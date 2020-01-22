@@ -41,7 +41,7 @@ let MyProfile = (props) => {
         <EditProfile
           onSubmit={values => updateUser(token, values)}
           initialValues={user}
-          user={user}
+          // user={user}
         />
       </div>
       
