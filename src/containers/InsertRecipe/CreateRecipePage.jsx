@@ -11,8 +11,6 @@ const CreateRecipePage = (props) => {
   const history = useHistory();
 
   const addModifyRecipe = (token, values) => {
-    console.log(values);
-    
     dispatch(asyncFetchAddModifyRecipe(token, values))
     history.push('/recipes')
   };

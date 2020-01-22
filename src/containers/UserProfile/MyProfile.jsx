@@ -16,15 +16,7 @@ let MyProfile = (props) => {
 
   const goToMyRecipes = () => history.push('/my-recipes');
 
-  const updateUser = (token, values) => {
-    console.log(JSON.parse(JSON.stringify(values)));
-    
-    let data = {};
-    Object.entries(values).forEach(value => data[value[0]] = value[1]);
-    console.log(data);
-    
-    dispatch(asyncUpdateUser(token, values));
-  };
+  const updateUser = (token, values) => dispatch(asyncUpdateUser(token, values));
 
   const header = {
     title: 'My Account',
@@ -41,7 +33,7 @@ let MyProfile = (props) => {
         <EditProfile
           onSubmit={values => updateUser(token, values)}
           initialValues={user}
-          // user={user}
+          user={user}
         />
       </div>
       
