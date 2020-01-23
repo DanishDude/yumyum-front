@@ -25,6 +25,18 @@ let EditProfile = (props) => {
             <h6>Last Name:</h6>
             <Field name="lastname" component="input" type="text" placeholder=""/>
           </div>
+          <div className="field">
+            <h6>Old Password:</h6>
+            <Field name="password" component="input" type="password" placeholder=""/>
+          </div>
+          <div className="field">
+            <h6>New Password:</h6>
+            <Field name="newPassword" component="input" type="password" placeholder=""/>
+          </div>
+          <div className="field">
+            <h6>Confirm Password:</h6>
+            <Field name="confirmPassword" component="input" type="password" placeholder=""/>
+          </div>
           <div>
             <Button className="save" color="primary" type="submit">Save</Button>
           </div>
