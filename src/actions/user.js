@@ -39,9 +39,7 @@ export const asyncFetchUser = token => dispatch => {
 
   fetch(`${url}/user`, options)
     .then(res => res.json())
-    .then(user => {
-      dispatch(fetchSuccessUser(user, token));
-    })
+    .then(user => dispatch(fetchSuccessUser(user, token)))
     .catch(() => {
       dispatch(fetchErrorUser());
     });
@@ -51,8 +49,9 @@ export const startUpdateUser = () => ({
   type: 'START_UPDATE_USER'
 });
 
-export const successUpdateUser = user => ({
-  type: 'SUCCES_UPDATE_USER',
+export const successUpdateUser = (token, user) => ({
+  type: 'SUCCESS_UPDATE_USER',
+  token,
   user
 });
 
@@ -63,7 +62,12 @@ export const errorUpdateUser = err => ({
 
 export const asyncUpdateUser = (token, user) => dispatch => {
   dispatch(startUpdateUser());
-  
+  if (user.newPassword === user.confirmPassword) {
+    delete user.confirmPassword;
+  } else {
+    return alert('New passwords do not match');
+  };
+
   const options = {
     method: 'PUT',
     headers: { 
@@ -74,7 +78,7 @@ export const asyncUpdateUser = (token, user) => dispatch => {
   };
 
   fetch(`${url}/user`, options)
-    .then(res => res.json)
-    .then(user => dispatch(successUpdateUser(user)))
+    .then(res => res.json())
+    .then(payload => dispatch(successUpdateUser(payload.token, payload.user)))
     .catch(err => dispatch(errorUpdateUser(err)));
 };

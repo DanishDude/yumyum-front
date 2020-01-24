@@ -8,8 +8,6 @@ import PageHeader from '../../components/PageHeader';
 import './MyProfile.scss';
 
 let MyProfile = (props) => {
-  console.log(props);
-  
   const { user, token } = props;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,13 +28,12 @@ let MyProfile = (props) => {
       <div className="action-btns">
         <Button onClick={goToMyRecipes}>My Recipes</Button>
       </div>
+      </div>
         <EditProfile
           onSubmit={values => updateUser(token, values)}
           initialValues={user}
           user={user}
         />
-      </div>
-      
     </div>
   );
 };

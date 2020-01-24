@@ -18,9 +18,10 @@ const user = (state = initialState, action) => {
     case 'ERROR_FETCH_USER':
       return { ...state, loading:false, error: action.err };
     case 'START_UPDATE_USER':
-      return { ...state, loading: true };
+      return { ...state, loading: true,};
     case 'SUCCESS_UPDATE_USER':
-      return { ...state, loading:false, user: action.user };
+      window.localStorage.setItem('token', action.token);
+      return { ...state, loading:false, user: action.user, token: action.token };
     case 'ERROR_UPDATE_USER':
       return { ...state, loading: false, error: action.err };
     default:
