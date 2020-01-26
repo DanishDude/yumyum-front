@@ -1,27 +1,50 @@
 import React from 'react'
 import { Button } from 'reactstrap';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import './EditProfile.scss';
 
 const validate = values => {
   const errors = {};
-  if (values.newPassword !== values.confirmPassword)
-    errors.password = 'New passwords must match';
+  if (!values.displayname) {
+    errors.displayname = 'Required';
+  } else if (values.displayname.length > 15) {
+    errors.displayname = 'Must be 15 characters or less';
+  };
+
+  if (!values.password) {
+    errors.password = 'Required'
+  };
+
+  if (values.newPassword !== values.confirmPassword) {
+    errors.confirmPassword = 'New passwords must match';
+  };
   return errors;
 };
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+/* const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div className="field">
     <input {...input} placeholder={label} type={type} />
-    {touched && (error & <span>{error}</span>)}
+    {touched && (error & <span>{error}</span>) || ''}
+  </div>
+) */
+
+const renderField = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched && (error && <span>{error}</span>)}
+    </div>
   </div>
 )
 
 let EditProfile = (props) => {
-  const { handleSubmit, user } = props
+  const { handleSubmit, user, valid } = props
   console.log(props);
-  
 
+  const disabled = !valid ? true : false;
+  
   return (
     <div className="EditProfile">
           <div className="field">
@@ -55,7 +78,7 @@ let EditProfile = (props) => {
             <p>{}</p>
           </div>
           <div>
-            <Button className="save" color="primary" type="submit">Save</Button>
+            <Button className="save" color="primary" type="submit" disabled={disabled}>Save</Button>
           </div>
         </form>
       </div>
