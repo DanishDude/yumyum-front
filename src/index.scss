@@ -20,10 +20,19 @@ code {
     monospace;
 }
 
-h1, h3, h5, p, div, span, a {
-  font-family: 'roboto', 'Noto Sans Myanmar UI', 'arial', 'sans-serif';
+h1, h2, h5 {
+  font-family: 'Roboto', 'Catamaran', 'Noto Sans Myanmar UI', 'arial', 'sans-serif';
 }
 
-h2, h4, h6 {
-  font-family: 'Catamaran',"Roboto", "Arial", sans-serif;
+h1 {
+  font-size: 4rem;
+  font-weight: 1000;
+}
+
+h4, h3, h6 {
+  font-family: 'Catamaran', 'Helvetica','Roboto', 'Arial', sans-serif;
+}
+
+p, div, span, a {
+  font-family: 'Roboto', 'Arial', sans-serif;
 }

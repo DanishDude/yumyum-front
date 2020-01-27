@@ -11,10 +11,13 @@ let Signup = props => {
         <h3 className="item">Create your account</h3>
         <form onSubmit={handleSubmit}>
           <div className="item">
-            <Field name="firstname" component="input" type="text" placeholder="First name" />
+            <Field name="displayname" component="input" type="text" placeholder="Display name" />
           </div>
           <div className="item">
-            <Field name="lastname" component="input" type="text" placeholder="Last name" />
+            <Field name="firstname" component="input" type="text" placeholder="First name (optional)" />
+          </div>
+          <div className="item">
+            <Field name="lastname" component="input" type="text" placeholder="Last name (optional)" />
           </div>
           <div className="item">
             <Field name="email" component="input" type="email" placeholder="Email" />

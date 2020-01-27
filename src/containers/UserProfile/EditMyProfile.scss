@@ -1,0 +1,16 @@
+.EditMyProfile {
+  .header-wrapper {
+    position: relative;
+    
+    .action-btns {
+      position: absolute;
+      top: 80%;
+      right: 8.5%;
+      bottom: 10%;
+  
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

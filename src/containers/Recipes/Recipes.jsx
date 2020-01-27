@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { asyncFetchRecipes } from "../../actions/fetchRecipes";
+import { asyncFetchRecipes } from "../../actions/recipes";
 import AddRecipeButton from "../InsertRecipe/AddRecipeButton";
 import RecipeCard from "./RecipeCard";
 import "./Recipes.scss";
@@ -16,7 +16,7 @@ const Recipes = () => {
   
   return (
     <div className="Recipes">
-      <h1> Here are the top rated recipes !</h1>
+      <h1>The Best rated recipes !</h1>
       <AddRecipeButton />
       {error !== "" ? <div>{error}</div> : ""}
       {!recipes && loading ? (
