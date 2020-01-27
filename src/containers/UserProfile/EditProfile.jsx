@@ -67,7 +67,6 @@ let EditProfile = (props) => {
           <div className="field">
             <h6>Confirm Password:</h6>
             <Field name="confirmPassword" component={renderField} type="password"/>
-            <p>{}</p>
           </div>
           <div>
             <Button className="save" color="primary" type="submit" disabled={disabled}>Save</Button>
