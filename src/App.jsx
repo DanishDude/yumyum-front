@@ -7,7 +7,8 @@ import CreateRecipePageOLD from './containers/InsertRecipe/CreateRecipePageOLD';
 import GetUser from './containers/ConnectUser/GetUser';
 import Home from './components/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
-import MyProfile from './containers/UserProfile/MyProfile';
+import MyAccount from './containers/UserProfile/MyAccount';
+import EditMyProfile from './containers/UserProfile/EditMyProfile';
 import NavigationBar from './components/NavigationBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import ProfileContainer from './containers/UserProfile/ProfileContainer';
@@ -35,7 +36,8 @@ const App = () => {
           <PrivateRoute exact path='/my-recipes' component={ProfileContainer} />
           <PrivateRoute path = '/create-recipe' component={CreateRecipePage} />
           <PrivateRoute path = '/old-create-recipe' component={CreateRecipePageOLD} />
-          <PrivateRoute path = '/my-profile' component={MyProfile} />
+          <PrivateRoute path = '/edit-profile' component={EditMyProfile} />
+          <PrivateRoute path = '/my-account' component={MyAccount} />
         </Switch>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import './EditProfile.scss';
 
@@ -32,6 +33,8 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 let EditProfile = (props) => {
+  const history = useHistory();
+  const cancel = () => history.push('/my-account');
   const { handleSubmit, user, valid } = props
   console.log(props);
 
@@ -68,8 +71,9 @@ let EditProfile = (props) => {
             <h6>Confirm Password:</h6>
             <Field name="confirmPassword" component={renderField} type="password"/>
           </div>
-          <div>
-            <Button className="save" color="primary" type="submit" disabled={disabled}>Save</Button>
+          <div className="action-btns">
+            <Button type="button" onClick={cancel} >Cancel</Button>
+            <Button color="primary" type="submit" disabled={disabled}>Save</Button>
           </div>
         </form>
       </div>

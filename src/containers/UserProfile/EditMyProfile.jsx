@@ -6,10 +6,9 @@ import { reset } from 'redux-form'
 import { asyncUpdateUser } from '../../actions/user';
 import EditProfile from './EditProfile';
 import PageHeader from '../../components/PageHeader';
-import ProfileInfo from './ProfileInfo';
-import './MyProfile.scss';
+import './EditMyProfile.scss';
 
-const MyProfile = (props) => {
+const EditMyProfile = (props) => {
   const { user, token } = props;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -23,26 +22,15 @@ const MyProfile = (props) => {
     title: 'My Account',
     subtext: 'Your Information. Stay current and keep it up to date'
   };
-
-  let view = false
-  const changeView = () => {
-    view = !view;
-    console.log(view);
-    
-  }
-
-  let plop = view ? 'It\'s Good' : 'No Way';
   
   return (
-    <div className="MyProfile">
+    <div className="EditMyProfile">
       <div className="header-wrapper">
         <PageHeader {...header} />
         <div className="action-btns">
           <Button onClick={goToMyRecipes}>My Recipes</Button>
         </div>
       </div>
-      <Button onClick={changeView} >Do Something</Button>
-      <p>{plop}</p>
       <EditProfile
         onSubmit={values => updateUser(token, values)}
         onSubmitSuccess={afterSubmit}
@@ -60,4 +48,4 @@ const mstp = state => {
   };
 };
 
-export default connect(mstp, null)(MyProfile);
+export default connect(mstp, null)(EditMyProfile);
