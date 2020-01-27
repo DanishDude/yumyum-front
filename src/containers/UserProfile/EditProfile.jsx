@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from 'reactstrap';
-import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import './EditProfile.scss';
 
@@ -22,19 +21,12 @@ const validate = values => {
   return errors;
 };
 
-/* const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="field">
-    <input {...input} placeholder={label} type={type} />
-    {touched && (error & <span>{error}</span>) || ''}
-  </div>
-) */
-
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
       <input {...input} placeholder={label} type={type} />
-      {touched && (error && <span>{error}</span>)}
+      {touched && (error && <span className="error">{error}</span>)}
     </div>
   </div>
 )

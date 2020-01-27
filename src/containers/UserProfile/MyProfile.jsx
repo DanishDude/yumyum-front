@@ -5,14 +5,20 @@ import { Button } from 'reactstrap';
 import { asyncUpdateUser } from '../../actions/user';
 import EditProfile from './EditProfile';
 import PageHeader from '../../components/PageHeader';
+import ProfileInfo from './ProfileInfo';
 import './MyProfile.scss';
 
-let MyProfile = (props) => {
+const MyProfile = (props) => {
   const { user, token } = props;
   const dispatch = useDispatch();
   const history = useHistory();
 
   const goToMyRecipes = () => history.push('/my-recipes');
+  
+  let editMode = false;
+  const editProfile = () => editMode = true;
+  console.log(editMode);
+  
 
   const updateUser = (token, values) => dispatch(asyncUpdateUser(token, values));
 
@@ -25,10 +31,14 @@ let MyProfile = (props) => {
     <div className="MyProfile">
       <div className="header-wrapper">
         <PageHeader {...header} />
-      <div className="action-btns">
-        <Button onClick={goToMyRecipes}>My Recipes</Button>
+        <div className="action-btns">
+          <Button onClick={goToMyRecipes}>My Recipes</Button>
+        </div>
       </div>
-      </div>
+        <ProfileInfo />
+        <Button onClick={() => editProfile}>Edit profile</Button>
+        <p>{editMode.toString()}</p>
+
         <EditProfile
           onSubmit={values => updateUser(token, values)}
           initialValues={user}

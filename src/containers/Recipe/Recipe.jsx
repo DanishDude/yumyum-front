@@ -21,7 +21,7 @@ const Recipe = (recipeObj) => {
         <div className="cover">
           <img
             className="cover-photo"
-            src={`http://localhost:5000/api/recipeImage/${recipe.id}`}
+            src={`http://localhost:5000/api/recipe/${recipe.id}/image`}
             alt=""
           />
         </div>

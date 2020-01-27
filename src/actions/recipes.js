@@ -27,7 +27,11 @@ export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
     for (const [key, value] of Object.entries(recipe)) {
       if (value) {
         if (key === 'image') {
-          value ? fd.append('image', value, value.name) : fd.append('image', {}, value);
+          console.log(value);
+          
+          (value && typeof value !== 'string')
+            ? fd.append('image', value, value.name)
+            : fd.append('image', {}, value);
         } else {
           fd.append(key, value);
         };
