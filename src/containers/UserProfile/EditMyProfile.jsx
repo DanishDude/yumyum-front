@@ -2,7 +2,6 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { reset } from 'redux-form'
 import { asyncUpdateUser } from '../../actions/user';
 import EditProfile from './EditProfile';
 import PageHeader from '../../components/PageHeader';
@@ -14,9 +13,8 @@ const EditMyProfile = (props) => {
   const history = useHistory();
 
   const goToMyRecipes = () => history.push('/my-recipes');
-
   const updateUser = (token, values) => dispatch(asyncUpdateUser(token, values));
-  const afterSubmit = (result, dispatch) => dispatch(reset('editProfile'));
+  const afterSubmit = () => history.push('/my-account');
 
   const header = {
     title: 'My Account',

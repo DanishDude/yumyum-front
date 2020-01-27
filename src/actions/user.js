@@ -62,11 +62,6 @@ export const errorUpdateUser = err => ({
 
 export const asyncUpdateUser = (token, user) => dispatch => {
   dispatch(startUpdateUser());
-  if (user.newPassword === user.confirmPassword) {
-    delete user.confirmPassword;
-  } else {
-    return alert('New passwords do not match');
-  };
 
   const options = {
     method: 'PUT',
@@ -78,7 +73,10 @@ export const asyncUpdateUser = (token, user) => dispatch => {
   };
 
   fetch(`${url}/user`, options)
-    .then(res => res.json())
+    .then(res => {
+      res.json();
+      if (res.status === 401) alert('Incorrect password');
+    })
     .then(payload => dispatch(successUpdateUser(payload.token, payload.user)))
-    .catch(err => dispatch(errorUpdateUser(err)));
+    .catch(error => dispatch(errorUpdateUser(error)));
 };

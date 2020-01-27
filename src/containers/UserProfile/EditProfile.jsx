@@ -30,14 +30,12 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
       {touched && (error && <span className="error">{error}</span>)}
     </div>
   </div>
-)
+);
 
 let EditProfile = (props) => {
   const history = useHistory();
   const cancel = () => history.push('/my-account');
-  const { handleSubmit, user, valid } = props
-  console.log(props);
-
+  const { handleSubmit, user, valid } = props;
   const disabled = !valid ? true : false;
   
   return (
@@ -72,6 +70,7 @@ let EditProfile = (props) => {
             <Field name="confirmPassword" component={renderField} type="password"/>
           </div>
           <div className="action-btns">
+            <h6></h6>
             <Button type="button" onClick={cancel} >Cancel</Button>
             <Button color="primary" type="submit" disabled={disabled}>Save</Button>
           </div>
