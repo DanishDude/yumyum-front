@@ -1,8 +1,17 @@
 .Recipes {
-
-  h1 {
-    padding: 20px 10px 0 10px;
-    text-align: center;
+  .header-wrapper {
+    position: relative;
+    
+    .action-btns {
+      position: absolute;
+      top: 80%;
+      right: 8.5%;
+      bottom: 10%;
+  
+      button {
+        margin-left: 10px;
+      }
+    }
   }
 
   ul {

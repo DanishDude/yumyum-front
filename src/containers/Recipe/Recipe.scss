@@ -1,79 +1,12 @@
 .Recipe {
   width: 100%;
-  padding: 0 10px;
 
-  .header {
-    
-    .title {
-      text-align: left;
-    }
-
-    .header-details {
-      display: flex;
-      flex-flow: wrap;
-      justify-items: flex-start;
-      align-items: flex-start;
-
-      .tag-list {
-        margin: 0 10px 10px 0;
-      }
-
-      .prep-cook-times {
-        margin: 0 10px 10px 0;
-        font-weight: 700;
-      }
-    }
+  h1 {
+    margin: 5vh 0 5vh 0;
+    text-align: center;
   }
 
-  .story-wrapper {
-    margin-bottom: 25px;
-
-    .cover {
-      float: right;
-
-      .cover-photo {
-        width: 500px;
-        height: 300px;
-        object-fit: cover;
-        margin-left: 15px;
-        margin-bottom: 15px;
-      }
-    }
-
-    .story {
-      width: 100%;
-      top: 10px;
-      left: 10px;
-
-      p {
-        //font-size: 1.5em;
-      }
-    }
-  }
-
-  .instructions {
-    width: 100%;
-    
-    .ingredients {
-      float: left;
-      margin: 0 20px;
-      padding: 10px;
-      border: 2px solid black;
-      border-radius: 5px;
-      //font-size: 1.5em;
-
-      .ingredients-list {
-      list-style-type: none;
-      }
-    }
-
-    .step-header {
-      padding-top: 12px;
-    }
-
-    .step {
-      list-style-type: none;
-      //font-size: 1.5em;
-    }
+  img {
+    align-self: center;
   }
 }

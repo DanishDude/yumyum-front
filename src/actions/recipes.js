@@ -77,6 +77,29 @@ export const asyncFetchRecipes = () => dispatch => {
     .catch(() => { dispatch(fetchErrorRecipes('Error loading recipes')) });
 };
 
+// -------- Get 1 recipe with params -------- //
+export const startFetchRecipe = () => ({
+  type: 'START_FETCH_RECIPE'
+});
+
+export const successFetchRecipe = recipe => ({
+  type: 'SUCCESS_FETCH_RECIPE',
+  recipe
+});
+
+export const errorFetchRecipe = err => ({
+  type: 'ERROR_FETCH_RECIPE',
+  err
+});
+
+export const asyncFetchRecipe = id => dispatch => {
+  dispatch(startFetchRecipe());
+  fetch(`${url}/recipe/${id}`)
+    .then(res => res.json())
+    .then(recipe => dispatch(successFetchRecipe(recipe)))
+    .catch(() => dispatch(errorFetchRecipe('Error loading recipe')));
+};
+
 // -------- Get recipe image -------- //
 export const startFetchRecipeImage = () => ({
   type: 'START_FETCH_RECIPE_IMAGE',
