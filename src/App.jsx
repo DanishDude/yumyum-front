@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import CreateRecipePage from './containers/InsertRecipe/CreateRecipePage';
-import CreateRecipePageOLD from './containers/InsertRecipe/CreateRecipePageOLD';
 import GetUser from './containers/ConnectUser/GetUser';
 import Home from './components/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
@@ -35,7 +34,6 @@ const App = () => {
           <Route path = '/signup' component={SignupPage} />
           <PrivateRoute exact path='/my-recipes' component={MyRecipes} />
           <PrivateRoute path = '/create-recipe' component={CreateRecipePage} />
-          <PrivateRoute path = '/old-create-recipe' component={CreateRecipePageOLD} />
           <PrivateRoute path = '/edit-profile' component={EditMyProfile} />
           <PrivateRoute path = '/my-account' component={MyAccount} />
         </Switch>
