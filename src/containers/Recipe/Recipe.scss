@@ -7,6 +7,41 @@
   }
 
   img {
-    align-self: center;
+    display: block;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  .story {
+    margin: 10px auto;
+    padding: 25px 0;
+    text-align: center;
+
+    p {
+      margin: auto;
+      max-width: 50vw;
+    }
+  }
+
+  .section {
+    margin: 0 20%;
+    border-bottom: 5px black solid;
+    margin-bottom: 10px;
+  }
+  
+  .ingredients {
+    padding-left: 40px;
+   
+    ul {
+      padding-bottom: 25px;
+      list-style-type: square;
+      font-weight: bolder;
+    }
+  }
+
+  .steps {
+    ul {
+      list-style: none;
+    }
   }
 }
