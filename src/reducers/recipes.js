@@ -1,5 +1,6 @@
 const initialState = {
   loading: false,
+  recipe: {},
   recipes: [],
   error: '',
 };
@@ -16,6 +17,10 @@ const recipes = (state = initialState, action) => {
     };
     case 'FETCH_ERROR_ADD_MODIFY_RECIPE':
       return { ...state, loading: false, error: action.err };
+    case 'START_FETCH_RECIPE':
+      return { ...state, loading: true };
+    case 'SUCCESS_FETCH_RECIPE':
+      return { state, loading: false, recipe: action.recipe, error: '' };
     case 'START_FETCH_RECIPES':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_RECIPES':

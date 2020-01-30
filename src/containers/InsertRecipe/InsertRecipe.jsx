@@ -41,7 +41,7 @@ let InsertRecipe = (props) => {
             />
           </div>
           <div className="field">
-            <Field name="ingredient_list" component="input" type="text"
+            <Field name="ingredients" component="input" type="text"
               placeholder="minced, beef, carrots, onions, herbs de provence"
             />
           </div>
@@ -56,8 +56,8 @@ let InsertRecipe = (props) => {
           </div>
           <div className="row">
             <div className="field timer col-3">
-              <label htmlFor="preparation_time">Prep time</label>
-              <Field name="preparation_time" component="input" type="number"
+              <label htmlFor="prep_time">Prep time</label>
+              <Field name="prep_time" component="input" type="number"
                     min="0" max="999" step="1" />
             </div>
             <div className="field timer col-3">
