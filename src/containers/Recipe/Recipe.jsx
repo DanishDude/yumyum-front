@@ -5,22 +5,22 @@ import './Recipe.scss';
 
 const Recipe = (props) => {
   console.log(props);
-  const { id } = props.match.params;
-  const { title, description, ingredients, prep_timre, cookt_time, instructions } = props.recipe;
-  
-  
   const dispatch = useDispatch();
+  const { id } = props.match.params;
+  const { title, description, ingredients, prep_time, cook_time, instructions } = props.recipe;
   
   useEffect(() => { dispatch(asyncFetchRecipe(id)) }, []);
-  
-  //recipe.prep_time = recipe.prep_time / 60;
-  //recipe.cook_time = recipe.cook_time / 60;
   
   return (
     <div className="Recipe">
       <h1>{title}</h1>
-      <img src={`http://localhost:5000/api/recipe/${id}/image`} alt="" />
-      <div className=" section story">
+      <img className="blury" src={`http://localhost:5000/api/recipe/${id}/image`} alt="" />
+      <img className="main" src={`http://localhost:5000/api/recipe/${id}/image`} alt="" />
+      <div className="time">
+        <p>{prep_time > 0 ? `Prep: ${prep_time}min` : ''}</p>
+        <p>{cook_time > 0 ? `Cook: ${cook_time}min` : ''}</p>
+      </div>
+      <div className="section story">
         <p>{description}</p>
       </div>
       {ingredients && ingredients[0] ?
@@ -34,17 +34,18 @@ const Recipe = (props) => {
               </li>) : ''}
           </ul>
         </div> : ''}
-        {ingredients && ingredients[0] ?
+        {instructions && instructions[0] ?
           <div className="section steps">
-          <ul>
-            {instructions && instructions[0] ?
-              instructions.split('|').map((step, i) => 
-              <li key={i}>
-                <h2>{i+1}.</h2>
-                <p>{step}</p>
-              </li>) : ''}
-          </ul>
-        </div> : ''}
+            <h3>Steps</h3>
+            <ul>
+              {instructions && instructions[0] ?
+                instructions.split('|').map((step, i) => 
+                <li key={i}>
+                  <h2>{i+1}.</h2>
+                  <p>{step}</p>
+                </li>) : ''}
+            </ul>
+          </div> : ''}
     </div>
   );
 };
