@@ -4,13 +4,12 @@ import { asyncFetchRecipe } from '../../actions/recipes';
 import './Recipe.scss';
 
 const Recipe = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
   const { id } = props.match.params;
   const { title, description, ingredients, prep_time, cook_time, instructions } = props.recipe;
   const image = props.recipe.image
     ? `http://localhost:5000/api/recipe/${id}/image`
-    : '/empty_plate.jpeg'
+    : '/empty_plate.jpeg';
   
   useEffect(() => { dispatch(asyncFetchRecipe(id)) }, []);
   
