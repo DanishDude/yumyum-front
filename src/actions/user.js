@@ -74,8 +74,13 @@ export const asyncUpdateUser = (token, user) => dispatch => {
 
   fetch(`${url}/user`, options)
     .then(res => {
-      res.json();
-      if (res.status === 401) alert('Incorrect password');
+      if (res.status === 401) {
+        alert('Incorrect password');
+      } else if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('Something went wrong');
+      };
     })
     .then(payload => dispatch(successUpdateUser(payload.token, payload.user)))
     .catch(error => dispatch(errorUpdateUser(error)));
