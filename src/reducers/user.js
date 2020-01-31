@@ -7,10 +7,20 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch(action.type) {
-    case 'LOGIN':
-      return { ...state, ...action.user };
-    case 'SIGNUP':
-      return { ...state, ...action.user };
+    case 'START_FETCH_LOGIN':
+      return { ...state, loading: true };
+    case 'SUCCESS_FETCH_LOGIN':
+      window.localStorage.setItem('token', action.token);
+      return { ...state, loading: false, user: action.user, token:action.token };
+    case 'ERROR_FETCH_LOGIN':
+      return { ...state, loading: false, error: action.err };
+    case 'START_FETCH_SIGNUP':
+      return { ...state, loading: true };
+    case 'SUCCESS_FETCH_SIGNUP':
+      window.localStorage.setItem('token', action.token);
+      return { ...state, loading: false, user: action.user, token:action.token };
+    case 'ERROR_FETCH_SIGNUP':
+      return { ...state, loading: false, error: action.err };
     case 'START_FETCH_USER':
       return { ...state, loading: true };
     case 'SUCCESS_FETCH_USER':

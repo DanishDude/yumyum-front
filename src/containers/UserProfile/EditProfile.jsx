@@ -6,6 +6,7 @@ import './EditProfile.scss';
 
 const validate = values => {
   const errors = {};
+  
   if (!values.displayname) {
     errors.displayname = 'Required';
   } else if (values.displayname.length > 15) {
