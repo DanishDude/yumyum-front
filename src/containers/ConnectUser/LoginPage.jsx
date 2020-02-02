@@ -9,14 +9,14 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const createAccount = () => history.push('/signup');
+  const signup = () => history.push('/signup');
   const loginUser = values => dispatch(asyncFetchLogin(values));
   const afterSubmit = () => history.push('/recipes');
 
   return (
     <div className="LoginPage">
       <Login
-        createAccount={createAccount}
+        signup={signup}
         onSubmit={loginUser}
         onSubmitSuccess={afterSubmit}
       />

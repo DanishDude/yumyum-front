@@ -5,7 +5,6 @@ import './Signup.scss';
 
 const validate = values => {
   const errors = {};
-  console.log('hello');
 
   if (!values.displayname) {
     errors.displayname = 'Required';
@@ -16,27 +15,31 @@ const validate = values => {
   if (!values.password) {
     errors.password = 'Required';
   };
+
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords must match'
+  }
+
+  return errors;
 }
 
 const renderfield = ({ input, placeholder, type, meta: { touched, error } }) => (
   <div>
     <input {...input} placeholder={placeholder} type={type} />
-    {touched && (error && <span className="error">{error}</span>)}
+    <div className="error-line">
+      {touched && (error && <span className="error">{error}</span>)}
+    </div>
   </div>
 );
 
 let Signup = props => {
-  const { handleSubmit, goTologin, valid } = props;
+  const { handleSubmit, login, valid } = props;
   const disabled = !valid ? true : false;
-  console.log('DISABLED: ' + disabled);
-  console.log('PROPS: ' + JSON.stringify(props));
-  
-  
 
   return (
     <div className="Signup">
       <div className="content">
-        <h3 className="item">Create your account</h3>
+        <h3>Create your account</h3>
         <form onSubmit={handleSubmit}>
           <div className="item">
             <Field name="displayname" component={renderfield} type="text" placeholder="Display name" />
@@ -54,18 +57,19 @@ let Signup = props => {
             <Field name="password" component={renderfield} type="password" placeholder="Password" />
           </div>
           <div className="item">
-            <Button color="link" type="button" onClick={goTologin}>Login instead</Button>
+            <Field name="confirmPassword" component={renderfield} type="password" placeholder="Confirm password" />
+          </div>
+          <div className="item">
+            <Button color="link" type="button" onClick={login}>Login instead</Button>
             <Button color="primary" type="submit" disabled={disabled}>Create Profile</Button>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-Signup = reduxForm({
+export default Signup = reduxForm({
   form: 'signup',
   validate
 })(Signup);
-
-export default Signup;

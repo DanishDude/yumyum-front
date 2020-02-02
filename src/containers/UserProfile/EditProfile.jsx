@@ -6,7 +6,7 @@ import './EditProfile.scss';
 
 const validate = values => {
   const errors = {};
-  
+
   if (!values.displayname) {
     errors.displayname = 'Required';
   } else if (values.displayname.length > 15) {
@@ -20,6 +20,7 @@ const validate = values => {
   if (values.newPassword !== values.confirmPassword) {
     errors.confirmPassword = 'New passwords must match';
   };
+
   return errors;
 };
 
@@ -72,7 +73,7 @@ let EditProfile = (props) => {
           </div>
           <div className="action-btns">
             <h6></h6>
-            <Button type="button" onClick={cancel} >Cancel</Button>
+            <Button type="button" onClick={cancel}>Cancel</Button>
             <Button color="primary" type="submit" disabled={disabled}>Save</Button>
           </div>
         </form>
