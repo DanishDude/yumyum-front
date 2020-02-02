@@ -1,14 +1,89 @@
 const url = 'http://localhost:5000/api';
 
-export const login = user => ({
-  type: 'LOGIN',
-  user
+export const startFetchLogin = () => ({
+  type: 'START_FETCH_LOGIN'
 });
 
-export const signup = user => ({
-  type: 'SIGNUP',
-  user
+export const successFetchLogin = (user, token) => ({
+  type: 'SUCCESS_FETCH_LOGIN',
+  user,
+  token
 });
+
+export const errorFetchLogin = err => ({
+  type: 'ERROR_FETCH_LOGIN',
+  err
+});
+
+export const asyncFetchLogin = user => dispatch => {
+  dispatch(startFetchLogin());
+
+  const options = {
+    method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+  };
+
+  fetch(`${url}/login`, options)
+    .then(res => {
+      if (res.status === 401) {
+        alert('Login error, check email and password is correct')
+      } else if (res.status === 200) {
+        return res.json()
+      }
+    })
+    .then(payload => dispatch(successFetchLogin(payload.user, payload.token)))
+    .catch(err => {
+      alert(err);
+      console.log(err);
+    });
+};
+
+export const startFetchSignup = () => ({
+  type: 'START_FETCH_SIGNUP'
+});
+
+export const successFetchSignup = (user, token) => ({
+  type: 'SUCCESS_FETCH_SIGNUP',
+  user,
+  token
+});
+
+export const errorFetchSignup = err => ({
+  type: 'ERROR_FETCH_SIGNUP',
+  err
+});
+
+export const asyncFetchSignup = user => dispatch => {
+  dispatch(startFetchUser());
+
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  };
+
+  fetch(`${url}/signup`, options)
+    .then(res => {
+      if (res.status === 500) {
+        alert('error during sugnup');
+        console.log(res);
+      } else if (res.status === 201) {
+        return res.json();
+      };
+    })
+    .then(payload => dispatch(successFetchSignup(payload.user, payload.token)))
+    .catch(err => {
+      dispatch(errorFetchSignup(err));
+      alert(err);
+    });
+}
 
 export const startFetchUser = () => ({
   type: 'START_FETCH_USER'
