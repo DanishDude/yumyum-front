@@ -31,16 +31,16 @@ class NavigationBar extends Component {
             <Collapse isOpen={ this.state.isOpen } navbar>
               <Nav className="ml-auto" navbar>
               <NavItem className="menu-item">
-                <NavLink to="/recipes">Recipes</NavLink>
+                <NavLink to='/recipes'>Recipes</NavLink>
               </NavItem>
               <NavItem className="menu-item">
-                <NavLink to="/about-us">About Us</NavLink>
+                <NavLink to='/about-us'>About Us</NavLink>
               </NavItem>
               <NavItem className="menu-item">
-                <NavLink to="/contact">Contact</NavLink>
+                <NavLink to='/contact'>Contact</NavLink>
               </NavItem>
               <NavItem className="menu-item">
-                <NavLink to="my-recipes">My Account</NavLink>
+                <NavLink to='/my-recipes'>My Account</NavLink>
               </NavItem>
               </Nav>
             </Collapse>

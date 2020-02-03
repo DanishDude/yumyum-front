@@ -8,11 +8,11 @@ import PageHeader from '../../components/PageHeader';
 import RecipeCard from '../Recipes/RecipeCard';
 import './MyRecipes.scss';
 
-let MyRecipes = (state) => {
+let MyRecipes = () => {
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { user, token } = state;
+  const { user, token } = content.user;
   const { recipes, loading, error } = content.recipes;
   const userRecipes = recipes.filter(recipe => recipe.user_id === user.id);
 
@@ -37,7 +37,7 @@ let MyRecipes = (state) => {
         </div> 
       </div>
       
-      {error !== '' ? <div>{error}</div> : ''}
+      {error !== '' ? <div>Error loading your recipes</div> : ''}
       {!userRecipes && loading ? (
         <div>Loading...</div>
       ) : (

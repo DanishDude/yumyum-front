@@ -144,10 +144,10 @@ export const fetchErrorRecipesByUser = err => ({
 
 export const asyncFetchRecipesByUser = token => dispatch => {
   dispatch(startFetchRecipesByUser());
-  fetch(`${url}/user/recipes`, { headers: { 'Authorization': 'Bearer ' + token } })
+  fetch(`${url}/recipes/user`, { headers: { 'Authorization': 'Bearer ' + token } })
     .then(res => res.json())
-    .then(userRecipes => { dispatch(fetchSuccessRecipesByUser(userRecipes)) })
-    .catch(() => { dispatch(fetchErrorRecipesByUser()) });
+    .then(userRecipes => dispatch(fetchSuccessRecipesByUser(userRecipes)))
+    .catch((err) => dispatch(fetchErrorRecipesByUser(err)));
 };
 
 // -------- Delete recipe -------- //

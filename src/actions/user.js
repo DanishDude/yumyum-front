@@ -59,6 +59,7 @@ export const errorFetchSignup = err => ({
 
 export const asyncFetchSignup = user => dispatch => {
   dispatch(startFetchUser());
+  if (user.confirmPassword) delete user.confirmPassword;
 
   const options = {
     method: 'POST',
@@ -81,7 +82,7 @@ export const asyncFetchSignup = user => dispatch => {
     .then(payload => dispatch(successFetchSignup(payload.user, payload.token)))
     .catch(err => {
       dispatch(errorFetchSignup(err));
-      alert(err);
+      console.error(err);
     });
 }
 
@@ -115,9 +116,7 @@ export const asyncFetchUser = token => dispatch => {
   fetch(`${url}/user`, options)
     .then(res => res.json())
     .then(user => dispatch(fetchSuccessUser(user, token)))
-    .catch(() => {
-      dispatch(fetchErrorUser());
-    });
+    .catch(() => dispatch(fetchErrorUser()));
 };
 
 export const startUpdateUser = () => ({
