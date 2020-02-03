@@ -12,7 +12,7 @@ const CreateRecipePage = (props) => {
 
   const addModifyRecipe = (token, values) => {
     dispatch(asyncFetchAddModifyRecipe(token, values))
-    history.push('/recipes')
+    // history.push('/recipes')
   };
 
   

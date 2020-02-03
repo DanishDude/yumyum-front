@@ -10,6 +10,7 @@ const recipes = (state = initialState, action) => {
     case 'START_FETCH_ADD_MODIFY_RECIPE':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_ADD_RECIPE':
+      window.location.assign(`/recipe/${action.recipe.id}`);
       return { ...state, loading: false, error: '' };
     case 'FETCH_SUCCESS_MODIFY_RECIPE': {
       const newRecipes = [...state.recipes.filter(r => r.id !== action.recipe.id), action.recipe];
@@ -20,7 +21,7 @@ const recipes = (state = initialState, action) => {
     case 'START_FETCH_RECIPE':
       return { ...state, loading: true };
     case 'SUCCESS_FETCH_RECIPE':
-      return { state, loading: false, recipe: action.recipe, error: '' };
+      return { ...state, loading: false, recipe: action.recipe, error: '' };
     case 'START_FETCH_RECIPES':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_RECIPES':
