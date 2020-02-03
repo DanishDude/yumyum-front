@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { asyncFetchRecipes } from "../../actions/fetchRecipes";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncFetchRecipes } from "../../actions/recipes";
 import AddRecipeButton from "../InsertRecipe/AddRecipeButton";
+import PageHeader from '../../components/PageHeader';
 import RecipeCard from "./RecipeCard";
 import "./Recipes.scss";
 
@@ -13,11 +13,20 @@ const Recipes = () => {
   const {recipes, loading, error} = content.recipes;
 
   useEffect(() => { dispatch(asyncFetchRecipes()) }, []);
+
+  const header = {
+    title: 'Recipes',
+    subtext: 'Find something delicous. Share your kitchen secrets'
+  };
   
   return (
     <div className="Recipes">
-      <h1> Here are the top rated recipes !</h1>
-      <AddRecipeButton />
+      <div className="header-wrapper">
+        <PageHeader {...header} />
+        <div className="action-btns">
+          <AddRecipeButton />
+        </div>
+      </div>
       {error !== "" ? <div>{error}</div> : ""}
       {!recipes && loading ? (
         <div>Loading...</div>
@@ -26,7 +35,7 @@ const Recipes = () => {
           {recipes && recipes.length > 0 ? (
             recipes.map(recipe => (
               <li key={recipe.id}>
-                <Link to={{pathname: `recipe/${recipe.id}`, state: {recipe: recipe}}}>
+                <Link to={{pathname: `recipe/${recipe.id}`/* , state: {recipe: recipe} */}}>
                   <RecipeCard recipe={recipe} />
                 </Link>
               </li>
@@ -41,6 +50,4 @@ const Recipes = () => {
   );
 };
 
-const mdtp = dispatch => bindActionCreators({ asyncFetchRecipes }, dispatch);
-
-export default connect(null, mdtp)(Recipes);
+export default Recipes;

@@ -1,59 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { asyncFetchRecipe } from '../../actions/recipes';
 import './Recipe.scss';
 
-const Recipe = (recipeObj) => {
-  const recipe = recipeObj.history.location.state.recipe;
-  recipe.preparation_time = recipe.preparation_time / 60;
-  recipe.cook_time = recipe.cook_time / 60;
+const Recipe = (props) => {
+  const dispatch = useDispatch();
+  const { id } = props.match.params;
+  const { title, description, ingredients, prep_time, cook_time, instructions } = props.recipe;
+  const image = props.recipe.image
+    ? `http://localhost:5000/api/recipe/${id}/image`
+    : '/empty_plate.jpeg';
+  
+  useEffect(() => { dispatch(asyncFetchRecipe(id)) }, []);
   
   return (
     <div className="Recipe">
-      <div className="header">
-        <h2 className="title">{recipe.title}</h2>
-        <div className="header-details">
-          <h6 className="tag-list">{recipe.tag_list}</h6>
-          <p className="prep-cook-times">
-            Prep: {recipe.preparation_time}min, Cook: {recipe.cook_time}min
-          </p>
-        </div>
+      <h1>{title}</h1>
+      <img src={image} alt="" />
+      <div className="time">
+        <p>{prep_time > 0 ? `Prep: ${prep_time}min` : ''}</p>
+        <p>{cook_time > 0 ? `Cook: ${cook_time}min` : ''}</p>
       </div>
-      <div className="story-wrapper">
-        <div className="cover">
-          <img
-            className="cover-photo"
-            src={`http://localhost:5000/api/recipeImage/${recipe.id}`}
-            alt=""
-          />
-        </div>
-        <div className="story">
-          <p>{recipe.description}</p>
-        </div>
-      </div>
-      <div className="instructions">
-        <div className="ingredients">
-          <h4>Ingredients</h4>
-          <ul className="ingredients-list">
-            {recipe.ingredient_list.split(', ').map((ingredient, index) =>
-              <li key={index}>
+      {description ?
+        <div className="section story">
+          <p className="">{description}</p>
+        </div> : ''}
+      {ingredients && ingredients[0] ?
+        <div className="section ingredients">
+        <h3>Ingredients</h3> 
+          <ul>
+            {ingredients && ingredients[0] ?
+              ingredients.split(',').map((ingredient, i) => 
+              <li key={i}>
                 {ingredient}
-              </li>
-            )}
+              </li>) : ''}
           </ul>
-        </div>
-        <div>
-          <h4 className="step-header">What to do</h4>
-          <ul className="step">
-            {recipe.instructions.split('|').map((step, index) => 
-              <li key={index}>
-                <h6>Step {index +1}</h6>
-                {step}
-              </li>
-            )}
-          </ul>
-        </div>
-      </div>
+        </div> : ''}
+        {instructions && instructions[0] ?
+          <div className="section steps">
+            <h3>Steps</h3>
+            <ul>
+              {instructions && instructions[0] ?
+                instructions.split('|').map((step, i) => 
+                <li key={i}>
+                  <h2>{i+1}.</h2>
+                  <p>{step}</p>
+                </li>) : ''}
+            </ul>
+          </div> : ''}
     </div>
   );
 };
 
-export default Recipe;
+const mstp = state => { return { recipe: state.recipes.recipe } };
+
+export default connect(mstp, null)(Recipe);

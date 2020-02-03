@@ -1,37 +1,45 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import NavigationBar from './components/NavigationBar';
-import Home from './components/Home';
+import { Route, Switch } from 'react-router-dom';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
-import Recipes from './containers/Recipes/Recipes';
-import Recipe from './containers/Recipe/Recipe';
-import Connected from './components/Conected';
-import LoginPage from './containers/ConnectUser/LoginPage';
-import SignupPage from './containers/ConnectUser/SignupPage';
 import CreateRecipePage from './containers/InsertRecipe/CreateRecipePage';
+import EditMyProfile from './containers/UserProfile/EditMyProfile';
+import GetUser from './containers/ConnectUser/GetUser';
+import Home from './components/Home';
+import LoginPage from './containers/ConnectUser/LoginPage';
+import MyAccount from './containers/UserProfile/MyAccount';
+import MyRecipes from './containers/UserProfile/MyRecipes';
+import NavigationBar from './components/NavigationBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
+import Recipe from './containers/Recipe/Recipe';
+import Recipes from './containers/Recipes/Recipes';
+import SignupPage from './containers/ConnectUser/SignupPage';
 import './App.scss';
 
 const App = () => {
+  const token = window.localStorage.getItem('token');
+
   return (
     <div className="App">
       <div className="wrapper">
-          <NavigationBar className="navigation-bar" />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path = "/recipes" component={Recipes} />
-            <Route path = "/recipe" component={Recipe} />
-            <Route path = "/about-us" component={AboutUs} />
-            <Route path = "/contact" component={Contact} />
-            <Route path = "/login" component={LoginPage} />
-            <Route path = "/signup" component={SignupPage} />
-            <PrivateRoute path = "/create-recipe" component={CreateRecipePage} />
-            <PrivateRoute exact path="/connected" component={Connected} />
-          </Switch>
-        </div>
+        <GetUser token={token} />
+        <NavigationBar className="navigation-bar" />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path = '/recipes' component={Recipes} />
+          <Route path = '/recipe/:id' component={Recipe} />
+          <Route path = '/about-us' component={AboutUs} />
+          <Route path = '/contact' component={Contact} />
+          <Route path = '/login' component={LoginPage} />
+          <Route path = '/signup' component={SignupPage} />
+          <PrivateRoute exact path='/my-recipes' component={MyRecipes} />
+          <PrivateRoute path = '/create-recipe' component={CreateRecipePage} />
+          <PrivateRoute path = '/edit-profile' component={EditMyProfile} />
+          <PrivateRoute path = '/my-account' component={MyAccount} />
+        </Switch>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

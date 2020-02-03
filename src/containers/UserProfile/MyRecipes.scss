@@ -1,0 +1,38 @@
+.MyRecipes {
+    .header-wrapper {
+      position: relative;
+
+      .action-btns {
+        position: absolute;
+        top: 80%;
+        right: 8.5%;
+        bottom: 10%;
+
+        button {
+          margin-left: 10px;
+        }
+      }
+    }
+
+  ul {
+    padding-top: 20px;
+    display: flex;
+    flex-flow: wrap;
+    list-style-type: none;
+    align-items: flex-start;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .icons {
+    padding: 2% 0 0 45%;
+  }
+
+  .icon {
+    margin-left: 15%;
+    font-size: 1.65em;
+    color: rgb(36, 36, 36);
+  }
+}

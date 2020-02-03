@@ -1,79 +1,95 @@
 .Recipe {
   width: 100%;
-  padding: 0 10px;
 
-  .header {
+  h1 {
+    margin: 5vh 0 5vh 0;
+    text-align: center;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 0;
+    width: 100vw;
+    max-width: 1200px;
+  }
+
+  .time {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
     
-    .title {
-      text-align: left;
+    p {
+      margin: 0 15px;
+      font-weight: bolder;
     }
+  }
 
-    .header-details {
-      display: flex;
-      flex-flow: wrap;
-      justify-items: flex-start;
-      align-items: flex-start;
+  .section {
+    margin: 0 20%;
+    padding: 0 0 30px;
+    border-bottom: 5px black solid;
+    margin-bottom: 10px;
+  }
 
-      .tag-list {
-        margin: 0 10px 10px 0;
-      }
+  .story {
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
 
-      .prep-cook-times {
-        margin: 0 10px 10px 0;
-        font-weight: 700;
+    p {
+      margin: auto;
+      min-width: 80;
+    }
+  }
+  
+  .ingredients {
+    padding-left: 3px;
+   
+    ul {
+      list-style-type: square;
+      font-weight: bolder;
+
+      li {
+        margin-left: 16px;
       }
     }
   }
 
-  .story-wrapper {
-    margin-bottom: 25px;
+  .steps {
+    padding-left: 3px;
+    ul {
+      list-style: none;
+    }
+  }
 
-    .cover {
-      float: right;
+  @media screen and (max-width: 900px) {
 
-      .cover-photo {
-        width: 500px;
-        height: 300px;
-        object-fit: cover;
-        margin-left: 15px;
-        margin-bottom: 15px;
-      }
+    .section {
+      margin: 0 2%;
     }
 
     .story {
-      width: 100%;
-      top: 10px;
-      left: 10px;
 
-      p {
-        //font-size: 1.5em;
+      p{
+      min-width: 80%;
       }
     }
-  }
 
-  .instructions {
-    width: 100%;
-    
     .ingredients {
-      float: left;
-      margin: 0 20px;
-      padding: 10px;
-      border: 2px solid black;
-      border-radius: 5px;
-      //font-size: 1.5em;
-
-      .ingredients-list {
-      list-style-type: none;
+      ul {
+        li {
+          margin-left: -10px;
+        }
       }
     }
 
-    .step-header {
-      padding-top: 12px;
-    }
-
-    .step {
-      list-style-type: none;
-      //font-size: 1.5em;
+    .steps {
+      ul{
+        li{
+          margin-left: -25px;
+        }
+      }
     }
   }
 }

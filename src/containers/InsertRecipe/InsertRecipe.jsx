@@ -4,17 +4,16 @@ import { Field, reduxForm } from 'redux-form';
 import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
-let InsertRecipe = props => {
+let InsertRecipe = (props) => {
   const { handleSubmit } = props;
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
-  const FileInput = ({ 
+  const FileInput = ({
     input: { value: omitValue, onChange, onBlur, ...inputProps }, 
     meta: omitMeta, 
     ...props 
   }) => {
-    
     return (
       <input
         onChange={adaptFileEventToValue(onChange)}
@@ -31,6 +30,7 @@ let InsertRecipe = props => {
       <div className="content">
         <h3>Add your recipe</h3>
         <form onSubmit={handleSubmit}>
+          <Field name="id" component="input" type="hidden" />
           <div className="field">
             <Field name="title" component="input" type="text" placeholder="Recipe title" />
           </div>
@@ -41,7 +41,7 @@ let InsertRecipe = props => {
             />
           </div>
           <div className="field">
-            <Field name="ingredient_list" component="input" type="text"
+            <Field name="ingredients" component="input" type="text"
               placeholder="minced, beef, carrots, onions, herbs de provence"
             />
           </div>
@@ -50,14 +50,14 @@ let InsertRecipe = props => {
           </div>
           <div className="field">
             <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft"
-                  placeholder="NB separate steps with this sign - | e.g. Chop vegies in large 
-                  chunks and fry at medium head | When vegiesare golden add beef"
+                  placeholder="NB separate steps with | sign, e.g. Slice tomatoes | Throw in olives |
+                  Sprinkle salt, pepper | Add a dash of olive oil | Top with freshly chopped basil"
             />
           </div>
           <div className="row">
             <div className="field timer col-3">
-              <label htmlFor="preparation_time">Prep time</label>
-              <Field name="preparation_time" component="input" type="number"
+              <label htmlFor="prep_time">Prep time</label>
+              <Field name="prep_time" component="input" type="number"
                     min="0" max="999" step="1" />
             </div>
             <div className="field timer col-3">
