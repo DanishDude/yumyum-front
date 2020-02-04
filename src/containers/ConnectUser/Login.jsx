@@ -23,13 +23,16 @@ const renderField = ({ input, placeholder, type, meta: {touched, error} }) => (
 )
 
 let Login = props => {
-  const { handleSubmit, signup, valid } = props;
+  const { handleSubmit, loginError, signup, valid } = props;
   const disabled = !valid ? true : false;
 
   return (
     <div className="Login">
       <div className="content">
         <h3 className="item">Sign In</h3>
+        {loginError === 'Invalid'
+          && <span className="login-error">Invalid email or password</span>}
+        {!loginError && <span className="no-login-error"> </span>}
         <form onSubmit={handleSubmit}>
           <div className="item">
             <Field name="email" component={renderField} type="email"  placeholder="Email" />

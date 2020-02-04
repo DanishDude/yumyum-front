@@ -30,14 +30,13 @@ export const asyncFetchLogin = user => dispatch => {
   fetch(`${url}/login`, options)
     .then(res => {
       if (res.status === 401) {
-        alert('Login error, check email and password is correct')
+        dispatch(errorFetchLogin('Invalid'));
       } else if (res.status === 200) {
         return res.json()
       }
     })
     .then(payload => dispatch(successFetchLogin(payload.user, payload.token)))
     .catch(err => {
-      alert(err);
       console.log(err);
     });
 };
@@ -73,7 +72,6 @@ export const asyncFetchSignup = user => dispatch => {
   fetch(`${url}/signup`, options)
     .then(res => {
       if (res.status === 500) {
-        alert('error during sugnup');
         console.log(res);
       } else if (res.status === 201) {
         return res.json();
@@ -159,3 +157,44 @@ export const asyncUpdateUser = (token, user) => dispatch => {
     .then(payload => dispatch(successUpdateUser(payload.token, payload.user)))
     .catch(error => dispatch(errorUpdateUser(error)));
 };
+
+export const startPrecheck = () => ({
+  type: 'START_PRECHECK'
+});
+
+export const finishPrecheck = precheck => ({
+  type: 'FINISH_PRECHECK',
+  precheck
+});
+
+export const errorPrecheck = err => ({
+  type: 'ERROR_PRECHECK',
+  err
+});
+
+export const asyncFetchPrecheck = data => dispatch => {
+  dispatch(startPrecheck());
+
+  data.toto = 'uh oh';
+  console.log('BEFORE: ', data);
+  
+  const allowed = ['email', 'displayname'];
+  for (const [key, value] of Object.entries(data)) {
+    console.log(key + ', ' + value);
+    
+    if (!allowed.includes(key)) {
+      delete data[key];
+    } else {
+      fetch(`${url}/user/${key}`, {body: value})
+        .then(res => res.json())
+        .then(payload => dispatch(finishPrecheck(payload)))
+        .catch(err => dispatch(errorPrecheck(err)));
+    }
+
+
+  };
+  
+  console.log('AFTER: ', data);
+
+  
+}
