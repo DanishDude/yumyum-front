@@ -5,15 +5,22 @@ import './Login.scss';
 
 const validate = values => {
   const errors = {};
+  const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (!values.password) {
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!regex.test(String(values.email).toLowerCase())) {
+    errors.email = 'Invalid email';
+  };
+
+  if (!values.password) {
     errors.password = 'Required';
   };
 
   return errors;
 }
 
-const renderField = ({ input, placeholder, type, meta: {touched, error} }) => (
+const renderField = ({ input, placeholder, type, meta: { touched, error } }) => (
   <div>
     <input {...input} placeholder={placeholder} type={type} />
     <div className="error-line">

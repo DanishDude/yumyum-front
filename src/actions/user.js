@@ -35,10 +35,10 @@ export const asyncFetchLogin = user => dispatch => {
         return res.json()
       }
     })
-    .then(payload => dispatch(successFetchLogin(payload.user, payload.token)))
-    .catch(err => {
-      console.log(err);
-    });
+    .then(payload => {
+      if (payload) dispatch(successFetchLogin(payload.user, payload.token));
+    })
+    .catch(err => dispatch(errorFetchLogin(err)));
 };
 
 export const startFetchSignup = () => ({
@@ -57,7 +57,7 @@ export const errorFetchSignup = err => ({
 });
 
 export const asyncFetchSignup = user => dispatch => {
-  dispatch(startFetchUser());
+  dispatch(startFetchSignup());
   if (user.confirmPassword) delete user.confirmPassword;
 
   const options = {
@@ -70,18 +70,20 @@ export const asyncFetchSignup = user => dispatch => {
   };
 
   fetch(`${url}/signup`, options)
-    .then(res => {
-      if (res.status === 500) {
-        console.log(res);
-      } else if (res.status === 201) {
-        return res.json();
-      };
+    .then(res => res.json())
+    .then(payload => {
+      const { sqlMessage } = payload;
+      
+      if (sqlMessage && sqlMessage.startsWith('Duplicate entry')) {
+        if (sqlMessage.endsWith('key \'EMAIL\''))
+          dispatch(errorFetchSignup('dup_email'));
+        if (sqlMessage.endsWith('key \'DISPLAY NAME\''))
+          dispatch(errorFetchSignup('dup_displayname'));
+      }
+      
+      if (payload.token) dispatch(successFetchSignup(payload.user, payload.token));
     })
-    .then(payload => dispatch(successFetchSignup(payload.user, payload.token)))
-    .catch(err => {
-      dispatch(errorFetchSignup(err));
-      console.error(err);
-    });
+    .catch(err => dispatch(errorFetchSignup(err)));
 }
 
 export const startFetchUser = () => ({
@@ -157,44 +159,3 @@ export const asyncUpdateUser = (token, user) => dispatch => {
     .then(payload => dispatch(successUpdateUser(payload.token, payload.user)))
     .catch(error => dispatch(errorUpdateUser(error)));
 };
-
-export const startPrecheck = () => ({
-  type: 'START_PRECHECK'
-});
-
-export const finishPrecheck = precheck => ({
-  type: 'FINISH_PRECHECK',
-  precheck
-});
-
-export const errorPrecheck = err => ({
-  type: 'ERROR_PRECHECK',
-  err
-});
-
-export const asyncFetchPrecheck = data => dispatch => {
-  dispatch(startPrecheck());
-
-  data.toto = 'uh oh';
-  console.log('BEFORE: ', data);
-  
-  const allowed = ['email', 'displayname'];
-  for (const [key, value] of Object.entries(data)) {
-    console.log(key + ', ' + value);
-    
-    if (!allowed.includes(key)) {
-      delete data[key];
-    } else {
-      fetch(`${url}/user/${key}`, {body: value})
-        .then(res => res.json())
-        .then(payload => dispatch(finishPrecheck(payload)))
-        .catch(err => dispatch(errorPrecheck(err)));
-    }
-
-
-  };
-  
-  console.log('AFTER: ', data);
-
-  
-}

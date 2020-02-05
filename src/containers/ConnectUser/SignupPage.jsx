@@ -1,27 +1,27 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { asyncFetchPrecheck, asyncFetchSignup } from '../../actions/user';
+import { asyncFetchSignup } from '../../actions/user';
 import Signup from './Signup';
 import './SignupPage.scss';
 
 const SignupPage = () => {
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const login = () => {
+    user.error = '';
     history.push('/login');
   }
-  // const signupUser = values => dispatch(asyncFetchSignup(values));
-  const signupUser = values => dispatch(asyncFetchPrecheck(values));
-  const signupError = 'toto';
+  const signupUser = values => dispatch(asyncFetchSignup(values));
 
   return (
     <div className="SignupPage">
       <Signup
         login={login}
         onSubmit={values =>  signupUser(values)}
-        signupError={signupError}
+        signupError={user.error}
       />
     </div>
   )
