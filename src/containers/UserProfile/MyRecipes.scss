@@ -30,9 +30,15 @@
     padding: 2% 0 0 45%;
   }
 
-  .icon {
+  .icon-edit {
     margin-left: 15%;
     font-size: 1.65em;
     color: rgb(36, 36, 36);
+  }
+  
+  .icon-del {
+    margin-left: 15%;
+    font-size: 1.65em;
+    color: darkred;
   }
 }
