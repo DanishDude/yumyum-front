@@ -9,7 +9,7 @@ import Home from './components/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
 import MyAccount from './containers/UserProfile/MyAccount';
 import MyRecipes from './containers/UserProfile/MyRecipes';
-import NavigationBar from './components/NavigationBar';
+import NavBar from './components/NavBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import Recipe from './containers/Recipe/Recipe';
 import Recipes from './containers/Recipes/Recipes';
@@ -23,7 +23,7 @@ const App = () => {
     <div className="App">
       <div className="wrapper">
         <GetUser token={token} />
-        <NavigationBar className="navigation-bar" />
+        <NavBar className="navigation-bar" />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path = '/recipes' component={Recipes} />
