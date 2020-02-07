@@ -77,7 +77,7 @@ export const asyncFetchSignup = user => dispatch => {
       if (sqlMessage && sqlMessage.startsWith('Duplicate entry')) {
         if (sqlMessage.endsWith('key \'EMAIL\''))
           dispatch(errorFetchSignup('dup_email'));
-        if (sqlMessage.endsWith('key \'DISPLAY NAME\''))
+        if (sqlMessage.endsWith('key \'DISPLAYNAME\''))
           dispatch(errorFetchSignup('dup_displayname'));
       }
       

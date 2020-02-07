@@ -23,12 +23,15 @@ let MyRecipes = (props) => {
   
   const goToMyProfile = () => history.push({pathname: 'my-account', state: {initialValues: user}});
   const modifyRecipe = recipe => history.push({pathname: 'create-recipe', state: recipe});
-  const deleteRecipe = (recipeId) => {
-    console.log(recipeId);
+  const deleteRecipe = (recipe) => {
+    toggle();
+    console.log(recipe);
+    return recipe
     
     // dispatch(asyncFetchDeleteRecipe(token, recipeId))
-    toggle();
   };
+
+  const deleteModal = userRecipe => userRecipe
   
   const header = {
     title: 'My Recipes',
@@ -53,7 +56,6 @@ let MyRecipes = (props) => {
           {userRecipes && userRecipes.length > 0 ? (
             userRecipes.map(userRecipe => (
               <li key={userRecipe.id}>
-              <Button onClick={() => console.log(userRecipe.id, userRecipe.title)} >What am I</Button>
                 <Link to={{pathname: `recipe/${userRecipe.id}`, state: {userRecipe}}}>
                   <RecipeCard recipe={userRecipe} />
                 </Link>
@@ -62,17 +64,20 @@ let MyRecipes = (props) => {
                     onClick={() => modifyRecipe(userRecipe)} >
                   </i>
                   <i className="fas fa-trash-alt icon-del" // ??? ALWAYS CAPTURES LAST RECIPE IN ARRAY ???
-                    onClick={() => toggle()} >
+                    onClick={() => deleteRecipe(userRecipe)} >
                   </i>
                   </div>
-                  <Modal isOpen={modal} toggle={toggle} className={className} backdrop={true} >
+                  <Button onClick={() => console.log(userRecipe.id, userRecipe.title)} >What am I</Button>
+                  <Modal toggle={toggle} isOpen={modal} className={className} userRecipe={userRecipe}>
                     <ModalHeader toggle={toggle}>Confirm deleting this recipe</ModalHeader>
-                    <ModalBody>
-                      {userRecipe.title}
-                    </ModalBody>
+                    <ModalBody>{userRecipe.title}</ModalBody>
                     <ModalFooter>
-                      <Button color="danger" onClick={() => deleteRecipe(userRecipe.id)}>Delete</Button>{' '}
-                      <Button color="secondary" onClick={toggle}>Cancel</Button>
+                      <Button color="danger" onClick={(userRecipe) => deleteRecipe(userRecipe.id)}>
+                        Delete
+                      </Button>{" "}
+                      <Button color="secondary" onClick={toggle}>
+                        Cancel
+                      </Button>
                     </ModalFooter>
                   </Modal>
               </li>
