@@ -11,7 +11,7 @@
   transform: translate(-50%, -50%);
 
   .content {
-    margin: 0;
+    margin: auto;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,6 +19,26 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
     justify-items: center;
+
+    .login-error {
+      height: 24px;
+      width: 100%;
+      display: inline-block;
+      align-self: auto;
+      background-color: pink;
+      text-align: center;
+      border-radius: 3px;
+      color: maroon;
+    }
+
+    .no-login-error {
+      height: 24px;
+      width: 100%;
+      display: inline-block;
+      align-self: auto;
+      text-align: center;
+      border-radius: 6px;
+    }
 
     h3 {
       text-align: center;

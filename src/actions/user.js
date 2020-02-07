@@ -30,16 +30,15 @@ export const asyncFetchLogin = user => dispatch => {
   fetch(`${url}/login`, options)
     .then(res => {
       if (res.status === 401) {
-        alert('Login error, check email and password is correct')
+        dispatch(errorFetchLogin('Invalid'));
       } else if (res.status === 200) {
         return res.json()
       }
     })
-    .then(payload => dispatch(successFetchLogin(payload.user, payload.token)))
-    .catch(err => {
-      alert(err);
-      console.log(err);
-    });
+    .then(payload => {
+      if (payload) dispatch(successFetchLogin(payload.user, payload.token));
+    })
+    .catch(err => dispatch(errorFetchLogin(err)));
 };
 
 export const startFetchSignup = () => ({
@@ -58,7 +57,7 @@ export const errorFetchSignup = err => ({
 });
 
 export const asyncFetchSignup = user => dispatch => {
-  dispatch(startFetchUser());
+  dispatch(startFetchSignup());
   if (user.confirmPassword) delete user.confirmPassword;
 
   const options = {
@@ -71,19 +70,20 @@ export const asyncFetchSignup = user => dispatch => {
   };
 
   fetch(`${url}/signup`, options)
-    .then(res => {
-      if (res.status === 500) {
-        alert('error during sugnup');
-        console.log(res);
-      } else if (res.status === 201) {
-        return res.json();
-      };
+    .then(res => res.json())
+    .then(payload => {
+      const { sqlMessage } = payload;
+      
+      if (sqlMessage && sqlMessage.startsWith('Duplicate entry')) {
+        if (sqlMessage.endsWith('key \'EMAIL\''))
+          dispatch(errorFetchSignup('dup_email'));
+        if (sqlMessage.endsWith('key \'DISPLAYNAME\''))
+          dispatch(errorFetchSignup('dup_displayname'));
+      }
+      
+      if (payload.token) dispatch(successFetchSignup(payload.user, payload.token));
     })
-    .then(payload => dispatch(successFetchSignup(payload.user, payload.token)))
-    .catch(err => {
-      dispatch(errorFetchSignup(err));
-      console.error(err);
-    });
+    .catch(err => dispatch(errorFetchSignup(err)));
 }
 
 export const startFetchUser = () => ({

@@ -24,6 +24,6 @@ const CreateRecipePage = (props) => {
   );
 };
 
-const mstp = state => { return { token: state.user.token } }
+const mstp = state => { return { token: state.user.token } };
 
 export default connect(mstp, null)(CreateRecipePage);
