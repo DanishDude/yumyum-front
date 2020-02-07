@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import {
-  asyncFetchDeleteRecipe,
-  asyncFetchRecipesByUser
-} from "../../actions/recipes";
+import { asyncFetchDeleteRecipe, asyncFetchRecipesByUser } from "../../actions/recipes";
 import AddRecipeButton from "../InsertRecipe/AddRecipeButton";
+import DeleteRecipeCard from './DeleteRecipeCard';
 import PageHeader from "../../components/PageHeader";
 import RecipeCard from "../Recipes/RecipeCard";
 import "./MyRecipes.scss";
 
-let MyRecipes = props => {
+const MyRecipes = props => {
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const history = useHistory();
   const { user, token } = content.user;
   const { recipes, loading, error } = content.recipes;
   const userRecipes = recipes.filter(recipe => recipe.user_id === user.id);
-  const { buttonLabel, className } = props;
+  const { className } = props;
   const [modal, setModal] = useState(false);
   const [recipeToDelete, setRecipeToDelete] = useState({});
   const toggle = () => setModal(!modal);
@@ -28,7 +26,8 @@ let MyRecipes = props => {
     dispatch(asyncFetchRecipesByUser(token));
   }, []);
 
-  const goToMyProfile = () => history.push({ pathname: "my-account", state: { initialValues: user } });
+  const goToMyProfile = () => history.push('/my-account');
+  const goToRecipe = recipe => history.push({ pathname: `/recipe/${recipe.id}`, state: recipe });
   const modifyRecipe = recipe => history.push({ pathname: "create-recipe", state: recipe });
   const deleteRecipe = recipeId => {
     dispatch(asyncFetchDeleteRecipe(token, recipeId));
@@ -38,7 +37,6 @@ let MyRecipes = props => {
   const openDeleteRecipe = recipe => {
     getRecipeToDelete(recipe);
     toggle();
-    console.log(recipe);
   };
 
   const header = {
@@ -63,42 +61,35 @@ let MyRecipes = props => {
         <ul>
           {userRecipes && userRecipes.length > 0
             ? userRecipes.map(userRecipe => (
-                <li key={userRecipe.id}>
-                  <Link
-                    to={{
-                      pathname: `recipe/${userRecipe.id}`,
-                      state: { userRecipe }
-                    }}
-                  >
-                    <RecipeCard recipe={userRecipe} />
-                  </Link>
-                  <div className="icons">
-                    <i
-                      className="fas fa-edit icon-edit"
-                      onClick={() => modifyRecipe(userRecipe)}
-                    ></i>
-                    <i
-                      className="fas fa-trash-alt icon-del"
-                      onClick={() => openDeleteRecipe(userRecipe)}
-                    ></i>
-                  </div>
-                  <Button
-                    onClick={() => console.log(userRecipe.id, userRecipe.title)}
-                  >
-                    What am I
-                  </Button>
-                </li>
+              <li key={userRecipe.id}>
+                <Link onClick={() => goToRecipe(userRecipe)} >
+                  <RecipeCard recipe={userRecipe} />
+                </Link>
+                <div className="icons">
+                  <i
+                    className="fas fa-edit icon-edit"
+                    onClick={() => modifyRecipe(userRecipe)}
+                  ></i>
+                  <i
+                    className="fas fa-trash-alt icon-del"
+                    onClick={() => openDeleteRecipe(userRecipe)}
+                  ></i>
+                </div>
+              </li>
             ))
             : ""}
         </ul>
       )}
-      <Modal  toggle={toggle} isOpen={modal} className={className} >
-        <ModalHeader toggle={toggle}>Confirm deleting this recipe</ModalHeader>
-        <ModalBody>{recipeToDelete.title}</ModalBody>
+      <Modal  toggle={toggle} isOpen={modal} className={className} centered >
+        <ModalHeader toggle={toggle}><h3>Permanently delete this recipe?</h3></ModalHeader>
+        <ModalBody>
+          <DeleteRecipeCard recipe={recipeToDelete} />
+        </ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={() => deleteRecipe(recipeToDelete.id)}>
             Delete
           </Button>{" "}
+          <Button color="primary" onClick={() => goToRecipe(recipeToDelete)}>View</Button>
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
