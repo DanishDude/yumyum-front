@@ -9,12 +9,11 @@ const LoginPage = () => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const loginUser = values => dispatch(asyncFetchLogin(values));
   const signup = () => {
     user.error = '';
     history.push('/signup');
-  }
-  const loginUser = values => dispatch(asyncFetchLogin(values));
+  };
 
   return (
     <div className="LoginPage">

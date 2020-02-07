@@ -62,7 +62,7 @@ const MyRecipes = props => {
           {userRecipes && userRecipes.length > 0
             ? userRecipes.map(userRecipe => (
               <li key={userRecipe.id}>
-                <Link onClick={() => goToRecipe(userRecipe)} >
+                <Link to={{pathname: `recipe/${userRecipe.id}`, state: {userRecipe}}}>
                   <RecipeCard recipe={userRecipe} />
                 </Link>
                 <div className="icons">
