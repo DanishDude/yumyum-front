@@ -1,5 +1,52 @@
 const url = 'http://localhost:5000/api';
 
+// -------- User Signup -------- //
+export const startFetchSignup = () => ({
+  type: 'START_FETCH_SIGNUP'
+});
+
+export const successFetchSignup = (user, token) => ({
+  type: 'SUCCESS_FETCH_SIGNUP',
+  user,
+  token
+});
+
+export const errorFetchSignup = err => ({
+  type: 'ERROR_FETCH_SIGNUP',
+  err
+});
+
+export const asyncFetchSignup = user => dispatch => {
+  dispatch(startFetchSignup());
+  if (user.confirmPassword) delete user.confirmPassword;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  };
+
+  fetch(`${url}/signup`, options)
+    .then(res => res.json())
+    .then(payload => {
+      const { sqlMessage } = payload;
+      
+      if (sqlMessage && sqlMessage.startsWith('Duplicate entry')) {
+        if (sqlMessage.endsWith('key \'EMAIL\''))
+          dispatch(errorFetchSignup('dup_email'));
+        if (sqlMessage.endsWith('key \'DISPLAYNAME\''))
+          dispatch(errorFetchSignup('dup_displayname'));
+      }
+      
+      if (payload.token) dispatch(successFetchSignup(payload.user, payload.token));
+    })
+    .catch(err => dispatch(errorFetchSignup(err)));
+}
+
+// -------- User Login -------- //
 export const startFetchLogin = () => ({
   type: 'START_FETCH_LOGIN'
 });
@@ -30,62 +77,23 @@ export const asyncFetchLogin = user => dispatch => {
   fetch(`${url}/login`, options)
     .then(res => {
       if (res.status === 401) {
-        alert('Login error, check email and password is correct')
+        dispatch(errorFetchLogin('Invalid'));
       } else if (res.status === 200) {
         return res.json()
       }
     })
-    .then(payload => dispatch(successFetchLogin(payload.user, payload.token)))
-    .catch(err => {
-      alert(err);
-      console.log(err);
-    });
+    .then(payload => {
+      if (payload) dispatch(successFetchLogin(payload.user, payload.token));
+    })
+    .catch(err => dispatch(errorFetchLogin(err)));
 };
 
-export const startFetchSignup = () => ({
-  type: 'START_FETCH_SIGNUP'
+// -------- User Logout -------- //
+export const logoutUser = () => ({
+  type: 'LOGOUT_USER'
 });
 
-export const successFetchSignup = (user, token) => ({
-  type: 'SUCCESS_FETCH_SIGNUP',
-  user,
-  token
-});
-
-export const errorFetchSignup = err => ({
-  type: 'ERROR_FETCH_SIGNUP',
-  err
-});
-
-export const asyncFetchSignup = user => dispatch => {
-  dispatch(startFetchUser());
-  if (user.confirmPassword) delete user.confirmPassword;
-
-  const options = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(user)
-  };
-
-  fetch(`${url}/signup`, options)
-    .then(res => {
-      if (res.status === 500) {
-        alert('error during sugnup');
-        console.log(res);
-      } else if (res.status === 201) {
-        return res.json();
-      };
-    })
-    .then(payload => dispatch(successFetchSignup(payload.user, payload.token)))
-    .catch(err => {
-      dispatch(errorFetchSignup(err));
-      console.error(err);
-    });
-}
-
+// -------- Get User with token -------- //
 export const startFetchUser = () => ({
   type: 'START_FETCH_USER'
 });
@@ -119,6 +127,7 @@ export const asyncFetchUser = token => dispatch => {
     .catch(() => dispatch(fetchErrorUser()));
 };
 
+// -------- Update User Profile -------- //
 export const startUpdateUser = () => ({
   type: 'START_UPDATE_USER'
 });

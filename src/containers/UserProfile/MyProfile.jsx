@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import PageHeader from '../../components/PageHeader';
-import './MyAccount.scss';
+import './MyProfile.scss';
 
 const MyProfile = (props) => {
   const { user } = props;
@@ -13,12 +13,12 @@ const MyProfile = (props) => {
   const editProfile = () => history.push('/edit-profile');
 
   const header = {
-    title: 'My Account',
+    title: 'My Profile',
     subtext: 'Your Information. Stay current and keep it up to date'
   };
   
   return (
-    <div className="MyAccount">
+    <div className="MyProfile">
       <div className="header-wrapper">
         <PageHeader {...header} />
         <div className="action-btns">

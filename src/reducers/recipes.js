@@ -10,7 +10,6 @@ const recipes = (state = initialState, action) => {
     case 'START_FETCH_ADD_MODIFY_RECIPE':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS_ADD_RECIPE':
-      window.location.assign(`/recipe/${action.recipe.id}`);
       return { ...state, loading: false, error: '' };
     case 'FETCH_SUCCESS_MODIFY_RECIPE': {
       const newRecipes = [...state.recipes.filter(r => r.id !== action.recipe.id), action.recipe];

@@ -3,7 +3,6 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { asyncFetchUser } from '../../actions/user';
 
-
 const GetUser = (token) => {
   const dispatch = useDispatch();
   useEffect(() => { dispatch(asyncFetchUser(token.token)) }, []);

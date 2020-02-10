@@ -50,6 +50,7 @@ export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
       } else {
         dispatch(fetchSuccessAddRecipe(recipe));
       };
+      window.location.assign(`/recipe/${recipe.id}`);
     })
     .catch((err) => dispatch(fetchErrorAddModifyRecipe(err)));
 };
