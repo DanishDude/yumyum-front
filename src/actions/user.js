@@ -1,46 +1,6 @@
 const url = 'http://localhost:5000/api';
 
-export const startFetchLogin = () => ({
-  type: 'START_FETCH_LOGIN'
-});
-
-export const successFetchLogin = (user, token) => ({
-  type: 'SUCCESS_FETCH_LOGIN',
-  user,
-  token
-});
-
-export const errorFetchLogin = err => ({
-  type: 'ERROR_FETCH_LOGIN',
-  err
-});
-
-export const asyncFetchLogin = user => dispatch => {
-  dispatch(startFetchLogin());
-
-  const options = {
-    method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user)
-  };
-
-  fetch(`${url}/login`, options)
-    .then(res => {
-      if (res.status === 401) {
-        dispatch(errorFetchLogin('Invalid'));
-      } else if (res.status === 200) {
-        return res.json()
-      }
-    })
-    .then(payload => {
-      if (payload) dispatch(successFetchLogin(payload.user, payload.token));
-    })
-    .catch(err => dispatch(errorFetchLogin(err)));
-};
-
+// -------- User Signup -------- //
 export const startFetchSignup = () => ({
   type: 'START_FETCH_SIGNUP'
 });
@@ -86,6 +46,54 @@ export const asyncFetchSignup = user => dispatch => {
     .catch(err => dispatch(errorFetchSignup(err)));
 }
 
+// -------- User Login -------- //
+export const startFetchLogin = () => ({
+  type: 'START_FETCH_LOGIN'
+});
+
+export const successFetchLogin = (user, token) => ({
+  type: 'SUCCESS_FETCH_LOGIN',
+  user,
+  token
+});
+
+export const errorFetchLogin = err => ({
+  type: 'ERROR_FETCH_LOGIN',
+  err
+});
+
+export const asyncFetchLogin = user => dispatch => {
+  dispatch(startFetchLogin());
+
+  const options = {
+    method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+  };
+
+  fetch(`${url}/login`, options)
+    .then(res => {
+      if (res.status === 401) {
+        dispatch(errorFetchLogin('Invalid'));
+      } else if (res.status === 200) {
+        return res.json()
+      }
+    })
+    .then(payload => {
+      if (payload) dispatch(successFetchLogin(payload.user, payload.token));
+    })
+    .catch(err => dispatch(errorFetchLogin(err)));
+};
+
+// -------- User Logout -------- //
+export const logoutUser = () => ({
+  type: 'LOGOUT_USER'
+});
+
+// -------- Get User with token -------- //
 export const startFetchUser = () => ({
   type: 'START_FETCH_USER'
 });
@@ -119,6 +127,7 @@ export const asyncFetchUser = token => dispatch => {
     .catch(() => dispatch(fetchErrorUser()));
 };
 
+// -------- Update User Profile -------- //
 export const startUpdateUser = () => ({
   type: 'START_UPDATE_USER'
 });

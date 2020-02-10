@@ -14,10 +14,10 @@ const EditMyProfile = (props) => {
 
   const goToMyRecipes = () => history.push('/my-recipes');
   const updateUser = (token, values) => dispatch(asyncUpdateUser(token, values));
-  const afterSubmit = () => history.push('/my-account');
+  const afterSubmit = () => history.push('/my-profile');
 
   const header = {
-    title: 'My Account',
+    title: 'My Profile',
     subtext: 'Your Information. Stay current and keep it up to date'
   };
   

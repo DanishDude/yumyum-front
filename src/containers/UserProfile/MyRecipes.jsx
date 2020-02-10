@@ -26,7 +26,7 @@ const MyRecipes = props => {
     dispatch(asyncFetchRecipesByUser(token));
   }, []);
 
-  const goToMyProfile = () => history.push('/my-account');
+  const goToMyProfile = () => history.push('/my-profile');
   const goToRecipe = recipe => history.push({ pathname: `/recipe/${recipe.id}`, state: recipe });
   const modifyRecipe = recipe => history.push({ pathname: "create-recipe", state: recipe });
   const deleteRecipe = recipeId => {
