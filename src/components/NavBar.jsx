@@ -11,10 +11,10 @@ const NavBar = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div className="NavBar">
-      <Navbar expand="md" color="dark" dark fixed="top">
+      <Navbar className="NavBar" expand="md" color="dark" dark fixed="top">
+        <span className="row content">
         <NavbarBrand tag={Link} to="/" onClick={toggle} className="mr-auto">
-          Yumyum
+          <img src="/yumyum_logo_cream.png" alt="" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} className="mr-2" />
         <Collapse isOpen={isOpen} navbar>
@@ -55,8 +55,8 @@ const NavBar = () => {
                 </NavItem>)}
           </Nav>
         </Collapse>
+        </span>
       </Navbar>
-    </div>
   );
 };
 
