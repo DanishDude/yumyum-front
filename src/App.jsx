@@ -23,7 +23,7 @@ const App = () => {
     <div className="App">
       <div className="wrapper">
         <GetUser token={token} />
-        <NavBar className="navigation-bar" />
+        <NavBar />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path = '/recipes' component={Recipes} />

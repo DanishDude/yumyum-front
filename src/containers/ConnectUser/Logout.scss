@@ -5,5 +5,10 @@
   i {
     cursor: pointer;
     font-size: larger;
+    color: rgb(178, 179, 180);
+  }
+
+  i:hover {
+    color: rgb(213, 216, 218);
   }
 }
