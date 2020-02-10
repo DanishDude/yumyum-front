@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import GetUser from '../ConnectUser/GetUser';
 
 const PrivateRoute = ({ component: Component, token, user, ...propsRoute }) => (
-
   <Route
     {...propsRoute}
     render={props => (
