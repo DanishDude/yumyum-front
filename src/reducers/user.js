@@ -15,6 +15,9 @@ const user = (state = initialState, action) => {
       return { ...state, loading: false, user: action.user, token:action.token, error: '' };
     case 'ERROR_FETCH_LOGIN':
       return { ...state, loading: false, error: action.err };
+    case 'LOGOUT_USER':
+      window.localStorage.removeItem('token')
+      return { ...state, loading: false, user: {}, token: '', error: '' };
     case 'START_FETCH_SIGNUP':
       return { ...state, loading: true };
     case 'SUCCESS_FETCH_SIGNUP':

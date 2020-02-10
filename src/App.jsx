@@ -7,7 +7,7 @@ import EditMyProfile from './containers/UserProfile/EditMyProfile';
 import GetUser from './containers/ConnectUser/GetUser';
 import Home from './components/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
-import MyAccount from './containers/UserProfile/MyAccount';
+import MyProfile from './containers/UserProfile/MyProfile';
 import MyRecipes from './containers/UserProfile/MyRecipes';
 import NavBar from './components/NavBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
@@ -35,7 +35,7 @@ const App = () => {
           <PrivateRoute exact path='/my-recipes' component={MyRecipes} />
           <PrivateRoute path = '/create-recipe' component={CreateRecipePage} />
           <PrivateRoute path = '/edit-profile' component={EditMyProfile} />
-          <PrivateRoute path = '/my-account' component={MyAccount} />
+          <PrivateRoute path = '/my-profile' component={MyProfile} />
         </Switch>
       </div>
     </div>

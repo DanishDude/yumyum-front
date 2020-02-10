@@ -36,7 +36,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 
 let EditProfile = (props) => {
   const history = useHistory();
-  const cancel = () => history.push('/my-account');
+  const cancel = () => history.push('/my-profile');
   const { handleSubmit, user, valid } = props;
   const disabled = !valid ? true : false;
   
