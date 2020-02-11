@@ -1,5 +1,35 @@
 .Home {
-  h1 {
-    margin-top: 30px;
+  .header {
+    width: 100vw;
+    max-width: 1200px;
+    position: relative;
+
+    h1 {
+      position: absolute;
+      margin: 60% 8%;
+      font-size: 60px;
+      z-index: 100;
+      color: #f0e6be;
+      white-space: nowrap;
+      letter-spacing: .12em;
+    }
+  
+    .cover {
+      position: absolute;
+      display: block;
+      margin: 0 auto;
+      width: 100vw;
+      max-width: 1200px;
+      //opacity: 0.8;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .header {
+      h1 {
+        font-size: 5vw;
+      }
+    }
   }
 }
+
