@@ -25,7 +25,7 @@ const App = () => {
         <GetUser token={token} />
         <NavBar />
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/home' component={Home} />
           <Route path = '/recipes' component={Recipes} />
           <Route path = '/recipe/:id' component={Recipe} />
           <Route path = '/about-us' component={AboutUs} />
