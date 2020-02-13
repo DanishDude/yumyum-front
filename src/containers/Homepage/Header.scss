@@ -1,4 +1,10 @@
-.Home {
+.Header {
+  .carousel-slides {
+  width: 100vw;
+  max-width: 1200px;
+
+  }
+/* 
   .header {
     width: 100vw;
     max-width: 1200px;
@@ -6,7 +12,7 @@
 
     h1 {
       position: absolute;
-      margin: 60% 8%;
+      margin: 60% 12%;
       font-size: 60px;
       z-index: 100;
       color: #f0e6be;
@@ -29,6 +35,6 @@
         font-size: 5vw;
       }
     }
-  }
+  } */
 }
 
