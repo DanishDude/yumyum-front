@@ -12,7 +12,7 @@ import MyRecipes from './containers/UserProfile/MyRecipes';
 import NavBar from './components/NavBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import Recipe from './containers/Recipe/Recipe';
-import Recipes from './containers/Recipes/Recipes';
+import RecipesPage from './containers/Recipes/RecipesPage';
 import SignupPage from './containers/ConnectUser/SignupPage';
 import './App.scss';
 
@@ -26,7 +26,7 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path = '/recipes' component={Recipes} />
+          <Route path = '/recipes' component={RecipesPage} />
           <Route path = '/recipe/:id' component={Recipe} />
           <Route path = '/about-us' component={AboutUs} />
           <Route path = '/contact' component={Contact} />

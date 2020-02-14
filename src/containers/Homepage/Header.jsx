@@ -5,12 +5,12 @@ import './Header.scss';
 
 const items = [
   {
-    src: '/discover_new_flavors.jpg',
+    src: 'share_kitchen_secrets.jpg',
     altText: 'Slide 1',
     caption: 'Discover new flavors'
   },
   {
-    src: 'share_kitchen_secrets.jpg',
+    src: '/discover_new_flavors.jpg',
     altText: 'Slide 2',
     caption: 'Share you kitchen secrets'
   },
@@ -51,7 +51,7 @@ const Header = () => {
         
       >
         <img src={item.src} alt={item.altText} className="carousel-slides"/>
-        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        <CarouselCaption className="caption-text" captionHeader={item.caption} captionText={''} />
       </CarouselItem>
     );
   });

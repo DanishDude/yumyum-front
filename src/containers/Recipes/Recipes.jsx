@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncFetchRecipes } from "../../actions/recipes";
-import AddRecipeButton from "../InsertRecipe/AddRecipeButton";
-import PageHeader from '../../components/PageHeader';
 import RecipeCard from "./RecipeCard";
 import "./Recipes.scss";
 
@@ -13,20 +11,9 @@ const Recipes = () => {
   const {recipes, loading, error} = content.recipes;
 
   useEffect(() => { dispatch(asyncFetchRecipes()) }, []);
-
-  const header = {
-    title: 'Recipes',
-    subtext: 'Find something delicous. Share your kitchen secrets'
-  };
   
   return (
     <div className="Recipes">
-      <div className="header-wrapper">
-        <PageHeader {...header} />
-        <div className="action-btns">
-          <AddRecipeButton />
-        </div>
-      </div>
       {error !== "" ? <div>{error}</div> : ""}
       {!recipes && loading ? (
         <div>Loading...</div>
@@ -35,17 +22,17 @@ const Recipes = () => {
           {recipes && recipes.length > 0 ? (
             recipes.map(recipe => (
               <li key={recipe.id}>
-                <Link to={{pathname: `recipe/${recipe.id}`/* , state: {recipe: recipe} */}}>
+                <Link to={ `recipe/${recipe.id}` }>
                   <RecipeCard recipe={recipe} />
                 </Link>
               </li>
             ))
           ) : (
-            <div>{"Sorry, there are no recipes today :-("}</div>
+            <div>{"There was a problem loading recipes :-( Check your internet connection"
+                  + " and reload the page"}</div>
           )}
         </ul>
       )}
-      
     </div>
   );
 };
