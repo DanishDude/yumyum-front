@@ -1,0 +1,25 @@
+.Header {
+  .carousel-slides {
+  width: 100vw;
+  max-width: 1200px;
+  }
+
+  .caption-text {
+    display: inherit !important;
+    color: #eff9f0;
+
+    h3 {
+    font-size: 300%;
+
+    }
+  }
+
+    @media screen and (max-width: 1200px) {
+    .caption-text {
+      h3 {
+      font-size: 4vw;
+      }
+    }
+  }
+}
+
