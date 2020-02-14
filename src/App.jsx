@@ -5,7 +5,7 @@ import Contact from './components/Contact';
 import CreateRecipePage from './containers/InsertRecipe/CreateRecipePage';
 import EditMyProfile from './containers/UserProfile/EditMyProfile';
 import GetUser from './containers/ConnectUser/GetUser';
-import Home from './components/Home';
+import Home from './containers/Homepage/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
 import MyProfile from './containers/UserProfile/MyProfile';
 import MyRecipes from './containers/UserProfile/MyRecipes';
@@ -25,7 +25,7 @@ const App = () => {
         <GetUser token={token} />
         <NavBar />
         <Switch>
-          <Route exact path='/home' component={Home} />
+          <Route exact path='/' component={Home} />
           <Route path = '/recipes' component={Recipes} />
           <Route path = '/recipe/:id' component={Recipe} />
           <Route path = '/about-us' component={AboutUs} />

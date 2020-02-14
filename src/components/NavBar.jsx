@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
       <Navbar className="NavBar" expand="md" color="dark" dark fixed="top">
         <span className="row content">
-        <NavbarBrand tag={Link} to="/home" onClick={toggle} className="mr-auto">
+        <NavbarBrand tag={Link} to="/" onClick={toggle} className="mr-auto">
           <img src="/yumyum_logo_cream.png" alt="" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} className="mr-2" />
