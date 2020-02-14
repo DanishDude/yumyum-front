@@ -5,14 +5,14 @@ import Contact from './components/Contact';
 import CreateRecipePage from './containers/InsertRecipe/CreateRecipePage';
 import EditMyProfile from './containers/UserProfile/EditMyProfile';
 import GetUser from './containers/ConnectUser/GetUser';
-import Home from './components/Home';
+import Home from './containers/Homepage/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
 import MyProfile from './containers/UserProfile/MyProfile';
 import MyRecipes from './containers/UserProfile/MyRecipes';
 import NavBar from './components/NavBar';
 import PrivateRoute from './containers/ConnectUser/PrivateRoute';
 import Recipe from './containers/Recipe/Recipe';
-import Recipes from './containers/Recipes/Recipes';
+import RecipesPage from './containers/Recipes/RecipesPage';
 import SignupPage from './containers/ConnectUser/SignupPage';
 import './App.scss';
 
@@ -26,7 +26,7 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path = '/recipes' component={Recipes} />
+          <Route path = '/recipes' component={RecipesPage} />
           <Route path = '/recipe/:id' component={Recipe} />
           <Route path = '/about-us' component={AboutUs} />
           <Route path = '/contact' component={Contact} />

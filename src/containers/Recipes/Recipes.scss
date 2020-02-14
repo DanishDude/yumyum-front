@@ -1,19 +1,4 @@
 .Recipes {
-  .header-wrapper {
-    position: relative;
-    
-    .action-btns {
-      position: absolute;
-      top: 80%;
-      right: 8.5%;
-      bottom: 10%;
-  
-      button {
-        margin-left: 10px;
-      }
-    }
-  }
-
   ul {
     padding-top: 20px;
     display: flex;
@@ -21,4 +6,4 @@
     list-style-type: none;
     align-items: flex-start;
   }
-} 
+}
