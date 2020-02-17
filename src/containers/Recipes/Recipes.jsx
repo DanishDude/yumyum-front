@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncFetchRecipes } from "../../actions/recipes";
 import RecipeCard from "./RecipeCard";
+import RecipeTile from './RecipeTile';
 import "./Recipes.scss";
 
 const Recipes = () => {
@@ -23,7 +24,7 @@ const Recipes = () => {
             recipes.map(recipe => (
               <li key={recipe.id}>
                 <Link to={ `recipe/${recipe.id}` }>
-                  <RecipeCard recipe={recipe} />
+                  <RecipeTile recipe={recipe} />
                 </Link>
               </li>
             ))
