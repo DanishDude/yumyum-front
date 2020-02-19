@@ -24,7 +24,7 @@ const Recipes = () => {
             recipes.map(recipe => (
               <li key={recipe.id}>
                 <Link to={ `recipe/${recipe.id}` }>
-                  <RecipeTile recipe={recipe} />
+                  <RecipeCard recipe={recipe} />
                 </Link>
               </li>
             ))
