@@ -6,7 +6,7 @@ import { asyncFetchDeleteRecipe, asyncFetchRecipesByUser } from "../../actions/r
 import AddRecipeButton from "../InsertRecipe/AddRecipeButton";
 import DeleteRecipeCard from './DeleteRecipeCard';
 import PageHeader from "../../components/PageHeader";
-import RecipeCard from "../Recipes/RecipeCard";
+import RecipeCardMini from '../Recipes/RecipeCardMini';
 import "./MyRecipes.scss";
 
 const MyRecipes = props => {
@@ -63,7 +63,7 @@ const MyRecipes = props => {
             ? userRecipes.map(userRecipe => (
               <li key={userRecipe.id}>
                 <Link to={{pathname: `recipe/${userRecipe.id}`, state: {userRecipe}}}>
-                  <RecipeCard recipe={userRecipe} />
+                  <RecipeCardMini recipe={userRecipe} />
                 </Link>
                 <div className="icons">
                   <i

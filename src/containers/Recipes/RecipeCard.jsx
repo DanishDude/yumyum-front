@@ -8,9 +8,11 @@ const RecipeCard = ({ recipe }) => {
   
   return (
     <div className="RecipeCard">
+      <div className="img-wrapper">
         <img src={ image } alt="" />
-        <h4>{ recipe.title }</h4>
-        <div className="bg-img"></div>
+      </div>
+      <h4>{ recipe.title }</h4>
+      <div className="bg-img"></div>
     </div>
   );
 };

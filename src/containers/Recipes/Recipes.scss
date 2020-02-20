@@ -4,6 +4,10 @@
     display: flex;
     flex-flow: wrap;
     list-style-type: none;
-    align-items: flex-start;
+    justify-content: center;
+
+    a {
+      text-decoration: none;
+    }
   }
 }
