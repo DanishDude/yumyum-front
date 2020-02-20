@@ -8,14 +8,8 @@ const CreateRecipePage = (props) => {
   const { token } = props;
   const recipe = props.location.state;
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const addModifyRecipe = (token, values) => {
-    dispatch(asyncFetchAddModifyRecipe(token, values))
-    // history.push('/recipes')
-  };
-
-  
+  const addModifyRecipe = (token, values) => dispatch(asyncFetchAddModifyRecipe(token, values));
 
   return (
     <div className="CreateRecipePage">
