@@ -1,12 +1,14 @@
 .InsertRecipe {
-  height: 800px;
-  width: 500px;
+  height: 360px;
+  width: 576px;
   padding: 1em;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  border: 2px solid gray;
+  border-radius: 1em;
 
   .content {
     margin: 0;
@@ -20,7 +22,13 @@
 
     h3 {
       text-align: center;
-      margin-bottom: 15px;
+      //margin-bottom: 15px;
+      position: absolute;
+      width: 225px;
+      top: -268%;
+      right: -5%;
+      padding: 0 10px;
+      background-color: whitesmoke;
     }
 
     .field {
@@ -37,6 +45,25 @@
 
     .timer {
       width: 80px;
+    }
+
+    .cancel {
+      position: absolute;
+      top: 300%;
+      left: 10%;
+    }
+
+    .previous {
+      position: absolute;
+      width: 88px;
+      top: 250%;
+    }
+
+    .next {
+      position: absolute;
+      width: 88px;
+      top: 250%;
+      right: 10%
     }
 
     .submit-btn {

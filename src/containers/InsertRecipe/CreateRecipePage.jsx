@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { asyncFetchAddModifyRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
 

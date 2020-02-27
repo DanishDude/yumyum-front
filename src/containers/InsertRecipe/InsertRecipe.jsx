@@ -26,13 +26,16 @@ let InsertRecipe = (props) => {
   };
 
   const [index, setIndex] = useState(0);
-  const next = () => setIndex(index < recipeForm.length ? index + 1 : index);
+  const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
+  const previous = () => setIndex(index > 0 ? index - 1 : index);
   console.log(index);
   
 
   const recipeForm = [
     <div className="field">
-      <Field name="title" component="input" type="text" placeholder="Recipe title" />
+      <Field name="title" component="input" type="text" 
+        placeholder="Give your recipe a cool title"
+      />
     </div>,
 
     <div className="field">
@@ -90,15 +93,22 @@ let InsertRecipe = (props) => {
           {recipeForm[index]}
          
           
+          <div className="cancel"><CancelAddRecipe /></div>
           <div className="row">
-            <div className="col-4"><CancelAddRecipe /></div>
-            <div>
-              <Button className="next" color="secondary" type="button" onClick={next}>Next</Button>
-              <p>{index}</p>
-            </div>
-            <div className="field col-8">
-              <Button className="submit-btn" color="primary" type="submit">Share</Button>
-            </div>
+            {index > 0 ?
+              (<div className="col-6">
+                <Button className="previous" color="secondary" type="button" onClick={previous}>
+                  Previous
+                </Button>
+              </div>) : ''}
+            {index < recipeForm.length - 1 ?
+              (<div className="col-6">
+                <Button className="next" color="primary" type="button" onClick={next}>Next</Button>
+              </div>) : ''}
+            {index === recipeForm.length - 1 ? 
+              (<div className="field col-6">
+                <Button className="submit-btn" color="primary" type="submit">Share</Button>
+              </div>) : ''}
           </div>
         </form>
       </div>
