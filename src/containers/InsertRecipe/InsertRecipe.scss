@@ -23,16 +23,16 @@
       text-align: center;
       position: absolute;
       width: 225px;
-      top: -8.5%;
-      right: 17%;
+      top: 2.75%;
+      right: 19%;
       padding: 0 5px;
       background-color: whitesmoke;
     }
 
     .field {
       width: 380px;
-      height: 240px;
-      margin: 50px 0 10px 0;
+      height: 200px;
+      margin: 120px 0 10px 0;
     }
 
     input {
@@ -41,23 +41,25 @@
 
     textarea {
       width: 100%;
-      height:80px;
-      max-height: 200px;
+      height:150px;
+      max-height: 150px;
       top: 80%;
     }
 
     .timers {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .timer {
-      width: 80px;
+      margin-right: 75px;
+      width: 100px;
     }
 
     .action-btns {
       display: flex;
       justify-content: flex-end;
+      margin-bottom: 50px;
 
       button {
       margin-right: 10px;

@@ -66,15 +66,13 @@ let InsertRecipe = (props) => {
     </Fragment>,
 
     <Fragment>
-      <h2>How long</h2>
+      <h2>Prep time & Cook time</h2>
       <div className="timers">
         <div className="timer">
-          <label htmlFor="prep_time">Prep time</label>
           <Field name="prep_time" component="input" type="number"
                 min="0" max="999" step="1" />
         </div>
         <div className="timer">
-          <label htmlFor="cook_time">Cook time</label>
           <Field name="cook_time" component="input" type="number"
                 min="0" max="999" step="1" />
         </div>
