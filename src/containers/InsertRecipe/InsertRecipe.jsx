@@ -5,7 +5,7 @@ import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = (props) => {
-  const { handleSubmit, value } = props;
+  const { handleSubmit } = props;
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
@@ -29,18 +29,15 @@ let InsertRecipe = (props) => {
   const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
-  const ingredients = [];
+  let ingredients = ["toto", "popo"];
+  let ingredientsList = (<p>{ingredients.join(', ')}</p>);
+  
   const addIngredient = value => {
     ingredients.push(value);
-    // clear input
-    console.log(ingredients);
+    console.log(ingredients.join(', '));
+    window.document.getElementById("newIngredient").value = "";
+    return ingredientsList;
   };
-
- /*  const renderIngredientsField = ({ input, placeholder, type, meta : {touched, error } }) => {
-    <div>
-      
-    </div>
-  } */
   
 // TO BE CONT.
   const [step, setStep] = useState(0);
@@ -70,7 +67,12 @@ let InsertRecipe = (props) => {
 
     <Fragment>
       <h2>Ingredients</h2>
-      <Field name="ingredients" component="input" type="text" placeholder="lettuce" />
+      <Field name="ingredients" component="input" type="text" placeholder="lettuce" value={ingredients.join(',')} />
+      <input type="text" id="newIngredient" />
+      {ingredientsList} {{/* does not update ?? */}}
+      <i className="fas fa-plus-circle step-btn"
+        onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
+      </i>
     </Fragment>,
 
     <Fragment>
