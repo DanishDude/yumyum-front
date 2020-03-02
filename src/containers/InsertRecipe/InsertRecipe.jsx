@@ -5,7 +5,7 @@ import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, value } = props;
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
@@ -28,8 +28,31 @@ let InsertRecipe = (props) => {
   const [index, setIndex] = useState(0);
   const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
   const previous = () => setIndex(index > 0 ? index - 1 : index);
-  console.log(index);
+
+  const ingredients = [];
+  const addIngredient = value => {
+    ingredients.push(value);
+    // clear input
+    console.log(ingredients);
+  };
+
+ /*  const renderIngredientsField = ({ input, placeholder, type, meta : {touched, error } }) => {
+    <div>
+      
+    </div>
+  } */
   
+// TO BE CONT.
+  const [step, setStep] = useState(0);
+  const nextStep = () => setStep(step + 1);
+  const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
+
+  const instructions = [];
+  const addInstructionStep = value => {
+    instructions.push(value)
+    nextStep();
+    
+  };
 
   const recipeForm = [
     <Fragment>
@@ -41,28 +64,26 @@ let InsertRecipe = (props) => {
       <h2>Share your story</h2>
       <Field name="description" component="textarea" type="text" rows="4" wrap="hard"
           placeholder="Where does this recipe come from? Why is it special?
-          Who else would love it?"
+          Who would love it?"
       />
     </Fragment>,
 
     <Fragment>
       <h2>Ingredients</h2>
-      <Field name="ingredients" component="input" type="text"
-        placeholder="minced, beef, carrots, onions, herbs de provence"
-      />
+      <Field name="ingredients" component="input" type="text" placeholder="lettuce" />
     </Fragment>,
 
     <Fragment>
       <h2>Tag it</h2>
-      <Field name="tag_list" component="input" type="text" placeholder="#parties #kids"/>
+      <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
     </Fragment>,
 
+// TO BE CONT.
     <Fragment>
-      <h2>Instructions</h2>
-      <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft"
-          placeholder="NB separate steps with | sign, e.g. Slice tomatoes | Throw in olives |
-          Sprinkle salt, pepper | Add a dash of olive oil | Top with freshly chopped basil"
-      />
+      <h2>Instructions (Step {step})</h2>
+      <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft" />
+      <i className="fas fa-plus-circle step-btn" onClick={addInstructionStep}></i>
+
     </Fragment>,
 
     <Fragment>
