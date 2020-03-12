@@ -29,14 +29,14 @@ let InsertRecipe = (props) => {
   const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
-  let ingredients = ["toto", "popo"];
-  let ingredientsList = (<p>{ingredients.join(', ')}</p>);
-  
+  // let ingredients = ["toto", "popo"];
+  const [ingredients, setIngredients] = useState([]);
   const addIngredient = value => {
-    ingredients.push(value);
+    if (value === '') return;
+    setIngredients([...ingredients, value]);
     console.log(ingredients.join(', '));
     window.document.getElementById("newIngredient").value = "";
-    return ingredientsList;
+    return;
   };
   
 // TO BE CONT.
@@ -67,10 +67,11 @@ let InsertRecipe = (props) => {
 
     <Fragment>
       <h2>Ingredients</h2>
-      <Field name="ingredients" component="input" type="text" placeholder="lettuce" value={ingredients.join(',')} />
-      <input type="text" id="newIngredient" />
-      {ingredientsList} {{/* does not update ?? */}}
-      <i className="fas fa-plus-circle step-btn"
+      <Field name="ingredients" component="input" type="hidden" value={ingredients} />
+      <input type="text" id="newIngredient" placeholder={ingredients == [] ? "lettuce" : ""} />
+      {console.log(typeof ingredients, ingredients)}
+      <p>{ingredients.join(', ')}</p>
+      <i className="fas fa-plus-circle step-btn-ingredients"
         onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
       </i>
     </Fragment>,
