@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment, useState,  } from 'react';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
-let InsertRecipe = (props) => {
+let InsertRecipe = props => {
   const { handleSubmit } = props;
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
@@ -26,16 +26,26 @@ let InsertRecipe = (props) => {
   };
 
   const [index, setIndex] = useState(0);
+  const [ingredientsBtn, setIngredientsBtn] = useState('step-btn-ingredients-inactive');
+  const [ingredients, setIngredients] = useState([]);
+
   const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
-  // let ingredients = ["toto", "popo"];
-  const [ingredients, setIngredients] = useState([]);
+  const handleIngredientsChange = value => {
+    if (value.length > 0) {
+      setIngredientsBtn('step-btn-ingredients');
+    } else {
+      setIngredientsBtn('step-btn-ingredients-inactive')
+    };
+  };
+
   const addIngredient = value => {
     if (value === '') return;
+
     setIngredients([...ingredients, value]);
-    console.log(ingredients.join(', '));
     window.document.getElementById("newIngredient").value = "";
+    setIngredientsBtn('step-btn-ingredients-inactive');
     return;
   };
   
@@ -68,10 +78,13 @@ let InsertRecipe = (props) => {
     <Fragment>
       <h2>Ingredients</h2>
       <Field name="ingredients" component="input" type="hidden" value={ingredients} />
-      <input type="text" id="newIngredient" placeholder={ingredients == [] ? "lettuce" : ""} />
-      {console.log(typeof ingredients, ingredients)}
+      <input id="newIngredient" type="text" placeholder={!ingredients[0] ? "lettuce" : ""}
+        onChange={() => {
+          handleIngredientsChange(window.document.getElementById("newIngredient").value);
+        }}
+      />
       <p>{ingredients.join(', ')}</p>
-      <i className="fas fa-plus-circle step-btn-ingredients"
+      <i className={`fas fa-plus-circle ${ingredientsBtn}`}
         onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
       </i>
     </Fragment>,
@@ -81,7 +94,7 @@ let InsertRecipe = (props) => {
       <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
     </Fragment>,
 
-// TO BE CONT.
+    // TO BE CONT.
     <Fragment>
       <h2>Instructions (Step {step})</h2>
       <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft" />
