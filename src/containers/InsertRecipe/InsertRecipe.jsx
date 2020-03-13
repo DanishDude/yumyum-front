@@ -33,10 +33,7 @@ let InsertRecipe = props => {
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
   const handleIngredientsChange = value => {
-    console.log(value[value.length-1], value);
     if (value[value.length - 1] === ',') {
-      console.log(value.slice(0, value.length - 1));
-      
       addIngredient(value.slice(0, value.length - 1));
     } else if (value.length > 0) {
       setIngredientsBtn('step-btn-ingredients');
