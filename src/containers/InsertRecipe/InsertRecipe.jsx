@@ -5,7 +5,7 @@ import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, initialValues } = props;
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
@@ -25,16 +25,22 @@ let InsertRecipe = props => {
     );
   };
 
-  const [index, setIndex] = useState(0);
-  const [ingredientsBtn, setIngredientsBtn] = useState('step-btn-ingredients-inactive');
-  const [ingredients, setIngredients] = useState([]);
-
   const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
+  const [index, setIndex] = useState(0);
+  const [ingredientsBtn, setIngredientsBtn] = useState('step-btn-ingredients-inactive');
+  const [ingredients, setIngredients] = useState(initialValues && initialValues.ingredients
+    ? initialValues.ingredients.split(', ')
+    : []);
+
   const handleIngredientsChange = value => {
-    if (value[value.length - 1] === ',') {
+    if (value.length === 1 && value === ',') {
+      window.document.getElementById("newIngredient").value = '';
+    } else if (value[value.length - 1] === ',') {
       addIngredient(value.slice(0, value.length - 1));
+    } else if (ingredients.includes(value)) {
+      setIngredientsBtn('step-btn-ingredients-inactive')
     } else if (value.length > 0) {
       setIngredientsBtn('step-btn-ingredients');
     } else {
@@ -44,14 +50,15 @@ let InsertRecipe = props => {
 
   const addIngredient = value => {
     if (value === '') return;
+    if (!ingredients.includes(value)) setIngredients([...ingredients, value]);
 
-    setIngredients([...ingredients, value]);
-    window.document.getElementById("newIngredient").value = "";
+    window.document.getElementById("newIngredient").value = '';
     setIngredientsBtn('step-btn-ingredients-inactive');
-    return;
   };
+
+  const removeIngredient = index => setIngredients(ingredients.filter((e, i) => i !== index));
   
-// TO BE CONT.
+  // TO BE CONT.
   const [step, setStep] = useState(0);
   const nextStep = () => setStep(step + 1);
   const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
@@ -85,7 +92,13 @@ let InsertRecipe = props => {
           handleIngredientsChange(window.document.getElementById("newIngredient").value);
         }}
       />
-      <p>{ingredients.join(', ')}</p>
+      <p>{
+        ingredients.map((ingredient, i) => 
+          <span key={i} onClick={() => removeIngredient(i)}>
+            {`${i !== 0 ? ', ' : ''} ${ingredient}`}
+          </span>
+        )}
+      </p>
       <i className={`fas fa-plus-circle ${ingredientsBtn}`}
         onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
       </i>
