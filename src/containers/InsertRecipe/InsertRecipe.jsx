@@ -6,6 +6,8 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
+  console.log(initialValues);
+  
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
@@ -29,9 +31,12 @@ let InsertRecipe = props => {
   const previous = () => setIndex(index > 0 ? index - 1 : index);
 
   const [index, setIndex] = useState(0);
-  const [ingredientsBtn, setIngredientsBtn] = useState('step-btn-ingredients-inactive');
+  const [ingredientsBtn, setIngredientsBtn] = useState('add-ingredients-btn-inactive');
   const [ingredients, setIngredients] = useState(initialValues && initialValues.ingredients
-    ? initialValues.ingredients.split(', ')
+    ? initialValues.ingredients
+    : []);
+  const [instructions, setInstructions] = useState(initialValues && initialValues.instructions
+    ? initialValues.instructions
     : []);
 
   const handleIngredientsChange = value => {
@@ -40,11 +45,11 @@ let InsertRecipe = props => {
     } else if (value[value.length - 1] === ',') {
       addIngredient(value.slice(0, value.length - 1));
     } else if (ingredients.includes(value)) {
-      setIngredientsBtn('step-btn-ingredients-inactive')
+      setIngredientsBtn('add-ingredients-btn-inactive')
     } else if (value.length > 0) {
-      setIngredientsBtn('step-btn-ingredients');
+      setIngredientsBtn('add-ingredients-btn');
     } else {
-      setIngredientsBtn('step-btn-ingredients-inactive')
+      setIngredientsBtn('add-ingredients-btn-inactive')
     };
   };
 
@@ -53,19 +58,23 @@ let InsertRecipe = props => {
     if (!ingredients.includes(value)) setIngredients([...ingredients, value]);
 
     window.document.getElementById("newIngredient").value = '';
-    setIngredientsBtn('step-btn-ingredients-inactive');
+    setIngredientsBtn('add-ingredients-btn-inactive');
   };
 
   const removeIngredient = index => setIngredients(ingredients.filter((e, i) => i !== index));
   
-  // TO BE CONT.
   const [step, setStep] = useState(0);
   const nextStep = () => setStep(step + 1);
   const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
 
-  const instructions = [];
-  const addInstructionStep = value => {
-    instructions.push(value)
+  const addInstruction = value => {
+    if (value === '') return;
+    console.log(value);
+    
+    setInstructions([...instructions, value]);
+    window.document.getElementById("newInstruction").value = '';
+    console.log(instructions);
+    
     nextStep();
     
   };
@@ -103,17 +112,30 @@ let InsertRecipe = props => {
         onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
       </i>
     </Fragment>,
-
-    <Fragment>
+ 
+    // TODO Refine tag handling with search
+    /* <Fragment>
       <h2>Tag it</h2>
       <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
-    </Fragment>,
+    </Fragment>, */
 
-    // TO BE CONT.
     <Fragment>
-      <h2>Instructions (Step {step})</h2>
-      <Field name="instructions" component="textarea" type="text" rows="4" wrap="soft" />
-      <i className="fas fa-plus-circle step-btn" onClick={addInstructionStep}></i>
+      <h2>Instructions (Step {step + 1})</h2>
+      <Field
+        id="instructions-field"
+        name="instructions"
+        component="textarea"
+        type="hidden"
+        value={instructions}
+      />
+      <textarea
+        id="newInstruction"
+        defaultValue={instructions[0]}>
+      </textarea>
+      <i className="fas fa-plus-circle add-instructions-btn" 
+        onClick={() => addInstruction(window.document.getElementById("newInstruction").value)}>
+      </i>
+      <p>{instructions.map((e, i) => <span key={i}>{`${i !== 0 ? '  ' : ''} ${i + 1}`}</span>)}</p>
 
     </Fragment>,
 
