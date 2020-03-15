@@ -166,15 +166,16 @@ let InsertRecipe = props => {
     </Fragment>,
 
     <Fragment>
-      <h2>Prep time & Cook time</h2>
-      <div className="timers">
+      <h2 className="prep-cook-time">
+        <span className="title">Prep time</span>
+        <span className="title">Cook time</span>
+      </h2>
+      <div className="prep-cook-time">
         <div className="timer">
-          <Field name="prep_time" component="input" type="number"
-                min="0" max="999" step="1" />
+          <Field name="prep_time" component="input" type="number"min="0" max="999" step="1" />
         </div>
         <div className="timer">
-          <Field name="cook_time" component="input" type="number"
-                min="0" max="999" step="1" />
+          <Field name="cook_time" component="input" type="number" min="0" max="999" step="1" />
         </div>
       </div>
     </Fragment>,

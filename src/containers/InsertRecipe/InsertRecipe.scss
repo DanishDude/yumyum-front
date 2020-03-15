@@ -106,15 +106,18 @@ $inactive-color: rgb(223, 223, 223);
       }
     }
 
-
-
-    .timers {
+    .prep-cook-time {
       display: flex;
       justify-content: flex-start;
+
+    }
+    
+    .title {
+      margin-right: 40px;
     }
 
     .timer {
-      margin-right: 75px;
+      margin-right: 77px;
       width: 100px;
     }
 
