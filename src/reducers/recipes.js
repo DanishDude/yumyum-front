@@ -23,7 +23,6 @@ const recipes = (state = initialState, action) => {
       if (action.recipe) {
         if (action.recipe.ingredients)
           action.recipe.ingredients = action.recipe.ingredients.split(',')
-
         if (action.recipe.instructions)
           action.recipe.instructions = action.recipe.instructions.split('|');
       }

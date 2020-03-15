@@ -90,6 +90,24 @@ $inactive-color: rgb(223, 223, 223);
       color: $inactive-color;
     }
 
+    .step-indexes {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+
+      .step-index {
+        margin-left: 10px;
+        color: blue;
+      }
+      
+      .step-index:hover {
+        position: relative;
+        bottom: 1px;
+      }
+    }
+
+
+
     .timers {
       display: flex;
       justify-content: flex-start;

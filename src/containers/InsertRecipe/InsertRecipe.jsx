@@ -6,8 +6,6 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
-  console.log(initialValues);
-  
 
   const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
@@ -40,7 +38,7 @@ let InsertRecipe = props => {
     : []);
 
   const handleIngredientsChange = value => {
-    if (value.length === 1 && value === ',') {
+    if (value === ',') {
       window.document.getElementById("newIngredient").value = '';
     } else if (value[value.length - 1] === ',') {
       addIngredient(value.slice(0, value.length - 1));
@@ -67,16 +65,38 @@ let InsertRecipe = props => {
   const nextStep = () => setStep(step + 1);
   const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
 
+  const handleInstructionsChange = (value) => {
+    if (value === '|') {
+      window.document.getElementById("newInstruction").value = '';
+    } else if (value[value.length - 1] === '|') {
+      addInstruction(value.slice(0, value.length - 1));
+    };
+  }
+
   const addInstruction = value => {
     if (value === '') return;
-    console.log(value);
-    
     setInstructions([...instructions, value]);
     window.document.getElementById("newInstruction").value = '';
-    console.log(instructions);
-    
     nextStep();
+  };
+
+  const goToInstruction = index => {
+    const instructionValue = window.document.getElementById("newInstruction").value;
+
+    if (instructionValue.length > 0 && step >= instructions.length) {
+      setInstructions([...instructions, instructionValue]);
+    } else if (instructionValue.length > 0) {
+      instructions[step] = instructionValue;
+    };
     
+    setStep(index);
+    window.document.getElementById("newInstruction").value = instructions[index];
+  };
+
+  const startNewInstruction = () => {
+    instructions[step] = window.document.getElementById("newInstruction").value;
+    setStep(instructions.length);
+    window.document.getElementById("newInstruction").value = '';
   };
 
   const recipeForm = [
@@ -113,13 +133,12 @@ let InsertRecipe = props => {
       </i>
     </Fragment>,
  
-    // TODO Refine tag handling with search
-    /* <Fragment>
-      <h2>Tag it</h2>
-      <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
-    </Fragment>, */
-
-    <Fragment>
+ /* <Fragment>
+ <h2>Tag it</h2>
+ <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
+ </Fragment>, */
+ 
+ <Fragment>
       <h2>Instructions (Step {step + 1})</h2>
       <Field
         id="instructions-field"
@@ -130,13 +149,20 @@ let InsertRecipe = props => {
       />
       <textarea
         id="newInstruction"
-        defaultValue={instructions[0]}>
+        defaultValue={instructions[step]}
+        onChange={() => handleInstructionsChange(window.document.getElementById("newInstruction").value)}>
       </textarea>
       <i className="fas fa-plus-circle add-instructions-btn" 
         onClick={() => addInstruction(window.document.getElementById("newInstruction").value)}>
       </i>
-      <p>{instructions.map((e, i) => <span key={i}>{`${i !== 0 ? '  ' : ''} ${i + 1}`}</span>)}</p>
-
+      <p className="step-indexes">{instructions.map((e, i) => 
+        <span className="step-index" key={i} onClick={() => goToInstruction(i)}>
+          {`${i !== 0 ? '  ' : ''} ${i + 1}`}
+        </span>)}
+        {step >= instructions.length
+          ? ''
+          : <span className="step-index" onClick={startNewInstruction}> Add Step</span>}
+      </p>
     </Fragment>,
 
     <Fragment>
