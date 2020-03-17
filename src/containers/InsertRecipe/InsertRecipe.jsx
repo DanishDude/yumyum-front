@@ -7,7 +7,15 @@ import './InsertRecipe.scss';
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
 
-  const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
+  const adaptFileEventToValue = delegate => e => {
+    delegate(e.target.files[0])
+
+    window.document.getElementById("preview-image").src = e.target.files[0];
+    console.log('hello', );
+    console.log(window.document.getElementById("preview-image"));
+    console.log(e.target.files[0]);
+    
+  };
 
   const FileInput = ({
     input: { value: omitValue, onChange, onBlur, ...inputProps }, 
@@ -182,7 +190,11 @@ let InsertRecipe = props => {
 
     <Fragment>
       <h2>Add a cover photo</h2>
-      <Field name="image" component={FileInput} type="file" accept="image/png, image/jpeg"
+      <Field
+        name="image"
+        component={FileInput}
+        type="file"
+        accept="image/png, image/jpeg"
       />
     </Fragment>
   ];
@@ -193,11 +205,7 @@ let InsertRecipe = props => {
         <h3>Add your recipe</h3>
         <form onSubmit={handleSubmit}>
           <Field name="id" component="input" type="hidden" />
-          <div className="field">
-            {recipeForm[index]}
-          </div>
-         
-          
+          <div className="field">{recipeForm[index]}</div>
           <div className="action-btns">
             <div className="cancel"><CancelAddRecipe /></div>
             {index > 0 ?
