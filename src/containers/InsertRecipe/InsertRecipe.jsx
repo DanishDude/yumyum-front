@@ -6,6 +6,8 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
+  console.log(props);
+  
   
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);
@@ -23,11 +25,15 @@ let InsertRecipe = props => {
   
   /*------------------------------ Select form index ------------------------------*/
   const next = () => {
-    console.log(recipeForm[index]);
-    console.log(recipeForm[index]._owner.firstEffect);
-    
-    
-    setIndex(index < recipeForm.length - 1 ? index + 1 : index)};
+    if (recipeForm[index].title === 'instructions'
+      && step === instructions.length
+      && window.document.getElementById("newInstruction").value.length > 0) {
+      addInstruction(window.document.getElementById("newInstruction").value);
+    };
+
+    setIndex(index < recipeForm.length - 1 ? index + 1 : index);
+  };
+
   const previous = () => setIndex(index > 0 ? index - 1 : index);
   
   /*------------------------------ Ingredients ------------------------------*/
@@ -80,8 +86,6 @@ let InsertRecipe = props => {
   };
   
   const removeInstruction = index => {
-    console.log(index, instructions);
-    
     if (index === 0) {
       window.document.getElementById("newInstruction").value = instructions.length === 1 ?
         '' : instructions[1];
@@ -94,9 +98,6 @@ let InsertRecipe = props => {
       window.document.getElementById("newInstruction").value = instructions[index + 1];
       setInstructions(instructions.filter((e, i) => i !== index));
     };
-    
-    console.log(step, instructions);
-    
   };
   
   const goToInstruction = index => {
@@ -104,7 +105,7 @@ let InsertRecipe = props => {
     
     if (instructionValue.length > 0 && step === instructions.length) {
       setInstructions([...instructions, instructionValue]);
-    } else {
+    } else if (step < instructions.length) {
       instructions[step] = instructionValue;
     };
     
@@ -123,15 +124,7 @@ let InsertRecipe = props => {
   };
   
   /*------------------------------ Image file ------------------------------*/
-  const adaptFileEventToValue = delegate => e => {
-    delegate(e.target.files[0])
-
-    window.document.getElementById("preview-image").src = e.target.files[0];
-    console.log('hello', );
-    console.log(window.document.getElementById("preview-image"));
-    console.log(e.target.files[0]);
-    
-  };
+  const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
 
   const FileInput = ({
     input: { value: omitValue, onChange, onBlur, ...inputProps }, 
@@ -150,22 +143,24 @@ let InsertRecipe = props => {
   };
 
   /*------------------------------ Recipe form ------------------------------*/
-                                  // TODO convert to array of Objects
-  const recipeForm = [
-    <Fragment>
+  const recipeForm = [{
+    title: 'title',
+    field: <Fragment>
       <h2>Your cool title</h2>
       <Field name="title" component="input" type="text" placeholder="Ceasar Salad" />
-    </Fragment>,
-
-    <Fragment>
+    </Fragment>
+  },{
+    title: 'description',
+    field: <Fragment>
       <h2>Share your story</h2>
       <Field name="description" component="textarea" type="text" rows="4" wrap="hard"
           placeholder="Where does this recipe come from? Why is it special?
           Who would love it?"
       />
-    </Fragment>,
-
-    <Fragment>
+    </Fragment>
+  },{
+    title: 'ingredients',
+    field: <Fragment>
       <h2>Ingredients</h2>
       <Field name="ingredients" component="input" type="hidden" value={ingredients} />
       <input id="newIngredient" type="text" placeholder={!ingredients[0] ? "lettuce" : ""}
@@ -183,9 +178,10 @@ let InsertRecipe = props => {
       <i className={`fas fa-plus-circle ${ingredientsBtn}`}
         onClick={() => addIngredient(window.document.getElementById("newIngredient").value)} >
       </i>
-    </Fragment>,
- 
-    <Fragment>
+    </Fragment>
+  },{
+    title: 'instructions',
+    field: <Fragment>
       <h2>Instructions (Step {step + 1})</h2>
       <Field
         id="instructions-field"
@@ -205,7 +201,6 @@ let InsertRecipe = props => {
       <i className={`fas fa-minus-circle ${removeInstructionsBtn}`} 
         onClick={() => removeInstruction(step)}>
       </i>
-      <a onClick={() => console.log(step, instructions)}>Check-in</a>
       <p className="step-indexes">{instructions.map((e, i) => 
         <span className="step-index" key={i} onClick={() => goToInstruction(i)}>
           {`${i !== 0 ? '  ' : ''} ${i + 1}`}
@@ -214,9 +209,10 @@ let InsertRecipe = props => {
           ? ''
           : <span className="step-index" onClick={startNewInstruction}> Add Step</span>}
       </p>
-    </Fragment>,
-
-    <Fragment>
+    </Fragment>
+  },{
+    title: 'time',
+    field: <Fragment>
       <h2 className="prep-cook-time">
         <span className="title">Prep time</span>
         <span className="title">Cook time</span>
@@ -229,9 +225,10 @@ let InsertRecipe = props => {
           <Field name="cook_time" component="input" type="number" min="0" max="999" step="1" />
         </div>
       </div>
-    </Fragment>,
-
-    <Fragment>
+    </Fragment>
+  },{
+    title: 'image',
+    field: <Fragment>
       <h2>Add a cover photo</h2>
       <Field
         name="image"
@@ -240,6 +237,7 @@ let InsertRecipe = props => {
         accept="image/png, image/jpeg"
       />
     </Fragment>
+    }
   ];
 
   return (
@@ -248,7 +246,7 @@ let InsertRecipe = props => {
         <h3>Add your recipe</h3>
         <form onSubmit={handleSubmit}>
           <Field name="id" component="input" type="hidden" />
-          <div className="field">{recipeForm[index]}</div>
+          <div className="field">{recipeForm[index].field}</div>
           <div className="action-btns">
             <div className="cancel"><CancelAddRecipe /></div>
             {index > 0 ?
