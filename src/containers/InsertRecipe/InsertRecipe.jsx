@@ -6,7 +6,123 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
-
+  
+  /*------------------------------ States ------------------------------*/
+  const [index, setIndex] = useState(0);
+  const [ingredientsBtn, setIngredientsBtn] = useState('add-ingredients-btn-inactive');
+  const [ingredients, setIngredients] = useState(initialValues && initialValues.ingredients
+    ? initialValues.ingredients
+    : []);
+  const [step, setStep] = useState(0);
+  const [instructions, setInstructions] = useState(initialValues && initialValues.instructions
+    ? initialValues.instructions
+    : []);
+  const [addInstructionsBtn, setAddInstructionsBtn] = useState('add-instructions-btn-inactive');
+  const [removeInstructionsBtn, setRemoveInstructionsBtn] = useState(step === instructions.length
+    ? 'remove-instructions-btn-inactive' : 'remove-instructions-btn');
+  
+  /*------------------------------ Select form index ------------------------------*/
+  const next = () => {
+    console.log(recipeForm[index]);
+    console.log(recipeForm[index]._owner.firstEffect);
+    
+    
+    setIndex(index < recipeForm.length - 1 ? index + 1 : index)};
+  const previous = () => setIndex(index > 0 ? index - 1 : index);
+  
+  /*------------------------------ Ingredients ------------------------------*/
+  const handleIngredientsChange = value => {
+    if (value === ',') {
+      window.document.getElementById("newIngredient").value = '';
+    } else if (value[value.length - 1] === ',') {
+      addIngredient(value.slice(0, value.length - 1));
+    } else if (ingredients.includes(value)) {
+      setIngredientsBtn('add-ingredients-btn-inactive')
+    } else if (value.length > 0) {
+      setIngredientsBtn('add-ingredients-btn');
+    } else {
+      setIngredientsBtn('add-ingredients-btn-inactive')
+    };
+  };
+  
+  const addIngredient = value => {
+    if (value === '') return;
+    if (!ingredients.includes(value)) setIngredients([...ingredients, value]);
+    
+    window.document.getElementById("newIngredient").value = '';
+    setIngredientsBtn('add-ingredients-btn-inactive');
+  };
+  
+  const removeIngredient = index => setIngredients(ingredients.filter((e, i) => i !== index));
+  
+  /*------------------------------ Instructions ------------------------------*/
+  const nextStep = () => setStep(step + 1);
+  const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
+  
+  const handleInstructionsChange = (value) => {
+    if (value === '|') {
+      window.document.getElementById("newInstruction").value = '';
+    } else if (value[value.length - 1] === '|') {
+      addInstruction(value.slice(0, value.length - 1));
+    } else if (value.length === 0) {
+      setAddInstructionsBtn('add-instructions-btn-inactive');
+    } else {
+      setAddInstructionsBtn('add-instructions-btn');
+    };
+  };
+  
+  const addInstruction = value => {
+    if (value === '') return;
+    setInstructions([...instructions, value]);
+    setAddInstructionsBtn('add-instructions-btn-inactive');
+    window.document.getElementById("newInstruction").value = '';
+    nextStep();
+  };
+  
+  const removeInstruction = index => {
+    console.log(index, instructions);
+    
+    if (index === 0) {
+      window.document.getElementById("newInstruction").value = instructions.length === 1 ?
+        '' : instructions[1];
+      setInstructions(instructions.slice(1));
+    } else if (index === instructions.length - 1) {
+      window.document.getElementById("newInstruction").value = instructions[index - 1];
+      setStep(index - 1);
+      setInstructions(instructions.filter((e, i) => i !== index));
+    } else {
+      window.document.getElementById("newInstruction").value = instructions[index + 1];
+      setInstructions(instructions.filter((e, i) => i !== index));
+    };
+    
+    console.log(step, instructions);
+    
+  };
+  
+  const goToInstruction = index => {
+    const instructionValue = window.document.getElementById("newInstruction").value;
+    
+    if (instructionValue.length > 0 && step === instructions.length) {
+      setInstructions([...instructions, instructionValue]);
+    } else {
+      instructions[step] = instructionValue;
+    };
+    
+    setStep(index);
+    setRemoveInstructionsBtn('remove-instructions-btn');
+    setAddInstructionsBtn('add-instructions-btn');
+    window.document.getElementById("newInstruction").value = instructions[index];
+  };
+  
+  const startNewInstruction = () => {
+    instructions[step] = window.document.getElementById("newInstruction").value;
+    setStep(instructions.length);
+    setRemoveInstructionsBtn('remove-instructions-btn-inactive');
+    setAddInstructionsBtn('add-instructions-btn');
+    window.document.getElementById("newInstruction").value = '';
+  };
+  
+  /*------------------------------ Image file ------------------------------*/
   const adaptFileEventToValue = delegate => e => {
     delegate(e.target.files[0])
 
@@ -33,80 +149,8 @@ let InsertRecipe = props => {
     );
   };
 
-  const next = () => setIndex(index < recipeForm.length - 1 ? index + 1 : index);
-  const previous = () => setIndex(index > 0 ? index - 1 : index);
-
-  const [index, setIndex] = useState(0);
-  const [ingredientsBtn, setIngredientsBtn] = useState('add-ingredients-btn-inactive');
-  const [ingredients, setIngredients] = useState(initialValues && initialValues.ingredients
-    ? initialValues.ingredients
-    : []);
-  const [instructions, setInstructions] = useState(initialValues && initialValues.instructions
-    ? initialValues.instructions
-    : []);
-
-  const handleIngredientsChange = value => {
-    if (value === ',') {
-      window.document.getElementById("newIngredient").value = '';
-    } else if (value[value.length - 1] === ',') {
-      addIngredient(value.slice(0, value.length - 1));
-    } else if (ingredients.includes(value)) {
-      setIngredientsBtn('add-ingredients-btn-inactive')
-    } else if (value.length > 0) {
-      setIngredientsBtn('add-ingredients-btn');
-    } else {
-      setIngredientsBtn('add-ingredients-btn-inactive')
-    };
-  };
-
-  const addIngredient = value => {
-    if (value === '') return;
-    if (!ingredients.includes(value)) setIngredients([...ingredients, value]);
-
-    window.document.getElementById("newIngredient").value = '';
-    setIngredientsBtn('add-ingredients-btn-inactive');
-  };
-
-  const removeIngredient = index => setIngredients(ingredients.filter((e, i) => i !== index));
-  
-  const [step, setStep] = useState(0);
-  const nextStep = () => setStep(step + 1);
-  const previousStep = () => setStep(step <= 0 ? 0 : step - 1);
-
-  const handleInstructionsChange = (value) => {
-    if (value === '|') {
-      window.document.getElementById("newInstruction").value = '';
-    } else if (value[value.length - 1] === '|') {
-      addInstruction(value.slice(0, value.length - 1));
-    };
-  }
-
-  const addInstruction = value => {
-    if (value === '') return;
-    setInstructions([...instructions, value]);
-    window.document.getElementById("newInstruction").value = '';
-    nextStep();
-  };
-
-  const goToInstruction = index => {
-    const instructionValue = window.document.getElementById("newInstruction").value;
-
-    if (instructionValue.length > 0 && step >= instructions.length) {
-      setInstructions([...instructions, instructionValue]);
-    } else if (instructionValue.length > 0) {
-      instructions[step] = instructionValue;
-    };
-    
-    setStep(index);
-    window.document.getElementById("newInstruction").value = instructions[index];
-  };
-
-  const startNewInstruction = () => {
-    instructions[step] = window.document.getElementById("newInstruction").value;
-    setStep(instructions.length);
-    window.document.getElementById("newInstruction").value = '';
-  };
-
+  /*------------------------------ Recipe form ------------------------------*/
+                                  // TODO convert to array of Objects
   const recipeForm = [
     <Fragment>
       <h2>Your cool title</h2>
@@ -141,12 +185,7 @@ let InsertRecipe = props => {
       </i>
     </Fragment>,
  
- /* <Fragment>
- <h2>Tag it</h2>
- <Field name="tag_list" component="input" type="text" placeholder="#parties #kids" />
- </Fragment>, */
- 
- <Fragment>
+    <Fragment>
       <h2>Instructions (Step {step + 1})</h2>
       <Field
         id="instructions-field"
@@ -160,9 +199,13 @@ let InsertRecipe = props => {
         defaultValue={instructions[step]}
         onChange={() => handleInstructionsChange(window.document.getElementById("newInstruction").value)}>
       </textarea>
-      <i className="fas fa-plus-circle add-instructions-btn" 
+      <i className={`fas fa-plus-circle ${addInstructionsBtn}`}
         onClick={() => addInstruction(window.document.getElementById("newInstruction").value)}>
       </i>
+      <i className={`fas fa-minus-circle ${removeInstructionsBtn}`} 
+        onClick={() => removeInstruction(step)}>
+      </i>
+      <a onClick={() => console.log(step, instructions)}>Check-in</a>
       <p className="step-indexes">{instructions.map((e, i) => 
         <span className="step-index" key={i} onClick={() => goToInstruction(i)}>
           {`${i !== 0 ? '  ' : ''} ${i + 1}`}
