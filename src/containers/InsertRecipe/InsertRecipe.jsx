@@ -7,8 +7,6 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues } = props;
-  console.log(props);
-  
   
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);
@@ -23,7 +21,9 @@ let InsertRecipe = props => {
   const [addInstructionsBtn, setAddInstructionsBtn] = useState('add-instructions-btn-inactive');
   const [removeInstructionsBtn, setRemoveInstructionsBtn] = useState(step === instructions.length
     ? 'remove-instructions-btn-inactive' : 'remove-instructions-btn');
-  
+  const [file, setFile] = useState([]);
+  const [files, setFiles] = useState([]);
+
   /*------------------------------ Select form index ------------------------------*/
   const next = () => {
     if (recipeForm[index].title === 'instructions'
@@ -125,7 +125,19 @@ let InsertRecipe = props => {
   };
   
   /*------------------------------ Image file ------------------------------*/
-  const adaptFileEventToValue = delegate => e => delegate(e.target.files[0]);
+  const adaptFileEventToValue = delegate => e => {
+    delegate(e.target.files[0])
+    /* setFiles(e.target.files.map(file => Object.assign(file, {
+      preview: URL.createObjectURL(file)
+    }))); */
+    setFile(Object.assign(
+      e.target.files[0],
+      { preview: URL.createObjectURL(e.target.files[0]) }
+    ));
+  };
+
+  const thumbnail = (<img src={file.preview} />);
+
 
   const FileInput = ({
     input: { value: omitValue, onChange, onBlur, ...inputProps }, 
@@ -145,8 +157,15 @@ let InsertRecipe = props => {
 
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
-  }, [])
+    const reader = new FileReader()
+    setFiles(acceptedFiles.map(file => Object.assign(file, {
+      preview: URL.createObjectURL(file)
+    })));
+  }, []);
+
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
+  const thumbs = files.map(file => (<img src={file.preview} />));
   
 
   /*------------------------------ Recipe form ------------------------------*/
@@ -200,7 +219,10 @@ let InsertRecipe = props => {
       <textarea
         id="newInstruction"
         defaultValue={instructions[step]}
-        onChange={() => handleInstructionsChange(window.document.getElementById("newInstruction").value)}>
+        onChange={() => {
+          handleInstructionsChange(window.document.getElementById("newInstruction").value)
+        }}
+      >
       </textarea>
       <i className={`fas fa-plus-circle ${addInstructionsBtn}`}
         onClick={() => addInstruction(window.document.getElementById("newInstruction").value)}>
@@ -247,10 +269,18 @@ let InsertRecipe = props => {
       <input {...getInputProps()} />
       {
         isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <div className="drop-area drag-active">
+            <p>Drop the files here ...</p>
+          </div> :
+          <div className="drop-area">
+            <p>Drag 'n' drop here</p>
+            <p>or</p>
+            <p>click to select files</p>
+          </div>
       }
     </div>
+    {thumbnail}
+    {thumbs}
     </Fragment>
     }
   ];
