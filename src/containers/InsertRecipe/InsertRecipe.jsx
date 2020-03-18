@@ -1,6 +1,7 @@
-import React, { Fragment, useState,  } from 'react';
+import React, { Fragment, useCallback, useState,  } from 'react';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import { useDropzone } from 'react-dropzone';
 import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
@@ -142,6 +143,12 @@ let InsertRecipe = props => {
     );
   };
 
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
+  }, [])
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  
+
   /*------------------------------ Recipe form ------------------------------*/
   const recipeForm = [{
     title: 'title',
@@ -236,6 +243,14 @@ let InsertRecipe = props => {
         type="file"
         accept="image/png, image/jpeg"
       />
+      <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the files here ...</p> :
+          <p>Drag 'n' drop some files here, or click to select files</p>
+      }
+    </div>
     </Fragment>
     }
   ];
