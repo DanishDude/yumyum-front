@@ -155,12 +155,18 @@ let InsertRecipe = props => {
     );
   };
 
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback(file => {
     // Do something with the files
-    const reader = new FileReader()
-    setFiles(acceptedFiles.map(file => Object.assign(file, {
+    console.log(file[0]);
+    
+    setFile(Object.assign(
+      file[0],
+      { preview: URL.createObjectURL(file[0]) }
+    ));
+    // const reader = new FileReader()
+    /* setFiles(acceptedFiles.map(file => Object.assign(file, {
       preview: URL.createObjectURL(file)
-    })));
+    }))); */
   }, []);
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -262,8 +268,9 @@ let InsertRecipe = props => {
       <Field
         name="image"
         component={FileInput}
-        type="file"
+        type="hidden"
         accept="image/png, image/jpeg"
+        value={file[0]}
       />
       <div {...getRootProps()}>
       <input {...getInputProps()} />
