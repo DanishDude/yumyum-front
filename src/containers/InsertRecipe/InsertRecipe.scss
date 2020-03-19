@@ -159,6 +159,12 @@ $inactive-color: rgb(223, 223, 223);
       background-color: aliceblue;
     }
 
+    .thumbnail {
+      margin-top: 5px;
+      width: 90px;
+      height: 90px;
+    }
+
     .action-btns {
       display: flex;
       justify-content: flex-end;

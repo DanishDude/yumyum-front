@@ -127,34 +127,32 @@ let InsertRecipe = props => {
   /*------------------------------ Image file ------------------------------*/
   const adaptFileEventToValue = delegate => e => {
     delegate(e.target.files[0])
-    /* setFiles(e.target.files.map(file => Object.assign(file, {
-      preview: URL.createObjectURL(file)
-    }))); */
-    setFile(Object.assign(
+    /* setFile(Object.assign(
       e.target.files[0],
       { preview: URL.createObjectURL(e.target.files[0]) }
-    ));
+    )); */
   };
 
-  const thumbnail = (<img src={file.preview} />);
-
-
+  
   const FileInput = ({
     input: { value: omitValue, onChange, onBlur, ...inputProps }, 
     meta: omitMeta, 
     ...props 
   }) => {
     return (
+      <div>
+      {console.log(inputProps)}
       <input
-        onChange={adaptFileEventToValue(onChange)}
-        onBlur={adaptFileEventToValue(onBlur)}
-        type="file"
-        {...props.input}
-        {...props}
+      onChange={adaptFileEventToValue(onChange)}
+      onBlur={adaptFileEventToValue(onBlur)}
+      type="file"
+      {...props.input}
+      {...props}
       />
+      </div>
     );
   };
-
+    
   const onDrop = useCallback(file => {
     // Do something with the files
     console.log(file[0]);
@@ -163,16 +161,43 @@ let InsertRecipe = props => {
       file[0],
       { preview: URL.createObjectURL(file[0]) }
     ));
-    // const reader = new FileReader()
-    /* setFiles(acceptedFiles.map(file => Object.assign(file, {
-      preview: URL.createObjectURL(file)
-    }))); */
+      // const reader = new FileReader()
+      /* setFiles(acceptedFiles.map(file => Object.assign(file, {
+        preview: URL.createObjectURL(file)
+      }))); */
   }, []);
-
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
-  const thumbs = files.map(file => (<img src={file.preview} />));
   
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  
+  /* const FileInput = ({
+    input: { value: omitValue, onChange, onBlur, ...inputProps }, 
+    meta: omitMeta, 
+    ...props 
+  }) => {
+    return (
+      <div {...getRootProps()}>
+      <input 
+      //onChange={adaptFileEventToValue(onChange)}
+      //onBlur={adaptFileEventToValue(onBlur)}
+      type="file"
+      {...props.input}
+      {...props}
+      {...getInputProps()}
+      />
+      {isDragActive ?
+        <div className="drop-area drag-active">
+          <p>Drop the files here ...</p>
+        </div> :
+        <div className="drop-area">
+          <p>Drag 'n' drop here</p>
+          <p>or</p>
+          <p>click to select files</p>
+        </div>}
+    </div>
+    );
+  }; */
+      
+  const thumbnail = (<img className="thumbnail" src={file.preview} />);
 
   /*------------------------------ Recipe form ------------------------------*/
   const recipeForm = [{
@@ -268,11 +293,11 @@ let InsertRecipe = props => {
       <Field
         name="image"
         component={FileInput}
-        type="hidden"
+        type="file"
         accept="image/png, image/jpeg"
-        value={file[0]}
+        // value={file[0]}
       />
-      <div {...getRootProps()}>
+      {/* <div {...getRootProps()}>
       <input {...getInputProps()} />
       {
         isDragActive ?
@@ -285,12 +310,10 @@ let InsertRecipe = props => {
             <p>click to select files</p>
           </div>
       }
-    </div>
+    </div> */}
     {thumbnail}
-    {thumbs}
     </Fragment>
-    }
-  ];
+  }];
 
   return (
     <div className="InsertRecipe">
