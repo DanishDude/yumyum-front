@@ -6,9 +6,7 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues, dispatch } = props;
-  console.log(props);
-  
-  
+
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);
   const [ingredientsBtn, setIngredientsBtn] = useState('add-ingredients-btn-inactive');
@@ -23,7 +21,7 @@ let InsertRecipe = props => {
   const [removeInstructionsBtn, setRemoveInstructionsBtn] = useState(step === instructions.length
     ? 'remove-instructions-btn-inactive' : 'remove-instructions-btn');
   const [file, setFile] = useState([]);
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(initialValues ? false : true);
 
   /*------------------------------ Select form index ------------------------------*/
   const next = () => {
@@ -39,19 +37,7 @@ let InsertRecipe = props => {
   const previous = () => setIndex(index > 0 ? index - 1 : index);
   
   /*------------------------------ Title ------------------------------*/
-  const handleTitleChange = e => {
-    console.log(e.target.value);
-    
-    if (e.target.value === '') {
-      setDisabled(false)
-      console.log('false');
-      
-    } else {
-      setDisabled(true);
-      console.log('true');
-      
-    };
-  };
+  const handleTitleChange = e => e.target.value ? setDisabled(false) : setDisabled(true);
 
   /*------------------------------ Ingredients ------------------------------*/
   const handleIngredientsChange = value => {
@@ -185,7 +171,7 @@ let InsertRecipe = props => {
   }
       
   const thumbnail = (<img className="thumbnail" src={thumbnailSrc} style={thumbnailStyle}/>);
-
+  
   /*------------------------------ Recipe form ------------------------------*/
   const recipeForm = [{
     title: 'title',
@@ -196,7 +182,7 @@ let InsertRecipe = props => {
         component="input"
         type="text"
         placeholder="Ceasar Salad"
-        onChange={onChange => handleTitleChange(onChange)}                  // TODO to be cont.....
+        onChange={e => handleTitleChange(e)}
       />
     </Fragment>
   },{
@@ -212,7 +198,7 @@ let InsertRecipe = props => {
     field: <Fragment>
       <h2>Ingredients</h2>
       <Field name="ingredients" component="input" type="hidden" value={ingredients}/>
-      <input id="newIngredient" type="text" placeholder={!ingredients[0] ? "lettuce" : ""}
+      <input id="newIngredient" type="text" placeholder={ingredients[0] ? "" : "lettuce"}
         onChange={() => {
           handleIngredientsChange(window.document.getElementById("newIngredient").value);
         }}
@@ -242,6 +228,7 @@ let InsertRecipe = props => {
       <textarea
         id="newInstruction"
         defaultValue={instructions[step]}
+        placeholder={instructions[0] ? "" : "Chop lettuce and place in a salad bowl"}
         onChange={() => {
           handleInstructionsChange(window.document.getElementById("newInstruction").value)
         }}
@@ -310,7 +297,7 @@ let InsertRecipe = props => {
                 Next
               </Button>) : ''}
             {index === recipeForm.length - 1 ? 
-              (<Button className="submit-btn" color="success" type="submit">
+              (<Button className="submit-btn" color="success" type="submit" disabled={disabled}>
                 {initialValues ? 'Update' : 'Share'}
               </Button>) : ''}
           </div>
