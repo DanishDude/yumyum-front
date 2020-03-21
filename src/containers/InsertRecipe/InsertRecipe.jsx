@@ -6,6 +6,8 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues, dispatch } = props;
+  console.log(props);
+  
   
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);
@@ -21,6 +23,7 @@ let InsertRecipe = props => {
   const [removeInstructionsBtn, setRemoveInstructionsBtn] = useState(step === instructions.length
     ? 'remove-instructions-btn-inactive' : 'remove-instructions-btn');
   const [file, setFile] = useState([]);
+  const [disabled, setDisabled] = useState(true);
 
   /*------------------------------ Select form index ------------------------------*/
   const next = () => {
@@ -35,6 +38,21 @@ let InsertRecipe = props => {
 
   const previous = () => setIndex(index > 0 ? index - 1 : index);
   
+  /*------------------------------ Title ------------------------------*/
+  const handleTitleChange = e => {
+    console.log(e.target.value);
+    
+    if (e.target.value === '') {
+      setDisabled(false)
+      console.log('false');
+      
+    } else {
+      setDisabled(true);
+      console.log('true');
+      
+    };
+  };
+
   /*------------------------------ Ingredients ------------------------------*/
   const handleIngredientsChange = value => {
     if (value === ',') {
@@ -90,6 +108,7 @@ let InsertRecipe = props => {
   
   const removeInstruction = index => {
     if (index === 0) {
+      if (instructions.length === 1) setRemoveInstructionsBtn('remove-instructions-btn-inactive');
       window.document.getElementById("newInstruction").value = instructions.length === 1 ?
         '' : instructions[1];
       setInstructions(instructions.slice(1));
@@ -144,6 +163,7 @@ let InsertRecipe = props => {
   }) => {
     return (
       <input
+        className="file-input"
         onChange={adaptFileEventToValue(onChange)}
         onBlur={adaptFileEventToValue(onBlur)}
         type="file"
@@ -153,7 +173,7 @@ let InsertRecipe = props => {
     );
   };
 
-  let thumbnailSrc;
+  let thumbnailSrc, thumbnailStyle;
   
   if (file.preview) {
     thumbnailSrc = file.preview
@@ -161,24 +181,30 @@ let InsertRecipe = props => {
     thumbnailSrc = `http://localhost:5000/api/recipe/${initialValues.id}/image`;
   } else {
     thumbnailSrc = '';
+    thumbnailStyle = { display: 'none' };
   }
       
-  const thumbnail = (<img className="thumbnail" src={thumbnailSrc} />);
+  const thumbnail = (<img className="thumbnail" src={thumbnailSrc} style={thumbnailStyle}/>);
 
   /*------------------------------ Recipe form ------------------------------*/
   const recipeForm = [{
     title: 'title',
     field: <Fragment>
       <h2>Your cool title</h2>
-      <Field name="title" component="input" type="text" placeholder="Ceasar Salad" />
+      <Field 
+        name="title"
+        component="input"
+        type="text"
+        placeholder="Ceasar Salad"
+        onChange={onChange => handleTitleChange(onChange)}                  // TODO to be cont.....
+      />
     </Fragment>
   },{
     title: 'description',
     field: <Fragment>
       <h2>Share your story</h2>
       <Field name="description" component="textarea" type="text" rows="4" wrap="hard"
-          placeholder="Where does this recipe come from? Why is it special?
-          Who would love it?"
+          placeholder="Where does this recipe come from? Why is it special?"
       />
     </Fragment>
   },{
@@ -285,7 +311,7 @@ let InsertRecipe = props => {
               </Button>) : ''}
             {index === recipeForm.length - 1 ? 
               (<Button className="submit-btn" color="success" type="submit">
-                Share
+                {initialValues ? 'Update' : 'Share'}
               </Button>) : ''}
           </div>
         </form>
