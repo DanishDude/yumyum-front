@@ -12,9 +12,6 @@ const Recipe = (props) => {
     : '/empty_plate.jpeg';
   
   useEffect(() => { dispatch(asyncFetchRecipe(id)) }, []);
-
-  console.log(props.recipe);
-  
   
   return (
     <div className="Recipe">

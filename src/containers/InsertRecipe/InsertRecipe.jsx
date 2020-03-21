@@ -1,12 +1,11 @@
-import React, { Fragment, useCallback, useState,  } from 'react';
+import React, { Fragment, useEffect, useState,  } from 'react';
 import { Button } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
-import { useDropzone } from 'react-dropzone';
+import { change, Field, reduxForm } from 'redux-form';
 import CancelAddRecipe from './CancelAddRecipe';
 import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
-  const { handleSubmit, initialValues } = props;
+  const { handleSubmit, initialValues, dispatch } = props;
   
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);
@@ -60,6 +59,10 @@ let InsertRecipe = props => {
   };
   
   const removeIngredient = index => setIngredients(ingredients.filter((e, i) => i !== index));
+  
+  useEffect(() => {
+    dispatch(change("insertRecipe", "ingredients", ingredients))
+  }, [ingredients]);
   
   /*------------------------------ Instructions ------------------------------*/
   const nextStep = () => setStep(step + 1);
@@ -122,6 +125,10 @@ let InsertRecipe = props => {
     setAddInstructionsBtn('add-instructions-btn');
     window.document.getElementById("newInstruction").value = '';
   };
+
+  useEffect(() => {
+    dispatch(change("insertRecipe", "instructions", instructions))
+  }, [instructions]);
   
   /*------------------------------ Image file ------------------------------*/
   const adaptFileEventToValue = delegate => e => {
@@ -178,7 +185,7 @@ let InsertRecipe = props => {
     title: 'ingredients',
     field: <Fragment>
       <h2>Ingredients</h2>
-      <Field name="ingredients" component="input" type="hidden" value={ingredients} />
+      <Field name="ingredients" component="input" type="hidden" value={ingredients}/>
       <input id="newIngredient" type="text" placeholder={!ingredients[0] ? "lettuce" : ""}
         onChange={() => {
           handleIngredientsChange(window.document.getElementById("newIngredient").value);
