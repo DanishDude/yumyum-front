@@ -110,16 +110,24 @@ $inactive-color: rgb(223, 223, 223);
       display: flex;
       justify-content: center;
       margin-top: 3px;
-      cursor: pointer;
 
       .step-index {
-        margin-left: 10px;
-        color: blue;
+        margin-left: 6px;
+        width: 23px;
+        padding: 0;
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: whitesmoke;
+        text-align: center;
       }
       
       .step-index:hover {
-        position: relative;
-        bottom: 1px;
+      background-color: white;
+      cursor: pointer;
+      }
+
+      .step-new {
+        width: 40px;
       }
     }
 

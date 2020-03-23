@@ -139,7 +139,8 @@ let InsertRecipe = props => {
   const adaptFileEventToValue = delegate => e => {
     const file = e.target.files[0];
     delegate(file);
-    setFile(Object.assign(file, { preview: URL.createObjectURL(file) }));
+    
+    // setFile(Object.assign(file, { preview: URL.createObjectURL(file) }));
   };
   
   const FileInput = ({
@@ -149,7 +150,7 @@ let InsertRecipe = props => {
   }) => {
     return (
       <input
-        className="file-input"
+        id="file-input"
         onChange={adaptFileEventToValue(onChange)}
         onBlur={adaptFileEventToValue(onBlur)}
         type="file"
@@ -246,7 +247,7 @@ let InsertRecipe = props => {
         </span>)}
         {step >= instructions.length
           ? ''
-          : <span className="step-index" onClick={startNewInstruction}> Add Step</span>}
+          : <span className="step-index step-new" onClick={startNewInstruction}>Add</span>}
       </p>
     </Fragment>
   },{
