@@ -137,10 +137,8 @@ let InsertRecipe = props => {
   
   /*------------------------------ Image file ------------------------------*/
   const adaptFileEventToValue = delegate => e => {
-    const file = e.target.files[0];
-    delegate(file);
-    
-    // setFile(Object.assign(file, { preview: URL.createObjectURL(file) }));
+    setFile(URL.createObjectURL(e.target.files[0]));
+    delegate(e.target.files[0]);
   };
   
   const FileInput = ({
@@ -162,8 +160,8 @@ let InsertRecipe = props => {
 
   let thumbnailSrc, thumbnailStyle;
   
-  if (file.preview) {
-    thumbnailSrc = file.preview
+  if (file) {
+    thumbnailSrc = file
   } else if (initialValues && initialValues.image) {
     thumbnailSrc = `http://localhost:5000/api/recipe/${initialValues.id}/image`;
   } else {

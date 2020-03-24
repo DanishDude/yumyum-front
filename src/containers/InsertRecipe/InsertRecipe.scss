@@ -171,3 +171,37 @@ $inactive-color: rgb(223, 223, 223);
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .InsertRecipe {
+    border: 0px solid gray;
+  
+    .content {
+
+      .field {
+        width: 380px;
+        height: 200px;
+        margin: 120px 0 10px 0;
+          h2 {
+            font-size: 1.75em;
+          }
+      }
+
+      .add-ingredients-btn {
+        top: 39.6%;
+      }
+
+      .add-ingredients-btn-inactive {
+        top: 39.6%;
+      }
+
+      @media screen and (max-width: 380px) {
+        .field {
+          width: 95vw;
+          height: 200px;
+          margin: 120px 0 10px 0;
+        }
+      }
+    }
+  }
+}
