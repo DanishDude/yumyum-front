@@ -30,7 +30,7 @@ const Recipe = (props) => {
         <h3>Ingredients</h3> 
           <ul>
             {ingredients && ingredients[0] ?
-              ingredients.split(',').map((ingredient, i) => 
+              ingredients.map((ingredient, i) => 
               <li key={i}>
                 {ingredient}
               </li>) : ''}
@@ -41,7 +41,7 @@ const Recipe = (props) => {
             <h3>Steps</h3>
             <ul>
               {instructions && instructions[0] ?
-                instructions.split('|').map((step, i) => 
+                instructions.map((step, i) => 
                 <li key={i}>
                   <h2>{i+1}.</h2>
                   <p>{step}</p>

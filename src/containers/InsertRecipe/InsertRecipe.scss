@@ -1,30 +1,38 @@
+$inactive-color: rgb(223, 223, 223);
+
 .InsertRecipe {
-  height: 800px;
-  width: 500px;
   padding: 1em;
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  border: 2px solid gray;
+  border-radius: 1em;
 
   .content {
     margin: 0;
     position: absolute;
     top:  50%;
     left: 50%;
-    padding-bottom: 20px;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     justify-items: center;
 
     h3 {
       text-align: center;
-      margin-bottom: 15px;
+      position: absolute;
+      width: 225px;
+      top: 2.75%;
+      right: 19%;
+      padding: 0 5px;
+      background-color: whitesmoke;
     }
 
     .field {
-      margin-bottom: 10px;
+      width: 380px;
+      height: 200px;
+      margin: 120px 0 10px 0;
     }
 
     input {
@@ -33,14 +41,184 @@
 
     textarea {
       width: 100%;
+      height:120px;
+      max-height: 120px;
+      top: 80%;
+    }
+
+    .add-ingredients-btn {
+      position: absolute;
+      top: 40.8%;
+      right: 3%;
+      font-size: 1.5em;
+    }
+
+    .add-ingredients-btn:hover {
+      cursor: pointer;
+    }
+
+    .add-ingredients-btn-inactive {
+      position: absolute;
+      top: 40.8%;
+      right: 3%;
+      font-size: 1.5em;
+      color: $inactive-color;
+    }
+
+    #instructions-field {
+      display: none;
+    }
+
+    .add-instructions-btn {
+      position: absolute;
+      top: 60%;
+      right: 3%;
+      font-size: 1.5em;
+    }
+
+    .add-instructions-btn:hover {
+      cursor: pointer;
+    }
+
+    .add-instructions-btn-inactive {
+      position: absolute;
+      top: 60%;
+      right: 3%;
+      font-size: 1.5em;
+      color: $inactive-color;
+    }
+
+    .remove-instructions-btn {
+      position: absolute;
+      top: 60%;
+      right: 11%;
+      font-size: 1.5em;
+      color: crimson;
+    }
+
+    .remove-instructions-btn:hover {
+      cursor: pointer;
+    }
+
+    .remove-instructions-btn-inactive {
+      display: none;
+    }
+
+    .step-indexes {
+      display: flex;
+      justify-content: center;
+      margin-top: 3px;
+
+      .step-index {
+        margin-left: 6px;
+        width: 23px;
+        padding: 0;
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: whitesmoke;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      
+      .step-index:hover {
+      background-color: white;
+      cursor: pointer;
+      }
+
+      .step-new {
+        width: 40px;
+      }
+    }
+
+    .prep-cook-time {
+      display: flex;
+      justify-content: flex-start;
+    }
+    
+    .title {
+      width: 50%;
     }
 
     .timer {
-      width: 80px;
+      margin-right: 77px;
+      width: 50%;
     }
 
-    .submit-btn {
-      width: 40%;
+    .file-input {
+      margin: auto;
+    }
+
+    .thumbnail {
+      margin: 10px auto;
+      display: block;
+      max-width: 150px;
+      max-height: 115px;
+      object-fit: contain;
+      border-radius: 5px;
+    }
+
+    .action-btns {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 50px;
+
+      button {
+      margin-right: 10px;
+      width: 88px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .InsertRecipe {
+    height: 360px;
+    width: 576px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .InsertRecipe {
+    border: 0px solid gray;
+  
+    .content {
+
+      .field {
+        width: 380px;
+        height: 200px;
+        margin: 120px 0 10px 0;
+          h2 {
+            font-size: 1.75em;
+          }
+      }
+
+      .add-ingredients-btn {
+        top: 39.6%;
+      }
+
+      .add-ingredients-btn-inactive {
+        top: 39.6%;
+      }
+
+      .add-instructions-btn {
+        margin-left: 10px;
+      }
+
+      .add-instructions-btn-inactive {
+        margin-left: 10px;
+      }
+
+      .remove-instructions-btn {
+        margin-left: 10px;
+      }
+
+      @media screen and (max-width: 380px) {
+        .field {
+          width: 95vw;
+          height: 200px;
+          margin: 120px 0 10px 0;
+        }
+      }
     }
   }
 }
