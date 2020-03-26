@@ -1,8 +1,6 @@
 $inactive-color: rgb(223, 223, 223);
 
 .InsertRecipe {
-  height: 360px;
-  width: 576px;
   padding: 1em;
   position: absolute;
   top: 50%;
@@ -119,6 +117,7 @@ $inactive-color: rgb(223, 223, 223);
         border-radius: 3px;
         background-color: whitesmoke;
         text-align: center;
+        font-size: 0.9em;
       }
       
       .step-index:hover {
@@ -134,7 +133,6 @@ $inactive-color: rgb(223, 223, 223);
     .prep-cook-time {
       display: flex;
       justify-content: flex-start;
-
     }
     
     .title {
@@ -172,6 +170,13 @@ $inactive-color: rgb(223, 223, 223);
   }
 }
 
+@media screen and (min-width: 769px) {
+  .InsertRecipe {
+    height: 360px;
+    width: 576px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .InsertRecipe {
     border: 0px solid gray;
@@ -193,6 +198,18 @@ $inactive-color: rgb(223, 223, 223);
 
       .add-ingredients-btn-inactive {
         top: 39.6%;
+      }
+
+      .add-instructions-btn {
+        margin-left: 10px;
+      }
+
+      .add-instructions-btn-inactive {
+        margin-left: 10px;
+      }
+
+      .remove-instructions-btn {
+        margin-left: 10px;
       }
 
       @media screen and (max-width: 380px) {
