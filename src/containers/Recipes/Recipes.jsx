@@ -28,7 +28,7 @@ const Recipes = () => {
               </li>
             ))
           ) : (
-            <div>{"There was a problem loading recipes :-( Check your internet connection"
+            <div>{"There was a problem loading recipes. Check your internet connection"
                   + " and reload the page"}</div>
           )}
         </ul>

@@ -30,10 +30,12 @@ export const asyncFetchAddModifyRecipe = (token, recipe) => dispatch => {
           (value && typeof value !== 'string')
             ? fd.append('image', value, value.name)
             : fd.append('image', {}, value);
+        } else if (key === 'instructions') {
+          fd.append(key, value.join('|'));
         } else {
           fd.append(key, value);
         };
-    };
+      };
     };
 
   const options = {
