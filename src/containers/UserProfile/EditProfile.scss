@@ -1,38 +1,113 @@
+$label: 30vw;
+$maxLabel: 150px;
+$input: 60vw;
+$maxInput: 300px;
+$mobileInput: 80vw;
+$mobileMaxInput: 300px;
+
 .EditProfile {
-  margin: 50px 5vw;
-  margin-right: -50%;
-  left: 50%;
+  margin: 30px auto;
+  // margin-right: -50%;
+  // left: 50%;
 
   div {
+    // margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     position: relative;
 
     input {
       margin-bottom: 10px;
-      width: 220px;
+      margin-left: 10px;;
+      width: $input;
+      max-width: $maxInput;
     }
 
     h6 {
-      flex: 0 0 15%;
-      max-width: 15%;
+      width: $label;
+      max-width: $maxLabel;
+      align-self: center;
     }
 
     p {
-      flex: 0 0 85%;
-      width: 200px;
-      max-width: 85%;
+      margin-bottom: 10px;
+      margin-left: 10px;;
+      width: $input;
+      max-width: $maxInput;
     }
     
+    // Handle error styles
     .error {
+      margin-bottom: 10px;
+      margin-left: 10px;;
+      width: 100%;
       color: red;
-      margin-left: 5px;
     }
-    
   }
-  
-  button {
-    margin: 15px 10px 0 0;
-    width: 108px;
+
+  .action-btns {
+    margin-left: 10px;
+    
+    button {
+      margin: 15px 10px 30px 0;
+      width: 105px;
+    }
+  }
+}
+
+@media screen  and (max-width: 575px) {
+  .EditProfile {
+    margin: 30px 20px;
+
+    div {
+      // width: 90vw;
+      // margin: 0 auto;
+      // display: inline-block;
+
+      input {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+        // sjustify-self: center;
+      }
+
+      h6 {
+        margin: 10px 0 0 -150px;
+        // left: 20vw;
+      }
+
+      p {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+        // margin: 0 auto;
+        // justify-self: center;
+      }
+
+      .error {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+        font-size: 0.8rem;
+      }
+
+      .email-block {
+        // left: 50vw
+
+      }
+
+      .email-label {
+        margin: 0;
+        width: 50px;
+        color: red;
+      }
+
+      .user-email {
+        margin: 0;
+        width: 240px;
+        max-width: $mobileMaxInput;
+      }
+    }
   }
 }

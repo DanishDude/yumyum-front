@@ -29,7 +29,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
     <label>{label}</label>
     <div>
       <input {...input} placeholder={label} type={type} />
-      {touched && (error && <span className="error">{error}</span>)}
+      {touched && (error &&<div className="error">{error}</div>)}
     </div>
   </div>
 );
@@ -42,33 +42,33 @@ let EditProfile = (props) => {
   
   return (
     <div className="EditProfile">
-          <div className="field">
-            <h6>Email:</h6>
-            <p>{user.email}</p>
-          </div>
+        <div className="field email-block">
+          <h6 className="email-label">Email</h6>
+          <p className="user-email">{user.email}</p>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="field">
-            <h6>Display Name:</h6>
+            <h6>Display Name</h6>
             <Field name="displayname" component={renderField} type="text"/>
           </div>
           <div className="field">
-            <h6>First Name:</h6>
+            <h6>First Name</h6>
             <Field name="firstname" component={renderField} type="text"/>
           </div>
           <div className="field">
-            <h6>Last Name:</h6>
+            <h6>Last Name</h6>
             <Field name="lastname" component={renderField} type="text"/>
           </div>
           <div className="field">
-            <h6>Password:</h6>
+            <h6>Password</h6>
             <Field name="password" component={renderField} type="password"/>
           </div>
           <div className="field">
-            <h6>New Password:</h6>
+            <h6>New Password</h6>
             <Field name="newPassword" component={renderField} type="password"/>
           </div>
           <div className="field">
-            <h6>Confirm Password:</h6>
+            <h6>Confirm Password</h6>
             <Field name="confirmPassword" component={renderField} type="password"/>
           </div>
           <div className="action-btns">

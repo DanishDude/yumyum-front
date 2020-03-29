@@ -1,10 +1,11 @@
 .Recipes {
   ul {
-    padding-top: 20px;
+    // padding-top: 20px;
     display: flex;
     flex-flow: wrap;
     list-style-type: none;
     justify-content: center;
+    padding-left: 0;
 
     a {
       text-decoration: none;

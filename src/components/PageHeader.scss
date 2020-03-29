@@ -12,4 +12,11 @@
     padding-left: 5vw;
     font-size: 1.5em;
   }
+
+  @media screen and (max-width: 767px) {
+    h1 {
+      padding-top: 10vh;
+      font-size: 3rem;
+    }
+  }
 }
