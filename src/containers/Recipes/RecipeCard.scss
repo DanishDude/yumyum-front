@@ -1,4 +1,4 @@
-$width: 260px;
+$width: 290px;
 $height: 480px;
 
 .RecipeCard {
@@ -32,26 +32,30 @@ $height: 480px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   $mobileWidth: 480px;
   $mobileHeight: 400px;
+  $maxMobileWidth: 99vw;
+  $mobileBorderRadius: 2px;
 
   .RecipeCard {
-    margin: 20px 15px 0px 0;
+    margin: 10px auto;
     width: $mobileWidth;
     height: $mobileHeight;
+    max-width: $maxMobileWidth;
     position: relative;
-    border-radius: 5px;
+    border-radius: $mobileBorderRadius;
     overflow: hidden;
     
     .bg-img {
       position: absolute;
       top: $mobileHeight * 0.4;
-      border-radius: 5px;
+      border-radius: $mobileBorderRadius;
       background: linear-gradient(
         to bottom, rgba(0,0,0,0) 0%,rgba(0, 0, 0, 0.35) 100%);
       width: $mobileWidth;
       height: $mobileHeight * 0.6;
+      max-width: $maxMobileWidth;
     }
     
     .img-wrapper {
@@ -60,8 +64,9 @@ $height: 480px;
         position: absolute;
         width: $mobileWidth;
         height: $mobileHeight;
+        max-width: $maxMobileWidth;
         object-fit: cover;
-        border-radius: 5px;
+        border-radius: $mobileBorderRadius;
       }
     }
     

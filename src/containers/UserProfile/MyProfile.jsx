@@ -42,8 +42,7 @@ const MyProfile = (props) => {
             <h6>Last Name:</h6>
             <p>{user.lastname}</p>
           </div>
-          <div>
-            <h6></h6>
+          <div className="field">
             <Button className="edit" color="primary" type="button" onClick={editProfile}>Edit</Button>
           </div>
       </div>
