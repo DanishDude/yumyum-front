@@ -9,18 +9,13 @@ $mobileMaxInput: 80vw;
 
 .EditProfile {
   margin: 30px auto;
-  // margin-right: -50%;
-  // left: 50%;
 
   .field {
-    // margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    // position: relative;
 
     input {
-      // margin-bottom: 10px;
       margin-left: 10px;;
       width: $input;
       max-width: $maxInput;
@@ -30,14 +25,12 @@ $mobileMaxInput: 80vw;
       width: $label;
       min-width: 140px;
       max-width: $maxLabel;
-      // height: 100%;
       margin-top: -16px;
       align-self: center;
     }
 
     p {
       margin: -10px 0 15px 10px;
-      // margin-bottom: 10px;
       margin-left: 10px;;
       width: $input;
       max-width: $maxInput;
@@ -65,26 +58,20 @@ $mobileMaxInput: 80vw;
     button {
       margin: 15px 10px 30px 0;
       width: 105px;
-      // justify-self: center;
     }
   }
 }
 
 @media screen  and (max-width: 439px) {
   .EditProfile {
-    // margin: 30px 20px;
 
     .field {
       margin-top: 20px;
-      // width: 90vw;
-      // margin: 0 auto;
-      // display: inline-block;
 
       input {
         margin: auto;
         width: $mobileInput;
         max-width: $mobileMaxInput;
-        // sjustify-self: center;
       }
 
       h6 {
@@ -98,8 +85,6 @@ $mobileMaxInput: 80vw;
         margin: auto;
         width: $mobileInput;
         max-width: $mobileMaxInput;
-        // margin: 0 auto;
-        // justify-self: center;
       }
 
       .error {
@@ -114,19 +99,6 @@ $mobileMaxInput: 80vw;
           margin-top: 0;
         }
       }
-
-      /* .email-label {
-        margin: 0;
-        width: 50px;
-        max-width: 50px;
-        color: red;
-      }
-
-      .user-email {
-        margin: 0;
-        width: 240px;
-        max-width: $mobileMaxInput;
-      } */
 
       .user-email {
         margin-bottom: 12px;
