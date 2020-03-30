@@ -50,7 +50,7 @@ const NavBar = () => {
                 </Fragment>)
               : (<NavItem className="menu-item">
                   <NavLink tag={Link} to="/Login" onClick={toggle}>
-                    Connect
+                    Login
                   </NavLink>
                 </NavItem>)}
           </Nav>
