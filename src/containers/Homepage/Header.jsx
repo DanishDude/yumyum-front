@@ -5,17 +5,17 @@ import './Header.scss';
 
 const items = [
   {
-    src: 'share_kitchen_secrets.jpg',
+    src: 'discover_new_flavors.jpg',
     altText: 'Slide 1',
     caption: 'Discover new flavors'
   },
   {
-    src: '/discover_new_flavors.jpg',
+    src: 'share_kitchen_secrets.jpg',
     altText: 'Slide 2',
     caption: 'Share you kitchen secrets'
   },
   {
-    src: 'Learn_new_tricks.jpg',
+    src: 'cooking_together.jpg',
     altText: 'Slide 3',
     caption: 'Learn new tricks in the kitchen'
   }
