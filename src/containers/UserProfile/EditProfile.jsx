@@ -26,10 +26,9 @@ const validate = values => {
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && (error &&<div className="error">{error}</div>)}
+    <input {...input} placeholder={label} type={type} />
+    <div className="error-line">
+      {touched && (error && <span className="error">{error}</span>)}
     </div>
   </div>
 );
@@ -39,10 +38,12 @@ let EditProfile = (props) => {
   const cancel = () => history.push('/my-profile');
   const { handleSubmit, user, valid } = props;
   const disabled = !valid ? true : false;
+  console.log(props);
+  
   
   return (
     <div className="EditProfile">
-        <div className="field email-block">
+        <div className="field">
           <h6 className="email-label">Email</h6>
           <p className="user-email">{user.email}</p>
         </div>
