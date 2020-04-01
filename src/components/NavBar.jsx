@@ -21,12 +21,12 @@ const NavBar = () => {
           <Nav className="ml-auto" navbar>
             <NavItem className="menu-item">
               <NavLink tag={Link} to="/recipes" onClick={toggle}>
-                Recipes
+                Browse recipes
               </NavLink>
             </NavItem>
             <NavItem className="menu-item">
-              <NavLink tag={Link} to="/about-us" onClick={toggle}>
-                About Us
+              <NavLink tag={Link} to="/create-recipe" onClick={toggle}>
+                Share your recipe
               </NavLink>
             </NavItem>
             <NavItem className="menu-item">
