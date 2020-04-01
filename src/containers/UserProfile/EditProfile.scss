@@ -1,38 +1,108 @@
-.EditProfile {
-  margin: 50px 5vw;
-  margin-right: -50%;
-  left: 50%;
+$label: 30vw;
+$maxLabel: 150px;
+$mobileLabel: 80vw;
+$maxMobileLabel: 80vw;
+$input: 60vw;
+$maxInput: 300px;
+$mobileInput: 90vw;
+$mobileMaxInput: 80vw;
 
-  div {
+.EditProfile {
+  margin: 30px auto;
+
+  .field {
     display: flex;
     flex-wrap: wrap;
-    position: relative;
+    justify-content: center;
 
     input {
-      margin-bottom: 10px;
-      width: 220px;
+      margin-left: 10px;;
+      width: $input;
+      max-width: $maxInput;
     }
 
     h6 {
-      flex: 0 0 15%;
-      max-width: 15%;
+      width: $label;
+      min-width: 140px;
+      max-width: $maxLabel;
+      margin-top: -16px;
+      align-self: center;
     }
 
     p {
-      flex: 0 0 85%;
-      width: 200px;
-      max-width: 85%;
+      margin: -10px 0 15px 10px;
+      margin-left: 10px;;
+      width: $input;
+      max-width: $maxInput;
     }
     
+    .error-line {
+      height: 12px;
+      font-size: 12px;
+      margin: -2px auto 12px 3px;
+    }    
+
     .error {
+      margin-bottom: 10px;
+      margin-left: 10px;;
+      width: 100%;
       color: red;
-      margin-left: 5px;
     }
-    
   }
-  
-  button {
-    margin: 15px 10px 0 0;
-    width: 108px;
+
+  .action-btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    button {
+      margin: 15px 10px 30px 0;
+      width: 105px;
+    }
+  }
+}
+
+@media screen  and (max-width: 439px) {
+  .EditProfile {
+
+    .field {
+      margin-top: 20px;
+
+      input {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+      }
+
+      h6 {
+        margin-bottom: 2px;
+        padding-left: 2px;
+        width: $mobileLabel;
+        max-width: $maxMobileLabel;
+      }
+
+      p {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+      }
+
+      .error {
+        margin: auto;
+        width: $mobileInput;
+        max-width: $mobileMaxInput;
+        font-size: 0.8rem;
+      }
+
+      .action-btns {
+        button {
+          margin-top: 0;
+        }
+      }
+
+      .user-email {
+        margin-bottom: 12px;
+      }
+    }
   }
 }
