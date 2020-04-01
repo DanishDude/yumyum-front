@@ -1,7 +1,14 @@
 .Footer {
+  display: flex;
+  justify-content: center;
   height: 100px;
   width: 100vw;
   background-color: #343A40;
   text-align: center;
   color: whitesmoke;
+
+  p {
+    align-self: center;
+    color: #E9E1BA;
+  }
 }

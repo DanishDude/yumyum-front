@@ -4,7 +4,9 @@ import './Footer.scss';
 const Footer = () => {
   return (
     <div className="Footer">
-      Hello, I am a Footer!
+      <p>
+        This site was created by <a href="https://github.com/DanishDude">DanishDude</a>
+      </p>
     </div>
   );
 };
