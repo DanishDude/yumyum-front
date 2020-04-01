@@ -4,6 +4,7 @@ import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import CreateRecipePage from './containers/InsertRecipe/CreateRecipePage';
 import EditMyProfile from './containers/UserProfile/EditMyProfile';
+import Footer from './components/Footer';
 import GetUser from './containers/ConnectUser/GetUser';
 import Home from './containers/Homepage/Home';
 import LoginPage from './containers/ConnectUser/LoginPage';
@@ -38,6 +39,7 @@ const App = () => {
           <PrivateRoute path = '/my-profile' component={MyProfile} />
         </Switch>
       </div>
+      <Footer />
     </div>
   );
 };
