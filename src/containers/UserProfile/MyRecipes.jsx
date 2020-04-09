@@ -41,7 +41,8 @@ const MyRecipes = props => {
 
   const header = {
     title: "My Recipes",
-    subtext: "Keep it fresh - update recipes anytime!"
+    subtext: "Keep it fresh - update recipes anytime!",
+    backgroundImage: "table-on-wooden-plank-326279.jpg"
   };
 
   return (

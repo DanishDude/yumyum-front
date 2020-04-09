@@ -38,8 +38,6 @@ let EditProfile = (props) => {
   const cancel = () => history.push('/my-profile');
   const { handleSubmit, user, valid } = props;
   const disabled = !valid ? true : false;
-  console.log(props);
-  
   
   return (
     <div className="EditProfile">

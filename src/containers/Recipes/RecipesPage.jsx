@@ -17,7 +17,8 @@ const RecipesPage = () => {
 
   const header = {
     title: 'Recipes',
-    subtext: 'Find something delicous. Share your kitchen secrets'
+    subtext: 'Find something delicous. Share your kitchen secrets',
+    backgroundImage: 'mediterranean-cuisine-2378758_1280.jpg'
   };
   
   return (

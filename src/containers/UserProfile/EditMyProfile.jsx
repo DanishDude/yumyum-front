@@ -18,7 +18,8 @@ const EditMyProfile = (props) => {
 
   const header = {
     title: 'My Profile',
-    subtext: 'Your Information. Stay current and keep it up to date'
+    subtext: 'Your Information. Stay current and keep it up to date',
+    backgroundImage: 'max-delsid-0geTqSZ76Xg-unsplash.jpg'
   };
   
   return (

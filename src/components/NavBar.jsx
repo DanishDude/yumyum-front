@@ -29,11 +29,6 @@ const NavBar = () => {
                 Share your recipe
               </NavLink>
             </NavItem>
-            <NavItem className="menu-item">
-              <NavLink tag={Link} to="/contact" onClick={toggle}>
-                Contact
-              </NavLink>
-            </NavItem>
             {user.token !== '' && user !== {}
               ? (<Fragment>
                 <NavItem className="menu-item">
