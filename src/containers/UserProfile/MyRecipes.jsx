@@ -48,7 +48,7 @@ const MyRecipes = props => {
   const header = {
     title: "My Recipes",
     subtext: "Keep it fresh - update recipes anytime!",
-    backgroundImage: "table-on-wooden-plank-326279.jpg"
+    backgroundImage: "max-delsid-0geTqSZ76Xg-unsplash.jpg"
   };
 
   return (
@@ -84,7 +84,13 @@ const MyRecipes = props => {
                 </div>
               </li>
             ))
-            : ""}
+            : <div className="no-recipes">
+                <h3>Spread the love and share your kitchen secrets</h3>
+                <img src="undraw_cooking_lyxy.svg" />
+                <div className="action-btn">
+                  <AddRecipeButton />
+                </div>
+              </div>}
         </ul>
       )}
       <Modal  toggle={toggle} isOpen={modal} className={className} centered >

@@ -18,7 +18,7 @@ const RecipesPage = () => {
   const header = {
     title: 'Recipes',
     subtext: 'Find something delicous. Share your kitchen secrets',
-    backgroundImage: 'max-delsid-0geTqSZ76Xg-unsplash.jpg'
+    backgroundImage: 'table-on-wooden-plank-326279.jpg'
   };
   
   return (

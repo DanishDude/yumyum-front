@@ -42,4 +42,24 @@
     font-size: 1.65em;
     color: darkred;
   }
+
+  .no-recipes {
+
+    h3 {
+      margin-top: 25px;
+      max-width: 80vw;
+      text-align: center;
+    }
+
+    img {
+      margin: 25px;
+      max-width: 70vw;
+    }
+
+    .action-btn {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+    }
+  }
 }

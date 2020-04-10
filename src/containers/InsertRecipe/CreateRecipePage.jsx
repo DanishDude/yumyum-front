@@ -2,6 +2,7 @@ import React from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { asyncFetchAddModifyRecipe } from '../../actions/recipes';
 import InsertRecipe from './InsertRecipe';
+import './CreateRecipePage.scss';
 
 const CreateRecipePage = (props) => {
   const { token } = props;
