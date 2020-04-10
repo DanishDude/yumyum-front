@@ -13,15 +13,18 @@ const MyRecipes = props => {
   const content = useSelector(state => state);
   const dispatch = useDispatch();
   const history = useHistory();
+
   const { user, token } = content.user;
   const { recipes, loading, error } = content.recipes;
   const userRecipes = recipes.filter(recipe => recipe.user_id === user.id);
   const { className } = props;
   const [modal, setModal] = useState(false);
   const [recipeToDelete, setRecipeToDelete] = useState({});
-  const toggle = () => setModal(!modal);
-  const getRecipeToDelete = recipe => setRecipeToDelete(recipe);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   useEffect(() => {
     dispatch(asyncFetchRecipesByUser(token));
   }, []);
@@ -33,7 +36,10 @@ const MyRecipes = props => {
     dispatch(asyncFetchDeleteRecipe(token, recipeId));
     toggle();
   };
-
+  
+  const toggle = () => setModal(!modal);
+  const getRecipeToDelete = recipe => setRecipeToDelete(recipe);
+  
   const openDeleteRecipe = recipe => {
     getRecipeToDelete(recipe);
     toggle();

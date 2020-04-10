@@ -6,6 +6,10 @@ import './InsertRecipe.scss';
 
 let InsertRecipe = props => {
   const { handleSubmit, initialValues, dispatch } = props;
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   /*------------------------------ States ------------------------------*/
   const [index, setIndex] = useState(0);

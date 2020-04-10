@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'reactstrap';
@@ -9,13 +9,17 @@ const MyProfile = (props) => {
   const { user } = props;
   const history = useHistory();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const goToMyRecipes = () => history.push('/my-recipes');
   const editProfile = () => history.push('/edit-profile');
 
   const header = {
     title: 'My Profile',
     subtext: 'Your Information. Stay current and keep it up to date',
-    backgroundImage: 'max-delsid-0geTqSZ76Xg-unsplash.jpg'
+    backgroundImage: 'a16f4ee0-7576-4bca-b97b-77dc46638087.jpg'
   };
   
   return (
