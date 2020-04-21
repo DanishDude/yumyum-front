@@ -12,6 +12,10 @@ const Recipe = (props) => {
     : '/empty_plate.jpeg';
   
   useEffect(() => { dispatch(asyncFetchRecipe(id)) }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   return (
     <div className="Recipe">
